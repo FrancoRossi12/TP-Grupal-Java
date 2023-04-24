@@ -10,8 +10,8 @@ public class Publicacion {
 
     Publicacion(){
 
-        Lista_comentario = new ArrayList<String>();
-        Lista_hashtag = new ArrayList<String>();
+        listaComentario = new ArrayList<String>();
+        listaHashtag = new ArrayList<String>();
     }
 
 }

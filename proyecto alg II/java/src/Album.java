@@ -5,7 +5,7 @@ public class Album extends Publicacion{
     private int Id_album;
     private  ArrayList<Number> listaPublicacion;
 
-    album() {listaPublicacion = new ArrayList<Number>();
+    Album() {listaPublicacion = new ArrayList<Number>();
     }
 
 }
