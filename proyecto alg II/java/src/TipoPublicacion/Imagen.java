@@ -1,4 +1,8 @@
-public class Imagen extends Publicacion implements Filtrable{
+package TipoPublicacion;
+
+import Perfil.Publicacion;
+
+public class Imagen extends Publicacion implements Filtrable {
 
     private int resolucion,alto,ancho;
 

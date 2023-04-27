@@ -1,3 +1,6 @@
+package Perfil;
+
+import Perfil.Album;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
