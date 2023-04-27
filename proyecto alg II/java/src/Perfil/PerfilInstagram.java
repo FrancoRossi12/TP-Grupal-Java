@@ -11,8 +11,9 @@ import java.util.*;
 public class PerfilInstagram {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 
-        List<Publicacion> publicaciones = CargadorDatos.cargarPublicacionesDesdeArchivo("publicaciones.xml");
+       /* List<Publicacion> publicaciones = CargadorDatos.cargarPublicacionesDesdeArchivo("publicaciones.xml");
         List<Album> albums = new ArrayList<>();
+        */
 
     }
 }

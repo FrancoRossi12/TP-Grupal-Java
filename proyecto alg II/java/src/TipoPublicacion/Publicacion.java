@@ -1,16 +1,16 @@
-package Perfil;
+package TipoPublicacion;
 
 import java.util.ArrayList;
 
 public class Publicacion {
 
     private int Id_publicacion,cantMG;
-    String nombre, fechasubida;
+    private String nombre, fechasubida;
 
-    ArrayList<String> listaComentario;
-    ArrayList<String> listaHashtag;
+    private  ArrayList<String> listaComentario;
+    private ArrayList<String> listaHashtag;
 
-    Publicacion(){
+    public Publicacion(){
 
         listaComentario = new ArrayList<String>();
         listaHashtag = new ArrayList<String>();

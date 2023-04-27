@@ -1,6 +1,7 @@
 package TipoPublicacion;
 
-import Perfil.Publicacion;
+import Interfaz.Durable;
+import Interfaz.Filtrable;
 
 public class Video extends Publicacion implements Durable, Filtrable {
 

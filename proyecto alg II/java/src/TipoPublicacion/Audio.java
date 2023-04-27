@@ -1,11 +1,12 @@
 package TipoPublicacion;
 
-import Perfil.Publicacion;
+import Interfaz.Durable;
 
 public class Audio extends Publicacion implements Durable {
 
     private int duracion,velocidad_bits;
-// metodo avanzar y detener
+
+    // metodo avanzar y detener
     public void avanzar(int segundos) {
 
     }

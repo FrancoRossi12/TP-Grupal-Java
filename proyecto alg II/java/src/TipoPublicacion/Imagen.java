@@ -1,6 +1,6 @@
 package TipoPublicacion;
 
-import Perfil.Publicacion;
+import Interfaz.Filtrable;
 
 public class Imagen extends Publicacion implements Filtrable {
 

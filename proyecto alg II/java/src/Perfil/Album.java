@@ -1,13 +1,18 @@
 package Perfil;
 
+import TipoPublicacion.Publicacion;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Album extends Publicacion {
 
     private int Id_album;
-    private  ArrayList<Number> listaPublicacion;
+    private List<Publicacion> listaPublicacion;
 
-    Album() {listaPublicacion = new ArrayList<Number>();
+    Album() {
+        super();
+        listaPublicacion = new ArrayList<Publicacion>();
     }
 
 }
