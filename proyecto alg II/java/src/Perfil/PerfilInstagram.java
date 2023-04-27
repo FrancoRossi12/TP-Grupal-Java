@@ -14,6 +14,5 @@ public class PerfilInstagram {
        /* List<Publicacion> publicaciones = CargadorDatos.cargarPublicacionesDesdeArchivo("publicaciones.xml");
         List<Album> albums = new ArrayList<>();
         */
-
     }
 }

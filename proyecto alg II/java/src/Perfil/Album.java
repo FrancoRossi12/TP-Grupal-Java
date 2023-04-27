@@ -5,7 +5,7 @@ import TipoPublicacion.Publicacion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Album extends Publicacion {
+public class Album {
 
     private int Id_album;
     private List<Publicacion> listaPublicacion;
