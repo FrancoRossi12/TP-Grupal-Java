@@ -1,4 +1,4 @@
-public class Video extends Publicacion{
+public class Video extends Publicacion implements Durable,Filtrable{
 
     private int resolucion,duracion,cantcuadros;
 
@@ -7,5 +7,14 @@ public class Video extends Publicacion{
      */
     public void reproducir() {
 
+    }
+    public void avanzar(int segundos) {
+
+    }
+    public void detener() {
+        
+    }
+    public void aplicarFiltro(){
+        
     }
 }
