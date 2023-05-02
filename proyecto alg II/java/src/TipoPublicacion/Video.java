@@ -4,7 +4,7 @@ import Interfaz.Durable;
 import Interfaz.Filtrable;
 
 public class Video extends Publicacion implements Durable, Filtrable {
-
+    
     private int resolucion,duracion,cantcuadros;
 
     /**
