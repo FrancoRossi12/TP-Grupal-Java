@@ -1,7 +1,7 @@
 <usuarios>
     <usuario>
         <nombre>Usuario1</nombre>
-        <contrasena>contrasena1</contrasena>
+        <contrasena></contrasena>
     </usuario>
     <usuario>
         <nombre>Usuario2</nombre>

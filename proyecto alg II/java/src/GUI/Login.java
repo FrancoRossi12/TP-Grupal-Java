@@ -1,3 +1,5 @@
+package GUI;
+
 import javax.swing.*;
 import java.awt.event.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -54,7 +56,7 @@ public class Login extends JDialog {
         // Cargar y analizar el archivo XML
         try {
             // Ruta al archivo XML (reemplaza con tu propia ruta)
-            String rutaArchivo = "C:\\Users\\Bruno\\Documents\\GitHub\\TP-Grupal-Java\\proyecto alg II\\java\\src\\Swing\\Usuarios.xml";
+            String rutaArchivo = "Swing/Perfil.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -79,7 +81,11 @@ public class Login extends JDialog {
                     // Autenticación exitosa
                     dispose();
                     // Agrega aquí el código para continuar con la lógica de tu aplicación
-                    return;
+
+                    Perfil dialog = new Perfil();
+                    dialog.pack();
+                    dialog.setVisible(true);
+
                 }
             }
 
