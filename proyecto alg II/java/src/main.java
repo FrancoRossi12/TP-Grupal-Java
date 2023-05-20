@@ -1,6 +1,8 @@
 public class main {
-    static void Main(String[] args){
-
-
+    public static void main(String[] args) {
+        Login dialog = new Login();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 }

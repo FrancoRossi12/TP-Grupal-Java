@@ -1,0 +1,14 @@
+<usuarios>
+    <usuario>
+        <nombre>Usuario1</nombre>
+        <contrasena>contrasena1</contrasena>
+    </usuario>
+    <usuario>
+        <nombre>Usuario2</nombre>
+        <contrasena>contrasena2</contrasena>
+    </usuario>
+    <usuario>
+        <nombre>Usuario3</nombre>
+        <contrasena>contrasena3</contrasena>
+    </usuario>
+</usuarios>
