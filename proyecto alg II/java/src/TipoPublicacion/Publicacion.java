@@ -8,12 +8,23 @@ public class Publicacion {
     private ArrayList<String> listaComentario;
     private ArrayList<String> listaHashtag;
 
-    public Publicacion(){
-        cantMG=0;
-        descPost=" ";
+    public Publicacion() {
+        cantMG = 0;
+        descPost = " ";
         listaComentario = new ArrayList<String>();
         listaHashtag = new ArrayList<String>();
     }
-    //posible(realizar) set_nombrePost
-    public void modificaDescPost(String desc){descPost=desc;}
+
+    // posible(realizar) set_nombrePost
+    public void modificaDescPost(String desc) {
+        descPost = desc;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void muestraNomPublicacion() {
+        System.out.println(nombre);
+    }
 }
