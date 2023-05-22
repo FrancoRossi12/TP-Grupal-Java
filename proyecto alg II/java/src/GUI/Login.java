@@ -56,7 +56,7 @@ public class Login extends JDialog {
         // Cargar y analizar el archivo XML
         try {
             // Ruta al archivo XML (reemplaza con tu propia ruta)
-            String rutaArchivo = "Swing/Perfil.xml";
+            String rutaArchivo = "C:\\Users\\m\\Documents\\GitHub\\TP-Grupal-Java\\proyecto alg II\\java\\src\\Swing\\Usuarios.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -103,5 +103,7 @@ public class Login extends JDialog {
         dispose();
     }
 
-
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

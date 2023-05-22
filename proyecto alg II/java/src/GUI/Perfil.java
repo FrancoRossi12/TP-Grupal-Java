@@ -4,19 +4,20 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 
 public class Perfil extends JDialog {
     private JPanel contentPane;
     private JButton publicacionesButton;
     private JButton albunesButton;
-    private JTextArea descripcion;
-    private JTextArea seguidos;
-    private JTextArea seguidores;
-    private JTextArea Albunes;
-    private JTextArea Publicaciones;
+    private JLabel descripcion;
+    private JLabel seguidos;
+    private JLabel seguidores;
+    private JLabel Albunes;
+    private JLabel Publicaciones;
+    private JLabel usuario;
 
     private String nombreUsuario;
     private String descripcionPerfil;
@@ -46,14 +47,14 @@ public class Perfil extends JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onPublicaciones();
+                onX();
             }
         });
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onAlbunes();
+                onX();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
@@ -64,7 +65,7 @@ public class Perfil extends JDialog {
     private void cargarDatosPerfil() {
         try {
             // Ruta al archivo XML (reemplaza con tu propia ruta)
-            String rutaArchivo = "proyecto alg II/java/src/Swing/Perfil.xml";
+            String rutaArchivo = "C:\\Users\\m\\Documents\\GitHub\\TP-Grupal-Java\\proyecto alg II\\java\\src\\Swing\\Perfil.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -77,7 +78,7 @@ public class Perfil extends JDialog {
             Element perfil = doc.getDocumentElement();
 
             // Obtener los datos del perfil
-            nombreUsuario = perfil.getAttribute("nombreUsuario");
+            nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
             descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
             cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
             cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
@@ -85,6 +86,7 @@ public class Perfil extends JDialog {
             cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
 
             // Actualizar los componentes de la interfaz con los datos cargados
+            usuario.setText(nombreUsuario);
             descripcion.setText(descripcionPerfil);
             seguidores.setText(String.valueOf(cantidadSeguidores));
             seguidos.setText(String.valueOf(cantidadSeguidos));
@@ -98,12 +100,19 @@ public class Perfil extends JDialog {
 
     private void onPublicaciones() {
         // add your code here
+        Publicaciones dialog = new Publicaciones();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    private void onX(){
         dispose();
     }
 
     private void onAlbunes() {
         // add your code here if necessary
-        dispose();
+        Album dialog = new Album();
+        dialog.pack();
+        dialog.setVisible(true);
     }
 }
 
