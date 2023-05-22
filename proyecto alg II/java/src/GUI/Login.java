@@ -89,10 +89,6 @@ public class Login extends JDialog {
                     dialog.pack();
                     dialog.setVisible(true);
 
-                }else{
-                    // Si se llega a este punto, la autenticación ha fallado
-                    JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
-
                 }
             }
 
@@ -100,6 +96,8 @@ public class Login extends JDialog {
         } catch (Exception ex) {
             ex.printStackTrace();
             // Manejo de excepciones
+            // Si se llega a este punto, la autenticación ha fallado
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
         }
     }
 
