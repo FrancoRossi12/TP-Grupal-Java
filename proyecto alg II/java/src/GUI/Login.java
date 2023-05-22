@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,9 +17,12 @@ public class Login extends JDialog {
     private JTextField Usuario;
 
     public Login() {
+        setTitle("Login");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        // Establecer tamaño mínimo
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -32,7 +36,6 @@ public class Login extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -40,7 +43,7 @@ public class Login extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
+        // call on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -56,7 +59,7 @@ public class Login extends JDialog {
         // Cargar y analizar el archivo XML
         try {
             // Ruta al archivo XML (reemplaza con tu propia ruta)
-            String rutaArchivo = "C:\\Users\\m\\Documents\\GitHub\\TP-Grupal-Java\\proyecto alg II\\java\\src\\Swing\\Usuarios.xml";
+            String rutaArchivo = "proyecto alg II/java/src/Swing/Usuarios.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -86,11 +89,13 @@ public class Login extends JDialog {
                     dialog.pack();
                     dialog.setVisible(true);
 
+                }else{
+                    // Si se llega a este punto, la autenticación ha fallado
+                    JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+
                 }
             }
 
-            // Si se llega a este punto, la autenticación ha fallado
-            JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -103,7 +108,4 @@ public class Login extends JDialog {
         dispose();
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }

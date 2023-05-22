@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,10 +28,11 @@ public class Perfil extends JDialog {
     private int cantidadPublicaciones;
 
     public Perfil() {
+        setTitle("Perfil");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(publicacionesButton);
-
+        // Establecer tamaño mínimo
         publicacionesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onPublicaciones();
@@ -43,7 +45,6 @@ public class Perfil extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -57,6 +58,9 @@ public class Perfil extends JDialog {
                 onX();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        Dimension minimumSize;
+        minimumSize = new Dimension(1080, 1920);
+        contentPane.setMinimumSize(minimumSize);
 
         // Cargar datos del perfil
         cargarDatosPerfil();
@@ -64,8 +68,8 @@ public class Perfil extends JDialog {
 
     private void cargarDatosPerfil() {
         try {
-            // Ruta al archivo XML (reemplaza con tu propia ruta)
-            String rutaArchivo = "C:\\Users\\m\\Documents\\GitHub\\TP-Grupal-Java\\proyecto alg II\\java\\src\\Swing\\Perfil.xml";
+            // Ruta al archivo XML
+            String rutaArchivo = "proyecto alg II/java/src/Swing/Perfil.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

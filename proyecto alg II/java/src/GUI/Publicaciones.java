@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Publicaciones extends JDialog {
@@ -9,9 +10,12 @@ public class Publicaciones extends JDialog {
     private JButton buttonCancel;
 
     public Publicaciones() {
+        setTitle("Publicaciones");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        // Establecer tamaño mínimo
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -25,7 +29,6 @@ public class Publicaciones extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

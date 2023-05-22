@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Album extends JDialog {
@@ -9,10 +10,14 @@ public class Album extends JDialog {
     private JButton eliminar;
 
     public Album() {
+        setTitle("Album");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(agregar);
-
+        // Establecer tamaño mínimo
+        Dimension minimumSize;
+        minimumSize = new Dimension(1080, 1920);
+        contentPane.setMinimumSize(minimumSize);
         agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onPublicaciones();
@@ -25,7 +30,6 @@ public class Album extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
