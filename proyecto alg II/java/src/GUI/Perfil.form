@@ -8,6 +8,7 @@
     <properties>
       <maximumSize width="1080" height="720"/>
       <minimumSize width="1080" height="720"/>
+      <preferredSize width="1080" height="720"/>
     </properties>
     <border type="none" title="Perfil"/>
     <children>
