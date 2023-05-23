@@ -4,16 +4,15 @@ import Interfaz.Filtrable;
 
 public class Imagen extends Publicacion implements Filtrable {
 
-    private int resolucion, alto, ancho;
+    private int resolucion, alto, ancho, filtro;
 
     public Imagen() {
         super();
-        resolucion = alto = ancho = 5;
+        resolucion = alto = ancho = filtro = 5;
     }
 
     // metodo aplicar flitro
-    public void aplicarFiltro() {// SOLO IMAGEN Y VIDEO PUEDEN APLICAR FILTROS, LOS OTROS FILTROS SON LOS DE
-                                 // FILTRAR PUBLICACIONES
+    public void aplicarFiltro(int filtro) {// la variable int filtro es una posicion dentro del vector de filtros disponibles
 
     }
 
@@ -30,5 +29,10 @@ public class Imagen extends Publicacion implements Filtrable {
             System.out.println(".");// TOY HACIENDO PRUEBAS
         }
         System.out.println("Fin publicacion: " + this.getNombre());
+    }
+
+    @Override
+    public void aplicarFiltro() {
+
     }
 }
