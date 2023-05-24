@@ -2,6 +2,6 @@ package Interfaz;
 
 public interface Filtrable {
 
-    public int[] myIntArray = {1, 2, 3};
+    public [] myIntArray = {1, 2, 3}; //HAY QUE USAR ENUM
     void aplicarFiltro();
 }
