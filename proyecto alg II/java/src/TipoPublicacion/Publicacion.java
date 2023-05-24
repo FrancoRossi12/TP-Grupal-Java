@@ -16,4 +16,16 @@ public class Publicacion {
     }
     //posible(realizar) set_nombrePost
     public void modificaDescPost(String desc){descPost=desc;}
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcionPost() {
+        return this.descPost;
+    }
+
+    public int getCantMG() {
+        return this.cantMG;
+    }
 }

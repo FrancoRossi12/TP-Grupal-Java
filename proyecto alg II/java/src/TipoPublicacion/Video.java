@@ -22,4 +22,16 @@ public class Video extends Publicacion implements Durable, Filtrable {
     public void aplicarFiltro(){
         
     }
+
+    public int getResolucion() {
+        return resolucion;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public int getCantcuadros() {
+        return cantcuadros;
+    }
 }

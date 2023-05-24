@@ -15,4 +15,12 @@ public class Audio extends Publicacion implements Durable {
     public void detener() {
         
     }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public int getVelocidad_bits() {
+        return velocidad_bits;
+    }
 }

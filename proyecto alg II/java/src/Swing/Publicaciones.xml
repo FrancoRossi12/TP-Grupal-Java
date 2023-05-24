@@ -1,0 +1,317 @@
+<publicaciones>
+    <audio>
+        <nombre>Audio 1</nombre>
+        <descripcionPost>Descripción del audio 1</descripcionPost>
+        <cantMG>10</cantMG>
+        <listaComentario>
+            <comentario>Comentario 1</comentario>
+            <comentario>Comentario 2</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#musica</hashtag>
+            <hashtag>#artistas</hashtag>
+        </listaHashtag>
+        <duracion>180</duracion>
+        <velocidad_bits>128</velocidad_bits>
+    </audio>
+    <imagen>
+        <nombre>Imagen 2</nombre>
+        <descripcionPost>Descripción de la imagen 2</descripcionPost>
+        <cantMG>50</cantMG>
+        <listaComentario>
+            <comentario>Comentario 3</comentario>
+            <comentario>Comentario 4</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#fotografia</hashtag>
+            <hashtag>#arte</hashtag>
+        </listaHashtag>
+        <resolucion>1920x1080</resolucion>
+        <alto>1080</alto>
+        <ancho>1920</ancho>
+    </imagen>
+    <texto>
+        <nombre>Texto 3</nombre>
+        <descripcionPost>Descripción del texto 3</descripcionPost>
+        <cantMG>20</cantMG>
+        <listaComentario>
+            <comentario>Comentario 5</comentario>
+            <comentario>Comentario 6</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#escritura</hashtag>
+            <hashtag>#poesia</hashtag>
+        </listaHashtag>
+        <fuente>Arial</fuente>
+        <cantCaracteres>500</cantCaracteres>
+        <tamañoFuente>12</tamañoFuente>
+    </texto>
+    <video>
+        <nombre>Video 4</nombre>
+        <descripcionPost>Descripción del video 4</descripcionPost>
+        <cantMG>30</cantMG>
+        <listaComentario>
+            <comentario>Comentario 7</comentario>
+            <comentario>Comentario 8</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#videos</hashtag>
+            <hashtag>#entretenimiento</hashtag>
+        </listaHashtag>
+        <resolucion>1280x720</resolucion>
+        <duracion>240</duracion>
+        <cantCuadros>30</cantCuadros>
+    </video>
+    <audio>
+        <nombre>Audio 5</nombre>
+        <descripcionPost>Descripción del audio 5</descripcionPost>
+        <cantMG>15</cantMG>
+        <listaComentario>
+            <comentario>Comentario 9</comentario>
+            <comentario>Comentario 10</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#music</hashtag>
+            <hashtag>#audio</hashtag>
+        </listaHashtag>
+        <duracion>200</duracion>
+        <velocidad_bits>192</velocidad_bits>
+    </audio>
+    <imagen>
+        <nombre>Imagen 6</nombre>
+        <descripcionPost>Descripción de la imagen 6</descripcionPost>
+        <cantMG>40</cantMG>
+        <listaComentario>
+            <comentario>Comentario 11</comentario>
+            <comentario>Comentario 12</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#photography</hashtag>
+            <hashtag>#art</hashtag>
+        </listaHashtag>
+        <resolucion>2560x1440</resolucion>
+        <alto>1440</alto>
+        <ancho>2560</ancho>
+    </imagen>
+    <texto>
+        <nombre>Texto 7</nombre>
+        <descripcionPost>Descripción del texto 7</descripcionPost>
+        <cantMG>25</cantMG>
+        <listaComentario>
+            <comentario>Comentario 13</comentario>
+            <comentario>Comentario 14</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#writing</hashtag>
+            <hashtag>#poetry</hashtag>
+        </listaHashtag>
+        <fuente>Times New Roman</fuente>
+        <cantCaracteres>750</cantCaracteres>
+        <tamañoFuente>14</tamañoFuente>
+    </texto>
+    <video>
+        <nombre>Video 8</nombre>
+        <descripcionPost>Descripción del video 8</descripcionPost>
+        <cantMG>35</cantMG>
+        <listaComentario>
+            <comentario>Comentario 15</comentario>
+            <comentario>Comentario 16</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#video</hashtag>
+            <hashtag>#entertainment</hashtag>
+        </listaHashtag>
+        <resolucion>1920x1080</resolucion>
+        <duracion>180</duracion>
+        <cantCuadros>24</cantCuadros>
+    </video>
+    <audio>
+        <nombre>Audio 9</nombre>
+        <descripcionPost>Descripción del audio 9</descripcionPost>
+        <cantMG>12</cantMG>
+        <listaComentario>
+            <comentario>Comentario 17</comentario>
+            <comentario>Comentario 18</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#sound</hashtag>
+            <hashtag>#musician</hashtag>
+        </listaHashtag>
+        <duracion>220</duracion>
+        <velocidad_bits>256</velocidad_bits>
+    </audio>
+    <imagen>
+        <nombre>Imagen 10</nombre>
+        <descripcionPost>Descripción de la imagen 10</descripcionPost>
+        <cantMG>60</cantMG>
+        <listaComentario>
+            <comentario>Comentario 19</comentario>
+            <comentario>Comentario 20</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#photography</hashtag>
+            <hashtag>#landscape</hashtag>
+        </listaHashtag>
+        <resolucion>3840x2160</resolucion>
+        <alto>2160</alto>
+        <ancho>3840</ancho>
+    </imagen>
+    <texto>
+        <nombre>Texto 11</nombre>
+        <descripcionPost>Descripción del texto 11</descripcionPost>
+        <cantMG>18</cantMG>
+        <listaComentario>
+            <comentario>Comentario 21</comentario>
+            <comentario>Comentario 22</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#writing</hashtag>
+            <hashtag>#novel</hashtag>
+        </listaHashtag>
+        <fuente>Verdana</fuente>
+        <cantCaracteres>900</cantCaracteres>
+        <tamañoFuente>16</tamañoFuente>
+    </texto>
+    <video>
+        <nombre>Video 12</nombre>
+        <descripcionPost>Descripción del video 12</descripcionPost>
+        <cantMG>42</cantMG>
+        <listaComentario>
+            <comentario>Comentario 23</comentario>
+            <comentario>Comentario 24</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#video</hashtag>
+            <hashtag>#viral</hashtag>
+        </listaHashtag>
+        <resolucion>3840x2160</resolucion>
+        <duracion>300</duracion>
+        <cantCuadros>60</cantCuadros>
+    </video>
+    <audio>
+        <nombre>Audio 13</nombre>
+        <descripcionPost>Descripción del audio 13</descripcionPost>
+        <cantMG>20</cantMG>
+        <listaComentario>
+            <comentario>Comentario 25</comentario>
+            <comentario>Comentario 26</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#music</hashtag>
+            <hashtag>#instrumental</hashtag>
+        </listaHashtag>
+        <duracion>160</duracion>
+        <velocidad_bits>192</velocidad_bits>
+    </audio>
+    <imagen>
+        <nombre>Imagen 14</nombre>
+        <descripcionPost>Descripción de la imagen 14</descripcionPost>
+        <cantMG>70</cantMG>
+        <listaComentario>
+            <comentario>Comentario 27</comentario>
+            <comentario>Comentario 28</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#photography</hashtag>
+            <hashtag>#portrait</hashtag>
+        </listaHashtag>
+        <resolucion>1920x1080</resolucion>
+        <alto>1080</alto>
+        <ancho>1920</ancho>
+    </imagen>
+    <texto>
+        <nombre>Texto 15</nombre>
+        <descripcionPost>Descripción del texto 15</descripcionPost>
+        <cantMG>30</cantMG>
+        <listaComentario>
+            <comentario>Comentario 29</comentario>
+            <comentario>Comentario 30</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#writing</hashtag>
+            <hashtag>#poem</hashtag>
+        </listaHashtag>
+        <fuente>Courier New</fuente>
+        <cantCaracteres>700</cantCaracteres>
+        <tamañoFuente>14</tamañoFuente>
+    </texto>
+    <video>
+        <nombre>Video 16</nombre>
+        <descripcionPost>Descripción del video 16</descripcionPost>
+        <cantMG>55</cantMG>
+        <listaComentario>
+            <comentario>Comentario 31</comentario>
+            <comentario>Comentario 32</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#video</hashtag>
+            <hashtag>#funny</hashtag>
+        </listaHashtag>
+        <resolucion>1280x720</resolucion>
+        <duracion>240</duracion>
+        <cantCuadros>30</cantCuadros>
+    </video>
+    <audio>
+        <nombre>Audio 17</nombre>
+        <descripcionPost>Descripción del audio 17</descripcionPost>
+        <cantMG>25</cantMG>
+        <listaComentario>
+            <comentario>Comentario 33</comentario>
+            <comentario>Comentario 34</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#sound</hashtag>
+            <hashtag>#audio</hashtag>
+        </listaHashtag>
+        <duracion>180</duracion>
+        <velocidad_bits>256</velocidad_bits>
+    </audio>
+    <imagen>
+        <nombre>Imagen 18</nombre>
+        <descripcionPost>Descripción de la imagen 18</descripcionPost>
+        <cantMG>45</cantMG>
+        <listaComentario>
+            <comentario>Comentario 35</comentario>
+            <comentario>Comentario 36</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#photography</hashtag>
+            <hashtag>#nature</hashtag>
+        </listaHashtag>
+        <resolucion>2560x1440</resolucion>
+        <alto>1440</alto>
+        <ancho>2560</ancho>
+    </imagen>
+    <texto>
+        <nombre>Texto 19</nombre>
+        <descripcionPost>Descripción del texto 19</descripcionPost>
+        <cantMG>35</cantMG>
+        <listaComentario>
+            <comentario>Comentario 37</comentario>
+            <comentario>Comentario 38</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#writing</hashtag>
+            <hashtag>#shortstory</hashtag>
+        </listaHashtag>
+        <fuente>Arial</fuente>
+        <cantCaracteres>800</cantCaracteres>
+        <tamañoFuente>16</tamañoFuente>
+    </texto>
+    <video>
+        <nombre>Video 20</nombre>
+        <descripcionPost>Descripción del video 20</descripcionPost>
+        <cantMG>38</cantMG>
+        <listaComentario>
+            <comentario>Comentario 39</comentario>
+            <comentario>Comentario 40</comentario>
+        </listaComentario>
+        <listaHashtag>
+            <hashtag>#video</hashtag>
+            <hashtag>#tutorial</hashtag>
+        </listaHashtag>
+        <resolucion>1920x1080</resolucion>
+        <duracion>200</duracion>
+        <cantCuadros>24</cantCuadros>
+    </video>
+</publicaciones>

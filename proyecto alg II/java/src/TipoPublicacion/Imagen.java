@@ -10,4 +10,16 @@ public class Imagen extends Publicacion implements Filtrable {
     public void aplicarFiltro(){
         
     }
+
+    public int getResolucion() {
+        return resolucion;
+    }
+
+    public int getAlto() {
+        return alto;
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
 }
