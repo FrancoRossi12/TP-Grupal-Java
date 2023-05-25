@@ -1,24 +1,14 @@
 package TipoPublicacion;
 
 import Interfaz.Filtrable;
-
 public class Imagen extends Publicacion implements Filtrable {
 
-    private int resolucion, alto, ancho, filtro;
+    private int resolucion, alto, ancho;
+    private TipoFiltro tipoFiltro;
 
     public Imagen() {
         super();
-        resolucion = alto = ancho = filtro = 5;
-    }
-
-    // metodo aplicar flitro
-    public void aplicarFiltro(int filtro) {// la variable int filtro es una posicion dentro del vector de filtros disponibles
-
-    }
-
-    public static void main(String[] args) {
-        Imagen foto = new Imagen();// ESTO ES PARA PROBAR NOMAS
-        foto.reproducir();
+        resolucion = alto = ancho = 5;
     }
 
     // metodo reproductor de imagen
@@ -31,8 +21,18 @@ public class Imagen extends Publicacion implements Filtrable {
         System.out.println("Fin publicacion: " + this.getNombre());
     }
 
+    public enum TipoFiltro {
+        SEPIA, B_W, CLARENDON, DEFAULT
+    }
     @Override
-    public void aplicarFiltro() {
-
+    public void aplicarFiltro(int x) {
+        if(x == 0)
+            tipoFiltro = tipoFiltro.DEFAULT;
+        else if(x == 1)
+            tipoFiltro = tipoFiltro.SEPIA;
+        else if(x == 2)
+            tipoFiltro = tipoFiltro.B_W;
+        else
+            tipoFiltro = tipoFiltro.CLARENDON;
     }
 }
