@@ -14,9 +14,7 @@ public class Video extends Publicacion implements Durable, Filtrable {
     }
 
     public Video(String nombre, String descripcion, int cantMG, int resolucion, int duracion, int cantcuadros) {
-        nombre = this.getNombre();
-        descripcion = this.getDescripcionPost();
-        cantMG = this.getCantMG();
+        super( nombre,  descripcion, cantMG);
         resolucion = this.resolucion;
         duracion = this.duracion;
         cantcuadros = this.cantcuadros;

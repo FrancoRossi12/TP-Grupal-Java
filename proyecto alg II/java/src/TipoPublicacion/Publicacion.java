@@ -14,6 +14,11 @@ public class Publicacion {
         listaComentario = new ArrayList<String>();
         listaHashtag = new ArrayList<String>();
     }
+    public Publicacion(String nombre, String descripcion, int cantMG){
+        nombre = this.nombre;
+        descripcion = this.descPost;
+        cantMG = this.cantMG;
+    }
     //posible(realizar) set_nombrePost
     public void modificaDescPost(String desc){descPost=desc;}
 

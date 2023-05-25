@@ -5,9 +5,7 @@ public class Texto extends Publicacion{
     int cantCaracteres, tamañoFuente;
 
     public Texto(String nombre, String descripcion, int cantMG, String fuente, int cantCaracteres, int tamañoFuente) {
-        nombre = this.getNombre();
-        descripcion = this.getDescripcionPost();
-        cantMG = this.getCantMG();
+        super( nombre,  descripcion, cantMG);
         fuente = this.fuente;
         cantCaracteres = this.cantCaracteres;
         tamañoFuente = this.tamañoFuente;
