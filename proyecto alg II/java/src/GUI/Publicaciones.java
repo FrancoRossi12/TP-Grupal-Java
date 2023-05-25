@@ -1,3 +1,5 @@
+package GUI;
+
 import TipoPublicacion.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -60,6 +62,10 @@ public class Publicaciones extends JDialog {
         mostrarPublicacion();
     }
 
+    public Publicaciones() {
+
+    }
+
     private void onX() {
         dispose();
     }
@@ -103,11 +109,31 @@ public class Publicaciones extends JDialog {
 
                         listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente));
                     } else if (tipo.equals("Imagen")) {
-                        // Obtener los atributos de la imagen y crear la instancia correspondiente
+                        String nombre = publicacionElement.getAttribute("nombre");
+                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
+                        int resolucion =Integer.parseInt(publicacionElement.getAttribute("resolucion"));
+                        int alto = Integer.parseInt(publicacionElement.getAttribute("alto"));
+                        int ancho = Integer.parseInt(publicacionElement.getAttribute("ancho"));
+
+                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG,resolucion, alto, ancho));
                     } else if (tipo.equals("Audio")) {
-                        // Obtener los atributos del audio y crear la instancia correspondiente
+                        String nombre = publicacionElement.getAttribute("nombre");
+                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
+                        int velocidad_bits = Integer.parseInt(publicacionElement.getAttribute("velocidad_bits"));
+                        int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
+
+                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG,duracion, velocidad_bits));
                     } else if (tipo.equals("Video")) {
-                        // Obtener los atributos del video y crear la instancia correspondiente
+                        String nombre = publicacionElement.getAttribute("nombre");
+                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
+                        int resolucion = Integer.parseInt(publicacionElement.getAttribute("resolucion"));
+                        int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
+                        int cantcuadros = Integer.parseInt(publicacionElement.getAttribute("cantcuadros"));
+
+                        listaPublicacion.add(new Video(nombre, descripcion, cantMG,resolucion, duracion, cantcuadros));
                     }
                 }
             }
@@ -152,3 +178,4 @@ public class Publicaciones extends JDialog {
 
         publicacionLabel.setText(texto);
     }
+}

@@ -5,4 +5,31 @@
     <seguidores>100</seguidores>
     <seguidos>50</seguidos>
     <cantAlbums>3</cantAlbums>
+<<<<<<< Updated upstream
+=======
+    <publicaciones>
+        <publicacion>
+            <titulo>Publicación 1</titulo>
+            <contenido>Contenido de la publicación 1</contenido>
+            <fecha>2023-05-20</fecha>
+        </publicacion>
+        <publicacion>
+            <titulo>Publicación 2</titulo>
+            <contenido>Contenido de la publicación 2</contenido>
+            <fecha>2023-05-21</fecha>
+        </publicacion>
+    </publicaciones>
+    <albums>
+        <album>
+            <nombre>Álbum 1</nombre>
+            <descripcion>Descripción del álbum 1</descripcion>
+            <fechaCreacion>2023-05-10</fechaCreacion>
+        </album>
+        <album>
+            <nombre>Álbum 2</nombre>
+            <descripcion>Descripción del álbum 2</descripcion>
+            <fechaCreacion>2023-05-15</fechaCreacion>
+        </album>
+    </albums>
+>>>>>>> Stashed changes
 </perfil>

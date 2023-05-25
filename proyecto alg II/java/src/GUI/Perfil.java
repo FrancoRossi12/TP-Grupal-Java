@@ -103,6 +103,7 @@ public class Perfil extends JDialog {
     }
 
     private void onPublicaciones() {
+
         // add your code here
         Publicaciones dialog = new Publicaciones();
         dialog.pack();
@@ -110,13 +111,16 @@ public class Perfil extends JDialog {
     }
     private void onX(){
         dispose();
+
     }
 
     private void onAlbunes() {
         // add your code here if necessary
+
         Album dialog = new Album();
         dialog.pack();
         dialog.setVisible(true);
+
     }
 }
 
