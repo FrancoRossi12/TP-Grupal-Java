@@ -31,6 +31,7 @@ public class Publicaciones extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(prev);
+        setSize(1080, 720);
 
         this.listaPublicacion = listaPublicacion;
 
@@ -92,46 +93,46 @@ public class Publicaciones extends JDialog {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/Publicaciones.xml");
 
-            NodeList publicacionNodes = ((Document) document).getElementsByTagName("Publicacion");
+            NodeList publicacionNodes = ((Document) document).getElementsByTagName("publicacion");
             for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
                 Node publicacionNode = publicacionNodes.item(i);
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element publicacionElement = (Element) publicacionNode;
                     String tipo = publicacionElement.getAttribute("tipo");
 
-                    if (tipo.equals("Texto")) {
+                    if (tipo.equals("texto")) {
                         String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        String descripcion = publicacionElement.getAttribute("descripcionPost");
                         int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
                         String fuente = publicacionElement.getAttribute("fuente");
                         int cantCaracteres = Integer.parseInt(publicacionElement.getAttribute("cantCaracteres"));
                         int tamañoFuente = Integer.parseInt(publicacionElement.getAttribute("tamañoFuente"));
 
                         listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente));
-                    } else if (tipo.equals("Imagen")) {
+                    } else if (tipo.equals("imagen")) {
                         String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        String descripcion = publicacionElement.getAttribute("descripcionPost");
                         int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
                         int resolucion =Integer.parseInt(publicacionElement.getAttribute("resolucion"));
                         int alto = Integer.parseInt(publicacionElement.getAttribute("alto"));
                         int ancho = Integer.parseInt(publicacionElement.getAttribute("ancho"));
 
                         listaPublicacion.add(new Imagen(nombre, descripcion, cantMG,resolucion, alto, ancho));
-                    } else if (tipo.equals("Audio")) {
+                    } else if (tipo.equals("audio")) {
                         String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        String descripcion = publicacionElement.getAttribute("descripcionPost");
                         int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
                         int velocidad_bits = Integer.parseInt(publicacionElement.getAttribute("velocidad_bits"));
                         int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
 
                         listaPublicacion.add(new Audio(nombre, descripcion, cantMG,duracion, velocidad_bits));
-                    } else if (tipo.equals("Video")) {
+                    } else if (tipo.equals("video")) {
                         String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcion");
+                        String descripcion = publicacionElement.getAttribute("descripcionPost");
                         int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
                         int resolucion = Integer.parseInt(publicacionElement.getAttribute("resolucion"));
                         int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
-                        int cantcuadros = Integer.parseInt(publicacionElement.getAttribute("cantcuadros"));
+                        int cantcuadros = Integer.parseInt(publicacionElement.getAttribute("cantCuadros"));
 
                         listaPublicacion.add(new Video(nombre, descripcion, cantMG,resolucion, duracion, cantcuadros));
                     }
