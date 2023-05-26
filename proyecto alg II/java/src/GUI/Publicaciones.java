@@ -97,7 +97,7 @@ public class Publicaciones extends JDialog {
             NodeList publicacionNodes = document.getElementsByTagName("Publicacion");
 
             for (int i = 0; i < publicacionNodes.getLength(); i++) {
-                Node publicacionNode = publicacionNodes.item(i);
+                Node publicacionNode = publicacionNodes.item(i);//CREAR SUBLISTA DE COMENTARIOS Y HASHTAGS
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element publicacionElement = (Element) publicacionNode;
                     String tipo = publicacionElement.getAttribute("tipo");
