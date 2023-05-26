@@ -8,8 +8,8 @@ public class Audio extends Publicacion implements Durable {
 
     public Audio(String nombre, String descripcion, int cantMG, int duracion, int velocidad_bits) {
         super( nombre,  descripcion, cantMG);
-        duracion = this.duracion;
-        velocidad_bits = this.velocidad_bits;
+        this.duracion = duracion;
+        this.velocidad_bits = velocidad_bits;
     }
 
 

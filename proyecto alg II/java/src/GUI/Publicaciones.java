@@ -92,7 +92,7 @@ public class Publicaciones extends JDialog {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/Publicaciones.xml");
 
-            NodeList publicacionNodes = ((Document) document).getElementsByTagName("publicacion");
+            NodeList publicacionNodes = ((Document) document).getElementsByTagName("Publicacion");
             for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
                 Node publicacionNode = publicacionNodes.item(i);
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {

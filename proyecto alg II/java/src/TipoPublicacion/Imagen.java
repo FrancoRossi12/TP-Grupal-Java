@@ -8,9 +8,9 @@ public class Imagen extends Publicacion implements Filtrable {
 
     public Imagen(String nombre, String descripcion, int cantMG, int resolucion, int alto, int ancho) {
         super( nombre,  descripcion, cantMG);
-        resolucion = this.resolucion;
-        alto = this.alto;
-        ancho = this.ancho;
+        this.resolucion = resolucion;
+        this.alto = alto;
+        this.ancho = ancho;
     }
 
 
