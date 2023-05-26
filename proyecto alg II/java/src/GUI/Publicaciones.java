@@ -27,11 +27,7 @@ public class Publicaciones extends JDialog {
     private List<Publicacion> listaPublicacion;
 
     public Publicaciones(List<Publicacion> listaPublicacion) {
-        setTitle("Publicaciones");
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(prev);
-        setSize(1080, 720);
+
 
         this.listaPublicacion = listaPublicacion;
 
@@ -64,6 +60,11 @@ public class Publicaciones extends JDialog {
     }
 
     public Publicaciones() {
+        setTitle("Publicaciones");
+        setContentPane(contentPane);
+        setModal(true);
+        getRootPane().setDefaultButton(prev);
+        setSize(1080, 720);
         listaPublicacion=cargarPublicacionesDesdeXML();
         mostrarPublicacion();
     }
@@ -75,15 +76,19 @@ public class Publicaciones extends JDialog {
     private void onPrev() {
         if (indice > 0) {
             indice--;
-            mostrarPublicacion();
+        } else {
+            indice = listaPublicacion.size() - 1; // Mostrar el último elemento si se alcanza el principio de la lista
         }
+        mostrarPublicacion();
     }
 
     private void onNext() {
         if (indice < listaPublicacion.size() - 1) {
             indice++;
-            mostrarPublicacion();
+        } else {
+            indice = 0; // Mostrar el primer elemento si se alcanza el final de la lista
         }
+        mostrarPublicacion();
     }
 
     private static List<Publicacion> cargarPublicacionesDesdeXML() {
