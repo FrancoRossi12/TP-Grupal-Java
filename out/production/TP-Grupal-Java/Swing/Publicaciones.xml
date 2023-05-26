@@ -1,5 +1,5 @@
 <publicaciones>
-    <audio>
+    <publicacion tipo="audio">
         <nombre>Audio 1</nombre>
         <descripcionPost>Descripción del audio 1</descripcionPost>
         <cantMG>10</cantMG>
@@ -13,8 +13,8 @@
         </listaHashtag>
         <duracion>180</duracion>
         <velocidad_bits>128</velocidad_bits>
-    </audio>
-    <imagen>
+    </publicacion>
+    <publicacion tipo="imagen">
         <nombre>Imagen 2</nombre>
         <descripcionPost>Descripción de la imagen 2</descripcionPost>
         <cantMG>50</cantMG>
@@ -29,8 +29,8 @@
         <resolucion>1920x1080</resolucion>
         <alto>1080</alto>
         <ancho>1920</ancho>
-    </imagen>
-    <texto>
+    </publicacion>
+    <publicacion tipo="texto">
         <nombre>Texto 3</nombre>
         <descripcionPost>Descripción del texto 3</descripcionPost>
         <cantMG>20</cantMG>
@@ -45,8 +45,8 @@
         <fuente>Arial</fuente>
         <cantCaracteres>500</cantCaracteres>
         <tamañoFuente>12</tamañoFuente>
-    </texto>
-    <video>
+    </publicacion>
+    <publicacion tipo="video">
         <nombre>Video 4</nombre>
         <descripcionPost>Descripción del video 4</descripcionPost>
         <cantMG>30</cantMG>
@@ -61,8 +61,8 @@
         <resolucion>1280x720</resolucion>
         <duracion>240</duracion>
         <cantCuadros>30</cantCuadros>
-    </video>
-    <audio>
+    </publicacion>
+    <publicacion tipo="audio">
         <nombre>Audio 5</nombre>
         <descripcionPost>Descripción del audio 5</descripcionPost>
         <cantMG>15</cantMG>
@@ -76,8 +76,8 @@
         </listaHashtag>
         <duracion>200</duracion>
         <velocidad_bits>192</velocidad_bits>
-    </audio>
-    <imagen>
+    </publicacion>
+    <publicacion tipo="imagen">
         <nombre>Imagen 6</nombre>
         <descripcionPost>Descripción de la imagen 6</descripcionPost>
         <cantMG>40</cantMG>
@@ -92,8 +92,8 @@
         <resolucion>2560x1440</resolucion>
         <alto>1440</alto>
         <ancho>2560</ancho>
-    </imagen>
-    <texto>
+    </publicacion>
+    <publicacion tipo="texto">
         <nombre>Texto 7</nombre>
         <descripcionPost>Descripción del texto 7</descripcionPost>
         <cantMG>25</cantMG>
@@ -108,8 +108,8 @@
         <fuente>Times New Roman</fuente>
         <cantCaracteres>750</cantCaracteres>
         <tamañoFuente>14</tamañoFuente>
-    </texto>
-    <video>
+    </publicacion>
+    <publicacion tipo="video">
         <nombre>Video 8</nombre>
         <descripcionPost>Descripción del video 8</descripcionPost>
         <cantMG>35</cantMG>
@@ -124,8 +124,8 @@
         <resolucion>1920x1080</resolucion>
         <duracion>180</duracion>
         <cantCuadros>24</cantCuadros>
-    </video>
-    <audio>
+    </publicacion>
+    <publicacion tipo="audio">
         <nombre>Audio 9</nombre>
         <descripcionPost>Descripción del audio 9</descripcionPost>
         <cantMG>12</cantMG>
@@ -139,8 +139,8 @@
         </listaHashtag>
         <duracion>220</duracion>
         <velocidad_bits>256</velocidad_bits>
-    </audio>
-    <imagen>
+    </publicacion>
+    <publicacion tipo="imagen">
         <nombre>Imagen 10</nombre>
         <descripcionPost>Descripción de la imagen 10</descripcionPost>
         <cantMG>60</cantMG>
@@ -155,8 +155,8 @@
         <resolucion>3840x2160</resolucion>
         <alto>2160</alto>
         <ancho>3840</ancho>
-    </imagen>
-    <texto>
+    </publicacion>
+    <publicacion tipo="texto">
         <nombre>Texto 11</nombre>
         <descripcionPost>Descripción del texto 11</descripcionPost>
         <cantMG>18</cantMG>
@@ -171,8 +171,8 @@
         <fuente>Verdana</fuente>
         <cantCaracteres>900</cantCaracteres>
         <tamañoFuente>16</tamañoFuente>
-    </texto>
-    <video>
+    </publicacion>
+    <publicacion tipo="video">
         <nombre>Video 12</nombre>
         <descripcionPost>Descripción del video 12</descripcionPost>
         <cantMG>42</cantMG>
@@ -187,8 +187,8 @@
         <resolucion>3840x2160</resolucion>
         <duracion>300</duracion>
         <cantCuadros>60</cantCuadros>
-    </video>
-    <audio>
+    </publicacion>
+    <publicacion tipo="audio">
         <nombre>Audio 13</nombre>
         <descripcionPost>Descripción del audio 13</descripcionPost>
         <cantMG>20</cantMG>
@@ -202,8 +202,8 @@
         </listaHashtag>
         <duracion>160</duracion>
         <velocidad_bits>192</velocidad_bits>
-    </audio>
-    <imagen>
+    </publicacion>
+    <publicacion tipo="imagen">
         <nombre>Imagen 14</nombre>
         <descripcionPost>Descripción de la imagen 14</descripcionPost>
         <cantMG>70</cantMG>
@@ -218,8 +218,8 @@
         <resolucion>1920x1080</resolucion>
         <alto>1080</alto>
         <ancho>1920</ancho>
-    </imagen>
-    <texto>
+    </publicacion>
+    <publicacion tipo="texto">
         <nombre>Texto 15</nombre>
         <descripcionPost>Descripción del texto 15</descripcionPost>
         <cantMG>30</cantMG>
@@ -234,8 +234,8 @@
         <fuente>Courier New</fuente>
         <cantCaracteres>700</cantCaracteres>
         <tamañoFuente>14</tamañoFuente>
-    </texto>
-    <video>
+    </publicacion>
+    <publicacion tipo="video">
         <nombre>Video 16</nombre>
         <descripcionPost>Descripción del video 16</descripcionPost>
         <cantMG>55</cantMG>
@@ -250,8 +250,8 @@
         <resolucion>1280x720</resolucion>
         <duracion>240</duracion>
         <cantCuadros>30</cantCuadros>
-    </video>
-    <audio>
+    </publicacion>
+    <publicacion tipo="audio">
         <nombre>Audio 17</nombre>
         <descripcionPost>Descripción del audio 17</descripcionPost>
         <cantMG>25</cantMG>
@@ -265,8 +265,8 @@
         </listaHashtag>
         <duracion>180</duracion>
         <velocidad_bits>256</velocidad_bits>
-    </audio>
-    <imagen>
+    </publicacion>
+    <publicacion tipo="imagen">
         <nombre>Imagen 18</nombre>
         <descripcionPost>Descripción de la imagen 18</descripcionPost>
         <cantMG>45</cantMG>
@@ -281,8 +281,8 @@
         <resolucion>2560x1440</resolucion>
         <alto>1440</alto>
         <ancho>2560</ancho>
-    </imagen>
-    <texto>
+    </publicacion>
+    <publicacion tipo="texto">
         <nombre>Texto 19</nombre>
         <descripcionPost>Descripción del texto 19</descripcionPost>
         <cantMG>35</cantMG>
@@ -297,8 +297,8 @@
         <fuente>Arial</fuente>
         <cantCaracteres>800</cantCaracteres>
         <tamañoFuente>16</tamañoFuente>
-    </texto>
-    <video>
+    </publicacion>
+    <publicacion tipo="video">
         <nombre>Video 20</nombre>
         <descripcionPost>Descripción del video 20</descripcionPost>
         <cantMG>38</cantMG>
@@ -313,5 +313,5 @@
         <resolucion>1920x1080</resolucion>
         <duracion>200</duracion>
         <cantCuadros>24</cantCuadros>
-    </video>
+    </publicacion>
 </publicaciones>
