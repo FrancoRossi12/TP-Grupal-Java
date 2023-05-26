@@ -16,6 +16,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Publicaciones extends JDialog {
@@ -63,7 +65,7 @@ public class Publicaciones extends JDialog {
     }
 
     public Publicaciones() {
-
+        listaPublicacion = cargarPublicacionesDesdeXML();
     }
 
     private void onX() {
@@ -92,8 +94,9 @@ public class Publicaciones extends JDialog {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/Publicaciones.xml");
 
-            NodeList publicacionNodes = ((Document) document).getElementsByTagName("Publicacion");
-            for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
+            NodeList publicacionNodes = document.getElementsByTagName("Publicacion");
+
+            for (int i = 0; i < publicacionNodes.getLength(); i++) {
                 Node publicacionNode = publicacionNodes.item(i);
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element publicacionElement = (Element) publicacionNode;
@@ -112,11 +115,11 @@ public class Publicaciones extends JDialog {
                         String nombre = publicacionElement.getAttribute("nombre");
                         String descripcion = publicacionElement.getAttribute("descripcion");
                         int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
-                        int resolucion =Integer.parseInt(publicacionElement.getAttribute("resolucion"));
+                        int resolucion = Integer.parseInt(publicacionElement.getAttribute("resolucion"));
                         int alto = Integer.parseInt(publicacionElement.getAttribute("alto"));
                         int ancho = Integer.parseInt(publicacionElement.getAttribute("ancho"));
 
-                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG,resolucion, alto, ancho));
+                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho));
                     } else if (tipo.equals("Audio")) {
                         String nombre = publicacionElement.getAttribute("nombre");
                         String descripcion = publicacionElement.getAttribute("descripcion");
@@ -124,7 +127,7 @@ public class Publicaciones extends JDialog {
                         int velocidad_bits = Integer.parseInt(publicacionElement.getAttribute("velocidad_bits"));
                         int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
 
-                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG,duracion, velocidad_bits));
+                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits));
                     } else if (tipo.equals("Video")) {
                         String nombre = publicacionElement.getAttribute("nombre");
                         String descripcion = publicacionElement.getAttribute("descripcion");
@@ -133,10 +136,18 @@ public class Publicaciones extends JDialog {
                         int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
                         int cantcuadros = Integer.parseInt(publicacionElement.getAttribute("cantcuadros"));
 
-                        listaPublicacion.add(new Video(nombre, descripcion, cantMG,resolucion, duracion, cantcuadros));
+                        listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros));
                     }
                 }
             }
+
+            // Ordenar la lista de publicaciones por nombre
+            Collections.sort(listaPublicacion, new Comparator<Publicacion>() {
+                @Override
+                public int compare(Publicacion p1, Publicacion p2) {
+                    return p1.getNombre().compareTo(p2.getNombre());
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -161,19 +172,18 @@ public class Publicaciones extends JDialog {
             texto += "Tamaño de fuente: " + textoPublicacion.getTamañoFuente() + "\n";
         } else if (publicacion instanceof Imagen) {
             Imagen imagenPublicacion = (Imagen) publicacion;
-            texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";
+            texto += "Resolución: " + imagenPublicacion.getResolucion() + "\n";
             texto += "Alto: " + imagenPublicacion.getAlto() + "\n";
             texto += "Ancho: " + imagenPublicacion.getAncho() + "\n";
         } else if (publicacion instanceof Audio) {
             Audio audioPublicacion = (Audio) publicacion;
             texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
-            texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
-
+            texto += "Duración: " + audioPublicacion.getDuracion() + "\n";
         } else if (publicacion instanceof Video) {
             Video videoPublicacion = (Video) publicacion;
-            texto += "Resolucion: " + videoPublicacion.getResolucion() + "\n";
+            texto += "Resolución: " + videoPublicacion.getResolucion() + "\n";
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
-            texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
+            texto += "Duración: " + videoPublicacion.getDuracion() + "\n";
         }
 
         publicacionLabel.setText(texto);
