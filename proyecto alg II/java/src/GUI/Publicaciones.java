@@ -23,7 +23,7 @@ public class Publicaciones extends JDialog {
     private JButton next;
     private JButton prev;
     private JLabel publicacionLabel;
-    private int indice = 0;
+    private static int indice = 0;
     private List<Publicacion> listaPublicacion;
 
     public Publicaciones(List<Publicacion> listaPublicacion) {
@@ -64,7 +64,8 @@ public class Publicaciones extends JDialog {
     }
 
     public Publicaciones() {
-
+        listaPublicacion=cargarPublicacionesDesdeXML();
+        mostrarPublicacion();
     }
 
     private void onX() {
@@ -99,42 +100,32 @@ public class Publicaciones extends JDialog {
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element publicacionElement = (Element) publicacionNode;
                     String tipo = publicacionElement.getAttribute("tipo");
-
+                    String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
+                    String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
+                    int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
                     if (tipo.equals("texto")) {
-                        String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcionPost");
-                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
-                        String fuente = publicacionElement.getAttribute("fuente");
-                        int cantCaracteres = Integer.parseInt(publicacionElement.getAttribute("cantCaracteres"));
-                        int tamañoFuente = Integer.parseInt(publicacionElement.getAttribute("tamañoFuente"));
+                        String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
+                        int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement,"cantCaracteres"));
+                        int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement,"tamañoFuente"));
 
                         listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente));
                     } else if (tipo.equals("imagen")) {
-                        String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcionPost");
-                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
-                        int resolucion =Integer.parseInt(publicacionElement.getAttribute("resolucion"));
-                        int alto = Integer.parseInt(publicacionElement.getAttribute("alto"));
-                        int ancho = Integer.parseInt(publicacionElement.getAttribute("ancho"));
+                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                        int alto = parseOptionalInt(getTextContent(publicacionElement,"alto"));
+                        int ancho = parseOptionalInt(getTextContent(publicacionElement,"ancho"));
 
-                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG,resolucion, alto, ancho));
+                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho));
                     } else if (tipo.equals("audio")) {
-                        String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcionPost");
-                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
-                        int velocidad_bits = Integer.parseInt(publicacionElement.getAttribute("velocidad_bits"));
-                        int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
+                        int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement,"velocidad_bits"));
+                        int duracion = parseOptionalInt(getTextContent(publicacionElement,"duracion"));
 
                         listaPublicacion.add(new Audio(nombre, descripcion, cantMG,duracion, velocidad_bits));
                     } else if (tipo.equals("video")) {
-                        String nombre = publicacionElement.getAttribute("nombre");
-                        String descripcion = publicacionElement.getAttribute("descripcionPost");
-                        int cantMG = Integer.parseInt(publicacionElement.getAttribute("cantMG"));
-                        int resolucion = Integer.parseInt(publicacionElement.getAttribute("resolucion"));
-                        int duracion = Integer.parseInt(publicacionElement.getAttribute("duracion"));
-                        int cantcuadros = Integer.parseInt(publicacionElement.getAttribute("cantCuadros"));
+                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                        int duracion = parseOptionalInt(getTextContent(publicacionElement,"duracion"));
+                        int cantcuadros = parseOptionalInt(getTextContent(publicacionElement,"cantCuadros"));
 
-                        listaPublicacion.add(new Video(nombre, descripcion, cantMG,resolucion, duracion, cantcuadros));
+                        listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros));
                     }
                 }
             }
@@ -144,11 +135,31 @@ public class Publicaciones extends JDialog {
 
         return listaPublicacion;
     }
+    public static int parseOptionalInt(String value) {
+        if (value != null && !value.isEmpty()) {
+            try {
+                return Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                // El valor no es un número válido, se puede manejar el error aquí
+                e.printStackTrace();
+            }
+        }
+        return 0; // Valor predeterminado si el valor es vacío o no válido
+    }
 
+    public static String getTextContent(Element element, String tagName) {
+        NodeList nodeList = element.getElementsByTagName(tagName);
+        if (nodeList != null && nodeList.getLength() > 0) {
+            Node node = nodeList.item(0);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                return node.getTextContent();
+            }
+        }
+        return ""; // Valor predeterminado si el contenido no está presente
+    }
     private void mostrarPublicacion() {
         Publicacion publicacion = listaPublicacion.get(indice);
         String tipo = publicacion.getClass().getSimpleName();
-
         String texto = "Tipo: " + tipo + "\n";
         texto += "Nombre: " + publicacion.getNombre() + "\n";
         texto += "Descripción: " + publicacion.getDescripcionPost() + "\n";
@@ -176,7 +187,7 @@ public class Publicaciones extends JDialog {
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
             texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
         }
-
+        System.out.print(texto);
         publicacionLabel.setText(texto);
     }
 }

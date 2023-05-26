@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class Perfil extends JDialog {
+public class Perfil extends JDialog{
     private JPanel contentPane;
     private JButton publicacionesButton;
     private JButton albunesButton;

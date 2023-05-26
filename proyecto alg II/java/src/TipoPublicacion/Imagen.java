@@ -4,9 +4,10 @@ import Interfaz.Filtrable;
 
 public class Imagen extends Publicacion implements Filtrable {
 
-    private int resolucion,alto,ancho;
+    private int alto,ancho;
+    private String resolucion;
 
-    public Imagen(String nombre, String descripcion, int cantMG, int resolucion, int alto, int ancho) {
+    public Imagen(String nombre, String descripcion, int cantMG, String resolucion, int alto, int ancho) {
         super( nombre,  descripcion, cantMG);
         this.resolucion = resolucion;
         this.alto = alto;
@@ -20,7 +21,7 @@ public class Imagen extends Publicacion implements Filtrable {
         
     }
 
-    public int getResolucion() {
+    public String getResolucion() {
         return resolucion;
     }
 
