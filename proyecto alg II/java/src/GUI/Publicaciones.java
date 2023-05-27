@@ -9,7 +9,6 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -56,7 +55,7 @@ public class Publicaciones extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        mostrarPublicacion();
+        mostrarPublicacion(indice);
     }
 
     public Publicaciones() {
@@ -66,7 +65,7 @@ public class Publicaciones extends JDialog {
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
         listaPublicacion=cargarPublicacionesDesdeXML();
-        mostrarPublicacion();
+        mostrarPublicacion(indice);
     }
 
     private void onX() {
@@ -79,7 +78,8 @@ public class Publicaciones extends JDialog {
         } else {
             indice = listaPublicacion.size() - 1; // Mostrar el último elemento si se alcanza el principio de la lista
         }
-        mostrarPublicacion();
+        System.out.println("LLegue");
+        mostrarPublicacion(indice);
     }
 
     private void onNext() {
@@ -88,7 +88,8 @@ public class Publicaciones extends JDialog {
         } else {
             indice = 0; // Mostrar el primer elemento si se alcanza el final de la lista
         }
-        mostrarPublicacion();
+        System.out.println("LLegue");
+        mostrarPublicacion(indice);
     }
 
     private static List<Publicacion> cargarPublicacionesDesdeXML() {
@@ -162,8 +163,8 @@ public class Publicaciones extends JDialog {
         }
         return ""; // Valor predeterminado si el contenido no está presente
     }
-    private void mostrarPublicacion() {
-        Publicacion publicacion = listaPublicacion.get(indice);
+    private void mostrarPublicacion(int i) {
+        Publicacion publicacion = listaPublicacion.get(i);
         String tipo = publicacion.getClass().getSimpleName();
         String texto = "Tipo: " + tipo + "\n";
         texto += "Nombre: " + publicacion.getNombre() + "\n";
