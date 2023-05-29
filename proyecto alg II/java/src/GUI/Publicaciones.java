@@ -22,6 +22,7 @@ public class Publicaciones extends JDialog {
     private JButton next;
     private JButton prev;
     private JLabel publicacionLabel;
+    private JLabel cantPub;
     private static int indice = 0;
     private List<Publicacion> listaPublicacion;
 
@@ -164,6 +165,7 @@ public class Publicaciones extends JDialog {
         return ""; // Valor predeterminado si el contenido no está presente
     }
     private void mostrarPublicacion(int i) {
+        String contador = (indice+1) + "/" + (listaPublicacion.toArray().length+1);
         Publicacion publicacion = listaPublicacion.get(i);
         String tipo = publicacion.getClass().getSimpleName();
         String texto = "Tipo: " + tipo + "\n";
@@ -193,7 +195,11 @@ public class Publicaciones extends JDialog {
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
             texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
         }
+
+        cantPub.setText(contador);
         System.out.print(texto);
         publicacionLabel.setText(texto);
     }
+
+
 }
