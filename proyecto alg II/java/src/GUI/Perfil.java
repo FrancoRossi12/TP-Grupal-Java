@@ -106,7 +106,7 @@ public class Perfil extends JDialog{
     private void onPublicaciones() {
 
         // add your code here
-        Publicaciones dialog = new Publicaciones();
+        Publicaciones dialog = new Publicaciones("Publicaciones");
         dialog.pack();
         dialog.setVisible(true);
     }

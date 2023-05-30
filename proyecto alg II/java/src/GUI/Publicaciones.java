@@ -26,52 +26,19 @@ public class Publicaciones extends JDialog {
     private static int indice = 0;
     private List<Publicacion> listaPublicacion;
 
-    public Publicaciones(List<Publicacion> listaPublicacion) {
+    public Publicaciones(String NombreArchivo) {
 
-
-        this.listaPublicacion = listaPublicacion;
-
-        prev.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("llega");
-                onPrev();
-            }
-        });
-        next.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onNext();
-            }
-        });
-
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onNext();
-            }
-        });
-
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-        mostrarPublicacion(indice);
-    }
-
-    public Publicaciones() {
         setTitle("Publicaciones");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
-        listaPublicacion=cargarPublicacionesDesdeXML();
+        listaPublicacion=cargarPublicacionesDesdeXML(NombreArchivo);
         mostrarPublicacion(indice);
         this.listaPublicacion = listaPublicacion;
 
         prev.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("llega");
                 onPrev();
             }
         });
@@ -94,11 +61,7 @@ public class Publicaciones extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        mostrarPublicacion(indice);
     }
-
-
-
     private void onX() {
         dispose();
     }
@@ -109,7 +72,6 @@ public class Publicaciones extends JDialog {
         } else {
             indice = listaPublicacion.size() - 1; // Mostrar el último elemento si se alcanza el principio de la lista
         }
-        System.out.println("LLegue");
         mostrarPublicacion(indice);
     }
 
@@ -119,17 +81,16 @@ public class Publicaciones extends JDialog {
         } else {
             indice = 0; // Mostrar el primer elemento si se alcanza el final de la lista
         }
-        System.out.println("LLegue");
         mostrarPublicacion(indice);
     }
 
-    private static List<Publicacion> cargarPublicacionesDesdeXML() {
+    private static List<Publicacion> cargarPublicacionesDesdeXML(String NombreArch) {
         List<Publicacion> listaPublicacion = new ArrayList<>();
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse("proyecto alg II/java/src/Swing/Publicaciones.xml");
+            Document document = builder.parse("proyecto alg II/java/src/Swing/" + NombreArch +".xml");
 
             NodeList publicacionNodes = ((Document) document).getElementsByTagName("publicacion");
             for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
@@ -227,9 +188,6 @@ public class Publicaciones extends JDialog {
         }
 
         cantPub.setText(contador);
-        System.out.print(texto);
         publicacionLabel.setText(texto);
     }
-
-
 }
