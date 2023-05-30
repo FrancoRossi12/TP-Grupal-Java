@@ -33,10 +33,10 @@ public class Publicaciones extends JDialog {
 
         prev.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("llega");
                 onPrev();
             }
         });
-
         next.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onNext();
@@ -67,7 +67,37 @@ public class Publicaciones extends JDialog {
         setSize(1080, 720);
         listaPublicacion=cargarPublicacionesDesdeXML();
         mostrarPublicacion(indice);
+        this.listaPublicacion = listaPublicacion;
+
+        prev.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("llega");
+                onPrev();
+            }
+        });
+        next.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onNext();
+            }
+        });
+
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onNext();
+            }
+        });
+
+        contentPane.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onX();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        mostrarPublicacion(indice);
     }
+
+
 
     private void onX() {
         dispose();
@@ -165,7 +195,7 @@ public class Publicaciones extends JDialog {
         return ""; // Valor predeterminado si el contenido no está presente
     }
     private void mostrarPublicacion(int i) {
-        String contador = (indice+1) + "/" + (listaPublicacion.toArray().length+1);
+        String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
         Publicacion publicacion = listaPublicacion.get(i);
         String tipo = publicacion.getClass().getSimpleName();
         String texto = "Tipo: " + tipo + "\n";
