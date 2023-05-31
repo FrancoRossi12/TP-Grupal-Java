@@ -3,14 +3,16 @@ package TipoPublicacion;
 import Interfaz.Durable;
 import Interfaz.Filtrable;
 
+import java.util.ArrayList;
+
 public class Video extends Publicacion implements Durable, Filtrable {
 
     private int duracion, cantcuadros;
     private tipoFiltro filtroAplicado;
     private String resolucion;
 
-    public Video(String nombre, String descripcion, int cantMG, String resolucion, int duracion, int cantcuadros) {
-        super(nombre, descripcion, cantMG);
+    public Video(String nombre, String descripcion, int cantMG, String resolucion, int duracion, int cantcuadros, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
+        super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
         this.resolucion = resolucion;
         this.duracion = duracion;
         this.cantcuadros = cantcuadros;

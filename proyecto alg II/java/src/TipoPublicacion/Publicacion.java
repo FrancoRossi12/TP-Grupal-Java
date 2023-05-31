@@ -1,6 +1,7 @@
 package TipoPublicacion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Publicacion {
     private int cantMG;
@@ -8,17 +9,13 @@ public class Publicacion {
     private ArrayList<String> listaComentario;
     private ArrayList<String> listaHashtag;
 
-    public Publicacion(){
-        cantMG=0;
-        descPost=" ";
-        listaComentario = new ArrayList<String>();
-        listaHashtag = new ArrayList<String>();
-    }
-    public Publicacion(String nombre, String descripcion, int cantMG){
+
+    public Publicacion(String nombre, String descripcion, int cantMG,ArrayList<String> listaHashtag,ArrayList<String> listaComentario){
         this.nombre = nombre;
         this.descPost = descripcion;
         this.cantMG = cantMG;
-
+        this.listaComentario = listaComentario;
+        this.listaHashtag = listaHashtag;
     }
     //posible(realizar) set_nombrePost
     public void modificaDescPost(String desc){descPost=desc;}
@@ -33,5 +30,14 @@ public class Publicacion {
 
     public int getCantMG() {
         return this.cantMG;
+    }
+
+    public List<String> getComentarios() {
+        return listaComentario;
+        
+    }
+
+    public List<String> getHashtags() {
+        return listaHashtag;
     }
 }

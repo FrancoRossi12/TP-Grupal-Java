@@ -2,6 +2,8 @@ package TipoPublicacion;
 
 import Interfaz.Filtrable;
 
+import java.util.ArrayList;
+
 public class Imagen extends Publicacion implements Filtrable {
 
     private int alto, ancho;
@@ -10,8 +12,8 @@ public class Imagen extends Publicacion implements Filtrable {
 
     private String resolucion;
 
-    public Imagen(String nombre, String descripcion, int cantMG, String resolucion, int alto, int ancho) {
-        super(nombre, descripcion, cantMG);
+    public Imagen(String nombre, String descripcion, int cantMG, String resolucion, int alto, int ancho, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
+        super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
         this.resolucion = resolucion;
         this.alto = alto;
         this.ancho = ancho;

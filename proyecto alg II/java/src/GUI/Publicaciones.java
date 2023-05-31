@@ -9,6 +9,11 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,21 +26,24 @@ public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
     private JButton prev;
-    private JLabel publicacionLabel;
+
     private JLabel cantPub;
+    private JTextPane textPane1;
+
     private static int indice = 0;
     private List<Publicacion> listaPublicacion;
 
-    public Publicaciones(String NombreArchivo) {
+    public Publicaciones(List<Publicacion> ListaPublicacion) {
 
+        this.listaPublicacion = ListaPublicacion;
         setTitle("Publicaciones");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
-        listaPublicacion=cargarPublicacionesDesdeXML(NombreArchivo);
+
         mostrarPublicacion(indice);
-        this.listaPublicacion = listaPublicacion;
+
 
         prev.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -51,7 +59,7 @@ public class Publicaciones extends JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onNext();
+                dispose();
             }
         });
 
@@ -62,6 +70,7 @@ public class Publicaciones extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+
     private void onX() {
         dispose();
     }
@@ -84,78 +93,8 @@ public class Publicaciones extends JDialog {
         mostrarPublicacion(indice);
     }
 
-    private static List<Publicacion> cargarPublicacionesDesdeXML(String NombreArch) {
-        List<Publicacion> listaPublicacion = new ArrayList<>();
-
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse("proyecto alg II/java/src/Swing/" + NombreArch +".xml");
-
-            NodeList publicacionNodes = ((Document) document).getElementsByTagName("publicacion");
-            for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
-                Node publicacionNode = publicacionNodes.item(i);
-                if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element publicacionElement = (Element) publicacionNode;
-                    String tipo = publicacionElement.getAttribute("tipo");
-                    String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
-                    String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
-                    int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
-                    if (tipo.equals("texto")) {
-                        String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
-                        int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement,"cantCaracteres"));
-                        int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement,"tamañoFuente"));
-
-                        listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente));
-                    } else if (tipo.equals("imagen")) {
-                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                        int alto = parseOptionalInt(getTextContent(publicacionElement,"alto"));
-                        int ancho = parseOptionalInt(getTextContent(publicacionElement,"ancho"));
-
-                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho));
-                    } else if (tipo.equals("audio")) {
-                        int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement,"velocidad_bits"));
-                        int duracion = parseOptionalInt(getTextContent(publicacionElement,"duracion"));
-
-                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG,duracion, velocidad_bits));
-                    } else if (tipo.equals("video")) {
-                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                        int duracion = parseOptionalInt(getTextContent(publicacionElement,"duracion"));
-                        int cantcuadros = parseOptionalInt(getTextContent(publicacionElement,"cantCuadros"));
-
-                        listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros));
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return listaPublicacion;
-    }
-    public static int parseOptionalInt(String value) {
-        if (value != null && !value.isEmpty()) {
-            try {
-                return Integer.parseInt(value);
-            } catch (NumberFormatException e) {
-                // El valor no es un número válido, se puede manejar el error aquí
-                e.printStackTrace();
-            }
-        }
-        return 0; // Valor predeterminado si el valor es vacío o no válido
-    }
-
-    public static String getTextContent(Element element, String tagName) {
-        NodeList nodeList = element.getElementsByTagName(tagName);
-        if (nodeList != null && nodeList.getLength() > 0) {
-            Node node = nodeList.item(0);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                return node.getTextContent();
-            }
-        }
-        return ""; // Valor predeterminado si el contenido no está presente
-    }
     private void mostrarPublicacion(int i) {
+
         String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
         Publicacion publicacion = listaPublicacion.get(i);
         String tipo = publicacion.getClass().getSimpleName();
@@ -186,8 +125,25 @@ public class Publicaciones extends JDialog {
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
             texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
         }
+        List<String> hashtags = publicacion.getHashtags();
+        if (!hashtags.isEmpty()) {
+            texto += "Hashtags:\n";
+            for (String hashtag : hashtags) {
+                texto += "#" + hashtag ;
+            }
+        }else{texto += "Sin hashtags";}
 
+        List<String> comentarios = publicacion.getComentarios();
+        if (!comentarios.isEmpty()) {
+            texto += "\nComentarios:\n";
+            for (String comentario : comentarios) {
+                texto += comentario + "\n";
+            }
+        }else{texto += "Sin comentario";}
+        Font font = textPane1.getFont();
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
+        textPane1.setFont(newFont);
         cantPub.setText(contador);
-        publicacionLabel.setText(texto);
+        textPane1.setText(texto);
     }
 }

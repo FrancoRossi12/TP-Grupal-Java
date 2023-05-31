@@ -1,8 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <perfil>
-    <nombreUsuario>Nombre de usuario</nombreUsuario>
-    <descripcion>Descripción del perfil</descripcion>
-    <cantPosts>10</cantPosts>
-    <seguidores>100</seguidores>
-    <seguidos>50</seguidos>
-    <cantAlbums>3</cantAlbums>
+          
+  
+  
+  <nombreUsuario>Nombre de usuario</nombreUsuario>
+          
+  
+  
+  <descripcion>Descripción del perfil</descripcion>
+          
+  
+  
+  <cantPosts>20</cantPosts>
+          
+  
+  
+  <seguidores>100</seguidores>
+          
+  
+  
+  <seguidos>50</seguidos>
+          
+  
+  
+  <cantAlbums>3</cantAlbums>
+      
+
+
 </perfil>
