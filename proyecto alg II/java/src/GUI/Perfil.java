@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -33,10 +34,6 @@ public class Perfil extends JDialog{
     private int cantidadPublicaciones;
     private PerfilInstagram perfilInstagram;
     private List<Publicacion> listaPublicacion;
-
-
-
-
     public Perfil() {
         setTitle("Perfil");
         setContentPane(contentPane);
@@ -226,6 +223,7 @@ public class Perfil extends JDialog{
                     }
                 }
             }
+            listaPublicacion.sort(Comparator.comparing(Publicacion::getNombre));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -233,8 +231,3 @@ public class Perfil extends JDialog{
         return listaPublicacion;
     }
 }
-
-
-
-
-

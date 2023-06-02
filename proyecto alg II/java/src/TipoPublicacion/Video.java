@@ -66,6 +66,7 @@ public class Video extends Publicacion implements Durable, Filtrable {
         return cantcuadros;
     }
 
+
     public tipoFiltro getFiltro() {
         return filtroAplicado;
     } // SIRVE PARA FILTRAR (FILTRAR DE AGRUPAR SEGUN CIERTAS CARACTERISTICAS)

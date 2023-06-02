@@ -1,25 +1,15 @@
 package GUI;
 
+import Interfaz.Filtrable;
 import TipoPublicacion.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Publicaciones extends JDialog {
@@ -29,7 +19,9 @@ public class Publicaciones extends JDialog {
 
     private JLabel cantPub;
     private JTextPane textPane1;
+    private JButton filtro;
 
+    int filtroaplicado = 0;
     private static int indice = 0;
     private List<Publicacion> listaPublicacion;
 
@@ -42,9 +34,16 @@ public class Publicaciones extends JDialog {
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
 
+        Font font = textPane1.getFont();
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
+        textPane1.setFont(newFont);
+
         mostrarPublicacion(indice);
-
-
+        filtro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Onfiltro();
+            }
+        });
         prev.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onPrev();
@@ -75,6 +74,21 @@ public class Publicaciones extends JDialog {
         dispose();
     }
 
+    private void Onfiltro(){
+        Publicacion publicacion = listaPublicacion.get(indice);
+        String tipo = publicacion.getClass().getSimpleName();
+
+        if(publicacion instanceof Imagen || publicacion instanceof Video){
+            filtropublicaciones dialog = new filtropublicaciones();
+            dialog.pack();
+            dialog.setVisible(true);
+            filtroaplicado = dialog.getFiltroaplicado();
+            ((Filtrable) publicacion).aplicarFiltro(filtroaplicado);
+        }else{
+            System.err.println("Incompativilidad con el tipo de publicacion");
+        }
+        mostrarPublicacion(indice);
+    }
     private void onPrev() {
         if (indice > 0) {
             indice--;
@@ -114,6 +128,7 @@ public class Publicaciones extends JDialog {
             texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";
             texto += "Alto: " + imagenPublicacion.getAlto() + "\n";
             texto += "Ancho: " + imagenPublicacion.getAncho() + "\n";
+            texto += "Filtro:" + ((Imagen) publicacion).getFiltro() + "\n";
         } else if (publicacion instanceof Audio) {
             Audio audioPublicacion = (Audio) publicacion;
             texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
@@ -124,6 +139,7 @@ public class Publicaciones extends JDialog {
             texto += "Resolucion: " + videoPublicacion.getResolucion() + "\n";
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
             texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
+            texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
         }
         List<String> hashtags = publicacion.getHashtags();
         if (!hashtags.isEmpty()) {
@@ -140,9 +156,6 @@ public class Publicaciones extends JDialog {
                 texto += comentario + "\n";
             }
         }else{texto += "Sin comentario";}
-        Font font = textPane1.getFont();
-        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
-        textPane1.setFont(newFont);
         cantPub.setText(contador);
         textPane1.setText(texto);
     }
