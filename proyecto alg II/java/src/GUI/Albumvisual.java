@@ -10,6 +10,8 @@ public class Albumvisual extends JDialog {
     private JPanel contentPane;
     private JButton agregar;
     private JButton eliminar;
+    private JComboBox comboBoxAlbumes;
+    private JPanel box;
     private List<Album> listaAlbumes;
     public Albumvisual() {
         setTitle("Album");
@@ -55,9 +57,9 @@ public class Albumvisual extends JDialog {
     private void onAgregar() {
         String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo álbum:", "Agregar Álbum", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
-            Album nuevoAlbum = new Album();
-            nuevoAlbum.setNombreAlbum(nombreAlbum);
+            Album nuevoAlbum = new Album(nombreAlbum);
             listaAlbumes.add(nuevoAlbum);
+            mostrarAlbumes();
         }
     }
 
@@ -82,6 +84,13 @@ public class Albumvisual extends JDialog {
     }
 
     private void mostrarAlbumes(){
+        comboBoxAlbumes.removeAllItems();
 
+        for (Album album : listaAlbumes) {
+            comboBoxAlbumes.addItem(album.getNombreAlbum());
+        }
+        box.add(comboBoxAlbumes);
+        box.revalidate();
+        box.repaint();
     }
 }
