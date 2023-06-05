@@ -10,7 +10,7 @@ public class Albumvisual extends JDialog {
     private JPanel contentPane;
     private JButton agregar;
     private JButton eliminar;
-    private JComboBox comboBoxAlbumes;
+    private JComboBox<Object> comboBoxAlbumes;
     private JPanel box;
     private List<Album> listaAlbumes;
     public Albumvisual() {

@@ -16,6 +16,7 @@ public class Video extends Publicacion implements Durable, Filtrable {
         this.resolucion = resolucion;
         this.duracion = duracion;
         this.cantcuadros = cantcuadros;
+        this.filtroAplicado = tipoFiltro.DEFAULT;
     }
 
     /**
