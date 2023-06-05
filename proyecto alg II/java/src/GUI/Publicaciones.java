@@ -163,6 +163,10 @@ public class Publicaciones extends JDialog {
             texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
 
         }
+
+        if(publicacion instanceof Video || publicacion instanceof Imagen){
+            filtro.setVisible(true);
+        }
         List<String> hashtags = publicacion.getHashtags();
         if (!hashtags.isEmpty()) {
             texto += "Hashtags:\n";
