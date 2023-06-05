@@ -185,6 +185,8 @@ public class Publicaciones extends JDialog {
 
         if(publicacion instanceof Video || publicacion instanceof Audio){
         textdurable.setVisible(true);
+        AVANZARButton.setVisible(true);
+        PAUSARButton.setVisible(true);
         if(publicacion instanceof Video){
             duracion = ((Video) publicacion).getDuracion();
         }else{
@@ -192,7 +194,9 @@ public class Publicaciones extends JDialog {
         }
             mostrarDuracionPublicacion(duracion);
         }else{
-        textdurable.setVisible(false);
+            textdurable.setVisible(false);
+            AVANZARButton.setVisible(false);
+            PAUSARButton.setVisible(false);
         }
     }
     private void mostrarDuracionPublicacion(int duracion) {

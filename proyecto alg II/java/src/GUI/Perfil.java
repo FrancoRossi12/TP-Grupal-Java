@@ -132,7 +132,7 @@ public class Perfil extends JDialog{
     private void onAlbunes() {
         // add your code here if necessary
 
-        Album dialog = new Album();
+        Albumvisual dialog = new Albumvisual();
         dialog.pack();
         dialog.setVisible(true);
 

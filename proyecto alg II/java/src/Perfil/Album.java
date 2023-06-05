@@ -15,6 +15,10 @@ public class Album {
         cantPostsAlbum=0;
         listaPublicacion = new ArrayList<Publicacion>();
     }
-    public void set_nombreAlbum(String al){nombreAlbum=al;}
-    public void set_nuevoSubAlbum(){subListaAlbums= new ArrayList<Album>();}
+    public void setNombreAlbum(String al){nombreAlbum=al;}
+    public void setNuevoSubAlbum(){subListaAlbums= new ArrayList<Album>();}
+
+    public Object getNombreAlbum() {
+        return nombreAlbum;
+    }
 }
