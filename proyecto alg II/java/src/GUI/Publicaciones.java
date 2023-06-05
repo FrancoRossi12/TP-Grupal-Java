@@ -20,6 +20,10 @@ public class Publicaciones extends JDialog {
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
+    private JTextPane textdurable;
+    private JPanel durable;
+    private JButton PAUSARButton;
+    private JButton AVANZARButton;
 
     int filtroaplicado = 0;
     private static int indice = 0;
@@ -39,6 +43,16 @@ public class Publicaciones extends JDialog {
         textPane1.setFont(newFont);
 
         mostrarPublicacion(indice);
+        PAUSARButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                OnPausar();
+            }
+        });
+        AVANZARButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                OnAvanzar();
+            }
+        });
         filtro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Onfiltro();
@@ -74,6 +88,12 @@ public class Publicaciones extends JDialog {
         dispose();
     }
 
+    private void OnPausar(){
+
+    }
+    private void OnAvanzar(){
+
+    }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);
         String tipo = publicacion.getClass().getSimpleName();
@@ -84,9 +104,8 @@ public class Publicaciones extends JDialog {
             dialog.setVisible(true);
             filtroaplicado = dialog.getFiltroaplicado();
             ((Filtrable) publicacion).aplicarFiltro(filtroaplicado);
-        }else{
-            System.err.println("Incompativilidad con el tipo de publicacion");
         }
+
         mostrarPublicacion(indice);
     }
     private void onPrev() {
@@ -108,7 +127,8 @@ public class Publicaciones extends JDialog {
     }
 
     private void mostrarPublicacion(int i) {
-
+        int duracion;
+        filtro.setVisible(false);
         String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
         Publicacion publicacion = listaPublicacion.get(i);
         String tipo = publicacion.getClass().getSimpleName();
@@ -133,6 +153,7 @@ public class Publicaciones extends JDialog {
             Audio audioPublicacion = (Audio) publicacion;
             texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
             texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
+            ;
 
         } else if (publicacion instanceof Video) {
             Video videoPublicacion = (Video) publicacion;
@@ -140,6 +161,7 @@ public class Publicaciones extends JDialog {
             texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
             texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
             texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
+
         }
         List<String> hashtags = publicacion.getHashtags();
         if (!hashtags.isEmpty()) {
@@ -156,7 +178,30 @@ public class Publicaciones extends JDialog {
                 texto += comentario + "\n";
             }
         }else{texto += "Sin comentario";}
+
+
         cantPub.setText(contador);
         textPane1.setText(texto);
+
+        if(publicacion instanceof Video || publicacion instanceof Audio){
+        textdurable.setVisible(true);
+        if(publicacion instanceof Video){
+            duracion = ((Video) publicacion).getDuracion();
+        }else{
+            duracion = ((Audio) publicacion).getDuracion();
+        }
+            mostrarDuracionPublicacion(duracion);
+        }else{
+        textdurable.setVisible(false);
+        }
     }
+    private void mostrarDuracionPublicacion(int duracion) {
+
+        for (int j = 0; j <= duracion; j++) {
+
+            String duraciontexto = j + " --------------------- " + duracion;
+            textdurable.setText(duraciontexto);
+        }
+    }
+
 }
