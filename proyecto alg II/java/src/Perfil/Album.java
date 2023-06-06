@@ -10,14 +10,14 @@ public class Album {
     private String nombreAlbum;
     private int cantPostsAlbum;
     private List<Publicacion> listaPublicacion;
-    private List<Album> subListaAlbums;
+    private List<Publicacion> subListaAlbums;
     public Album(String nombreAlbum) {
         this.nombreAlbum = nombreAlbum;
         cantPostsAlbum=0;
         listaPublicacion = new ArrayList<Publicacion>();
     }
     public void setNombreAlbum(String al){nombreAlbum=al;}
-    public void setNuevoSubAlbum(){subListaAlbums= new ArrayList<Album>();}
+    public void setNuevoSubAlbum(){subListaAlbums= new ArrayList<Publicacion>();}
 
     public Object getNombreAlbum() {
         return this.nombreAlbum;
@@ -39,11 +39,11 @@ public class Album {
         this.listaPublicacion = listaPublicacion;
     }
 
-    public List<Album> getSubListaAlbums() {
+    public List<Publicacion> getSubListaAlbums() {
         return subListaAlbums;
     }
 
-    public void setSubListaAlbums(List<Album> subListaAlbums) {
+    public void setSubListaAlbums(List<Publicacion> subListaAlbums) {
         this.subListaAlbums = subListaAlbums;
     }
 }

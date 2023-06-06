@@ -9,7 +9,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
 import Perfil.Album;
 import org.w3c.dom.Document;
@@ -23,6 +22,8 @@ public class Albumvisual extends JDialog {
     private JButton eliminar;
     private JComboBox<Object> comboBoxAlbumes;
     private JPanel box;
+    private JButton albumButton;
+    private JButton subalbumButton;
     private List<Album> listaAlbumes;
     private Document documentoXML;
     public Albumvisual(List<Album> listaAlbumes) {

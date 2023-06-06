@@ -215,7 +215,6 @@ public class Publicaciones extends JDialog {
                 if (Thread.interrupted()) {
                     return;
                 }
-
                 String duraciontexto = j + " --------------------- " + duracion;
                 SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
                 try {

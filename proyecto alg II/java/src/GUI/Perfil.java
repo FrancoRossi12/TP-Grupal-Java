@@ -77,59 +77,6 @@ public class Perfil extends JDialog{
         listaPublicacion = cargarPublicacionesDesdeXML("Publicaciones");
         cargarDatosPerfil();
     }
-
-    private void cargarDatosPerfil() {
-        try {
-            // Ruta al archivo XML
-            String rutaArchivo = "proyecto alg II/java/src/Swing/Perfil.xml";
-
-            // Crear el analizador de documentos
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-
-            // Parsear el archivo XML
-            Document doc = dBuilder.parse(rutaArchivo);
-
-            // Obtener el elemento raíz del perfil
-            Element perfil = doc.getDocumentElement();
-
-            // Obtener los datos del perfil
-            nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
-            descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
-            cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
-            cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
-            cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
-            cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
-
-            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion,listaAlbumes);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Manejo de excepciones
-        }
-        muestradatosPerfil();
-    }
-    private List<Album> cargarAlbumesDesdeXML(String filePath) {
-        try {
-            File xmlFile = new File(filePath);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document document = dBuilder.parse(xmlFile);
-
-            document.getDocumentElement().normalize();
-
-            NodeList nodeList = document.getElementsByTagName("album");
-
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Element albumElement = (Element) nodeList.item(i);
-                String nombreAlbum = albumElement.getElementsByTagName("nombre").item(0).getTextContent();
-                Album album = new Album(nombreAlbum);
-                listaAlbumes.add(album);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listaAlbumes;
-    }
     void muestradatosPerfil(){
 
         usuario.setText(perfilInstagram.getNombreUsuario());
@@ -248,5 +195,57 @@ public class Perfil extends JDialog{
             e.printStackTrace();
         }
         return listaPublicacion;
+    }
+    private void cargarDatosPerfil() {
+        try {
+            // Ruta al archivo XML
+            String rutaArchivo = "proyecto alg II/java/src/Swing/Perfil.xml";
+
+            // Crear el analizador de documentos
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
+            // Parsear el archivo XML
+            Document doc = dBuilder.parse(rutaArchivo);
+
+            // Obtener el elemento raíz del perfil
+            Element perfil = doc.getDocumentElement();
+
+            // Obtener los datos del perfil
+            nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
+            descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
+            cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
+            cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
+            cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
+            cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
+
+            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion,listaAlbumes);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Manejo de excepciones
+        }
+        muestradatosPerfil();
+    }
+    private List<Album> cargarAlbumesDesdeXML(String filePath) {
+        try {
+            File xmlFile = new File(filePath);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document document = dBuilder.parse(xmlFile);
+
+            document.getDocumentElement().normalize();
+
+            NodeList nodeList = document.getElementsByTagName("album");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Element albumElement = (Element) nodeList.item(i);
+                String nombreAlbum = albumElement.getElementsByTagName("nombre").item(0).getTextContent();
+                Album album = new Album(nombreAlbum);
+                listaAlbumes.add(album);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaAlbumes;
     }
 }
