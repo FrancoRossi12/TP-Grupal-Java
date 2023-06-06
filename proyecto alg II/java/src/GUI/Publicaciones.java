@@ -27,10 +27,12 @@ public class Publicaciones extends JDialog {
 
     int filtroaplicado = 0;
     private static int indice = 0;
+    private Thread Thread;
     private List<Publicacion> listaPublicacion;
 
     public Publicaciones(List<Publicacion> ListaPublicacion) {
 
+        Thread= null; //Inicializo hilo
         this.listaPublicacion = ListaPublicacion;
         setTitle("Publicaciones");
         setContentPane(contentPane);
@@ -127,7 +129,7 @@ public class Publicaciones extends JDialog {
     }
 
     private void mostrarPublicacion(int i) {
-        int duracion;
+        int duracion=0;
         filtro.setVisible(false);
         String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
         Publicacion publicacion = listaPublicacion.get(i);
@@ -191,6 +193,9 @@ public class Publicaciones extends JDialog {
         textdurable.setVisible(true);
         AVANZARButton.setVisible(true);
         PAUSARButton.setVisible(true);
+        if (Thread != null) {
+            Thread.interrupt();
+        }
         if(publicacion instanceof Video){
             duracion = ((Video) publicacion).getDuracion();
         }else{
@@ -198,18 +203,29 @@ public class Publicaciones extends JDialog {
         }
             mostrarDuracionPublicacion(duracion);
         }else{
+            duracion=0;
             textdurable.setVisible(false);
             AVANZARButton.setVisible(false);
             PAUSARButton.setVisible(false);
         }
     }
     private void mostrarDuracionPublicacion(int duracion) {
+        Thread = new Thread(() -> {
+            for (int j = 0; j <= duracion; j++) {
+                if (Thread.interrupted()) {
+                    return;
+                }
 
-        for (int j = 0; j <= duracion; j++) {
-
-            String duraciontexto = j + " --------------------- " + duracion;
-            textdurable.setText(duraciontexto);
-        }
+                String duraciontexto = j + " --------------------- " + duracion;
+                SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        });
+        Thread.start();
     }
-
+    //Creo un hilo para cada publciacion y muestra la duracion correspondiente a la publicacion (video o audio) actual
 }
