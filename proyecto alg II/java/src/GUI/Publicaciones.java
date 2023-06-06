@@ -16,12 +16,10 @@ public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
     private JButton prev;
-
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
     private JTextPane textdurable;
-    private JPanel durable;
     private JButton PAUSARButton;
     private JButton AVANZARButton;
 
@@ -155,7 +153,6 @@ public class Publicaciones extends JDialog {
             Audio audioPublicacion = (Audio) publicacion;
             texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
             texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
-            ;
 
         } else if (publicacion instanceof Video) {
             Video videoPublicacion = (Video) publicacion;
