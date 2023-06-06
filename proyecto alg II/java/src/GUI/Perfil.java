@@ -1,8 +1,10 @@
 package GUI;
+import Perfil.Album;
 import Perfil.PerfilInstagram;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,7 +27,6 @@ public class Perfil extends JDialog{
     private JLabel Albunes;
     private JLabel Publicaciones;
     private JLabel usuario;
-
     private String nombreUsuario;
     private String descripcionPerfil;
     private int cantidadSeguidores;
@@ -34,6 +35,7 @@ public class Perfil extends JDialog{
     private int cantidadPublicaciones;
     private PerfilInstagram perfilInstagram;
     private List<Publicacion> listaPublicacion;
+    private List<Album> listaAlbumes = new ArrayList<>();
     public Perfil() {
         setTitle("Perfil");
         setContentPane(contentPane);
@@ -71,6 +73,7 @@ public class Perfil extends JDialog{
         contentPane.setMinimumSize(minimumSize);
 
         // Cargar datos del perfil
+        String arch= "proyecto alg II/java/src/Swing/Album.xml";listaAlbumes = cargarAlbumesDesdeXML(arch);
         listaPublicacion = cargarPublicacionesDesdeXML("Publicaciones");
         cargarDatosPerfil();
     }
@@ -98,14 +101,35 @@ public class Perfil extends JDialog{
             cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
             cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
 
-            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion);
+            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion,listaAlbumes);
         } catch (Exception ex) {
             ex.printStackTrace();
             // Manejo de excepciones
         }
         muestradatosPerfil();
     }
+    private List<Album> cargarAlbumesDesdeXML(String filePath) {
+        try {
+            File xmlFile = new File(filePath);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document document = dBuilder.parse(xmlFile);
 
+            document.getDocumentElement().normalize();
+
+            NodeList nodeList = document.getElementsByTagName("album");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Element albumElement = (Element) nodeList.item(i);
+                String nombreAlbum = albumElement.getElementsByTagName("nombre").item(0).getTextContent();
+                Album album = new Album(nombreAlbum);
+                listaAlbumes.add(album);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaAlbumes;
+    }
     void muestradatosPerfil(){
 
         usuario.setText(perfilInstagram.getNombreUsuario());
@@ -126,16 +150,12 @@ public class Perfil extends JDialog{
     }
     private void onX(){
         dispose();
-
     }
-
     private void onAlbunes() {
-        // add your code here if necessary
 
-        Albumvisual dialog = new Albumvisual();
+        Albumvisual dialog = new Albumvisual(listaAlbumes);
         dialog.pack();
         dialog.setVisible(true);
-
     }
 
     public static String getTextContent(Element element, String tagName) {
@@ -227,7 +247,6 @@ public class Perfil extends JDialog{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return listaPublicacion;
     }
 }

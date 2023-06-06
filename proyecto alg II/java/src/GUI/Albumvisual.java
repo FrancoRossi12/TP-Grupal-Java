@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import Perfil.Album;
+
 public class Albumvisual extends JDialog {
     private JPanel contentPane;
     private JButton agregar;
@@ -13,17 +14,16 @@ public class Albumvisual extends JDialog {
     private JComboBox<Object> comboBoxAlbumes;
     private JPanel box;
     private List<Album> listaAlbumes;
-    public Albumvisual() {
+    public Albumvisual(List<Album> listaAlbumes) {
         setTitle("Album");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(agregar);
-        // Establecer tamaño mínimo
+        this.listaAlbumes = listaAlbumes;
+        mostrarAlbumes();
         Dimension minimumSize;
         minimumSize = new Dimension(1080, 1920);
         contentPane.setMinimumSize(minimumSize);
-
-        listaAlbumes = new ArrayList<>();
         agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onAgregar();
@@ -84,13 +84,15 @@ public class Albumvisual extends JDialog {
     }
 
     private void mostrarAlbumes(){
-        comboBoxAlbumes.removeAllItems();
 
+        comboBoxAlbumes.removeAllItems();
         for (Album album : listaAlbumes) {
             comboBoxAlbumes.addItem(album.getNombreAlbum());
         }
+        box.setLayout(new FlowLayout());
         box.add(comboBoxAlbumes);
         box.revalidate();
         box.repaint();
     }
+
 }

@@ -1,0 +1,14 @@
+<albums>
+    <album>
+        <nombre>Audio</nombre>
+    </album>
+    <album>
+        <nombre>Texto</nombre>
+    </album>
+    <album>
+        <nombre>Imagen</nombre>
+    </album>
+    <album>
+        <nombre>Video</nombre>
+    </album>
+</albums>

@@ -13,7 +13,7 @@ public class PerfilInstagram {
     private List<Publicacion> listaPublicacion;
     private List<Album> listaAlbums;
 
-    public PerfilInstagram(String nombreUsuario, String descripcion,int seguidores,int seguidos,int cantPosts,int cantAlbums,List<Publicacion> listaPublicacion) {
+    public PerfilInstagram(String nombreUsuario, String descripcion,int seguidores,int seguidos,int cantPosts,int cantAlbums,List<Publicacion> listaPublicacion,List<Album> listaAlbums) {
         this.nombreUsuario = nombreUsuario;
         this.cantPosts = cantPosts;
         this.cantAlbums = cantAlbums;
@@ -21,7 +21,7 @@ public class PerfilInstagram {
         this.seguidos = seguidos;
         this.descripcion = descripcion;
         this.listaPublicacion = listaPublicacion;
-        this.listaAlbums = new ArrayList<>();
+        this.listaAlbums = listaAlbums;
     }
 
     public int getCantPosts() {
