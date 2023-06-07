@@ -165,7 +165,8 @@ public class Publicaciones extends JDialog {
 
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
-        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteImput,cantCararcInput,tamañoImput,hashtags,null);
+        ArrayList<String> comentariosInput = new ArrayList<>();
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteImput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -197,8 +198,9 @@ public class Publicaciones extends JDialog {
             hashtags.add(hashtag.trim());
         }
 
+        ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,null );
+        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -228,9 +230,9 @@ public class Publicaciones extends JDialog {
         for (String hashtag : hashtagsArray) {
             hashtags.add(hashtag.trim());
         }
-
+        ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,null );
+        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -258,9 +260,9 @@ public class Publicaciones extends JDialog {
         for (String hashtag : hashtagsArray) {
             hashtags.add(hashtag.trim());
         }
-
+        ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Audio(nombre, descripcion,0,duracionImput,velocidad_bitsImput,hashtags,null );
+        Publicacion nuevaPublicacion = new Audio(nombre, descripcion,0,duracionImput,velocidad_bitsImput,hashtags,comentariosInput );
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
 
@@ -359,15 +361,15 @@ public class Publicaciones extends JDialog {
             for (String hashtag : hashtags) {
                 texto += "#" + hashtag ;
             }
-        }else{texto += "Sin hashtags";}
+        }else{texto += "\nSin hashtags";}
 
         List<String> comentarios = publicacion.getComentarios();
         if (!comentarios.isEmpty()) {
-            texto += "\nComentarios:\n";
+            texto += "Comentarios:\n";
             for (String comentario : comentarios) {
                 texto += comentario + "\n";
             }
-        }else{texto += "Sin comentario";}
+        }else{texto += "\nSin comentario";}
 
 
         cantPub.setText(contador);
