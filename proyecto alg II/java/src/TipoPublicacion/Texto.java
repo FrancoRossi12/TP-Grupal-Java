@@ -1,6 +1,7 @@
 package TipoPublicacion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Texto extends Publicacion{
     String fuente;
@@ -12,6 +13,8 @@ public class Texto extends Publicacion{
         this.cantCaracteres = cantCaracteres;
         this.tamañoFuente = tamañoFuente;
     }
+
+
 
 
     public String getFuente() {

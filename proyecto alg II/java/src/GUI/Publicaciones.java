@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import Perfil.Reportes;
 public class Publicaciones extends JDialog {
@@ -24,6 +26,8 @@ public class Publicaciones extends JDialog {
     private JButton PAUSARButton;
     private JButton AVANZARButton;
     private JButton reportesButton;
+    private JButton eliminarButton;
+    private JButton agregarButton;
 
     int filtroaplicado = 0;
     private static int indice = 0;
@@ -70,6 +74,16 @@ public class Publicaciones extends JDialog {
                 onNext();
             }
         });
+        eliminarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onEliminar();
+            }
+        });
+        agregarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onAgregar();
+            }
+        });
         reportesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onReportes();
@@ -89,7 +103,171 @@ public class Publicaciones extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+    private void onEliminar(){
 
+        if (!listaPublicacion.isEmpty()) {
+            listaPublicacion.remove(indice);
+            if (indice >= listaPublicacion.size()) {
+                indice = listaPublicacion.size() - 1;
+            }
+            mostrarPublicacion(indice);
+        }
+    }
+    private void onAgregar() {
+        // Mostrar el cuadro de diálogo de opción
+        String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
+        int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+        List<Publicacion> listaPublicacion = Publicaciones.this.listaPublicacion;
+        // Verificar la opción seleccionada
+        switch (seleccion) {
+            case 0:
+                // Agregar una publicación de texto
+                agregarPublicacionTexto();
+                break;
+            case 1:
+                // Agregar una publicación de imagen
+                agregarPublicacionImagen();
+                break;
+            case 2:
+                // Agregar una publicación de video
+                agregarPublicacionVideo();
+                break;
+            case 3:
+                // Agregar una publicación de audio
+                agregarPublicacionAudio();
+                break;
+            default:
+                // No se seleccionó una opción válida
+                break;
+        }
+    }
+
+    private void agregarPublicacionTexto() {
+        // Solicitar el nombre de la nueva publicación de texto
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Solicitar la descripción de la nueva publicación de texto
+        String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Separar los hashtags ingresados por comas y agregarlos a una lista
+        ArrayList<String> hashtags = new ArrayList<>();
+        String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
+        for (String hashtag : hashtagsArray) {
+            hashtags.add(hashtag.trim());
+        }
+
+        // datos del texto
+        String fuenteImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        int tamañoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        // Crear una nueva instancia de Publicacion de texto
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteImput,cantCararcInput,tamañoImput,hashtags,null);
+
+        // Agregar la nueva publicación a la lista
+        listaPublicacion.add(nuevaPublicacion);
+
+        // Mostrar la nueva publicación en la interfaz
+
+        mostrarPublicacion(indice);
+    }
+
+    private void agregarPublicacionImagen() {
+        // Solicitar el nombre de la nueva publicación de imagen
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Solicitar la descripción de la nueva publicación de imagen
+        String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        int cantcuadrosInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Separar los hashtags ingresados por comas y agregarlos a una lista
+        ArrayList<String> hashtags = new ArrayList<>();
+        String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
+        for (String hashtag : hashtagsArray) {
+            hashtags.add(hashtag.trim());
+        }
+
+        // Crear una nueva instancia de Publicacion de imagen
+        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,null );
+
+        // Agregar la nueva publicación a la lista
+        listaPublicacion.add(nuevaPublicacion);
+
+        // Mostrar la nueva publicación en la interfaz
+        mostrarPublicacion(indice);
+    }
+
+    private void agregarPublicacionVideo() {
+        // Solicitar el nombre de la nueva publicación de video
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Solicitar la descripción de la nueva publicación de video
+        String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        int altoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        int anchoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Separar los hashtags ingresados por comas y agregarlos a una lista
+        ArrayList<String> hashtags = new ArrayList<>();
+        String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
+        for (String hashtag : hashtagsArray) {
+            hashtags.add(hashtag.trim());
+        }
+
+        // Crear una nueva instancia de Publicacion de imagen
+        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,null );
+
+        // Agregar la nueva publicación a la lista
+        listaPublicacion.add(nuevaPublicacion);
+
+        // Mostrar la nueva publicación en la interfaz
+        mostrarPublicacion(indice);
+    }
+
+    private void agregarPublicacionAudio() {
+        // Solicitar el nombre de la nueva publicación de audio
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Solicitar la descripción de la nueva publicación de audio
+        String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        int velocidad_bitsImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+
+        String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        // Separar los hashtags ingresados por comas y agregarlos a una lista
+        ArrayList<String> hashtags = new ArrayList<>();
+        String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
+        for (String hashtag : hashtagsArray) {
+            hashtags.add(hashtag.trim());
+        }
+
+        // Crear una nueva instancia de Publicacion de imagen
+        Publicacion nuevaPublicacion = new Audio(nombre, descripcion,0,duracionImput,velocidad_bitsImput,hashtags,null );
+        // Agregar la nueva publicación a la lista
+        listaPublicacion.add(nuevaPublicacion);
+
+        // Mostrar la nueva publicación en la interfaz
+        indice = listaPublicacion.size() - 1;
+        mostrarPublicacion(indice);
+    }
     public void onReportes(){
         reporte.prueba(listaPublicacion);
     }
