@@ -357,7 +357,7 @@ public class Publicaciones extends JDialog {
         }
         List<String> hashtags = publicacion.getHashtags();
         if (!hashtags.isEmpty()) {
-            texto += "Hashtags:\n";
+            texto += "\nHashtags:\n";
             for (String hashtag : hashtags) {
                 texto += "#" + hashtag ;
             }
@@ -365,12 +365,11 @@ public class Publicaciones extends JDialog {
 
         List<String> comentarios = publicacion.getComentarios();
         if (!comentarios.isEmpty()) {
-            texto += "Comentarios:\n";
+            texto += "\nComentarios:\n";
             for (String comentario : comentarios) {
                 texto += comentario + "\n";
             }
         }else{texto += "\nSin comentario";}
-
 
         cantPub.setText(contador);
         textPane1.setText(texto);
