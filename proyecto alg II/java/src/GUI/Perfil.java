@@ -32,7 +32,6 @@ public class Perfil extends JDialog {
     private JLabel Albunes;
     private JLabel Publicaciones;
     private JLabel usuario;
-    private JButton reportesButton;
     private String nombreUsuario;
     private String descripcionPerfil;
     private int cantidadSeguidores;
