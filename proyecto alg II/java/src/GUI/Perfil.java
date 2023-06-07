@@ -10,6 +10,10 @@ import java.util.Comparator;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import TipoPublicacion.*;
 import org.w3c.dom.Document;
@@ -75,10 +79,10 @@ public class Perfil extends JDialog{
         // Cargar datos del perfil
         String arch= "proyecto alg II/java/src/Swing/Album.xml";listaAlbumes = cargarAlbumesDesdeXML(arch);
         listaPublicacion = cargarPublicacionesDesdeXML("Publicaciones");
+        actualizarXML();
         cargarDatosPerfil();
     }
     void muestradatosPerfil(){
-
         usuario.setText(perfilInstagram.getNombreUsuario());
         descripcion.setText(perfilInstagram.getDescripcion());
         seguidores.setText(String.valueOf(perfilInstagram.getSeguidores()));
@@ -247,5 +251,27 @@ public class Perfil extends JDialog{
             e.printStackTrace();
         }
         return listaAlbumes;
+    }
+    private void actualizarXML() {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse("proyecto alg II/java/src/Swing/Perfil.xml");
+
+            Element perfil = document.getDocumentElement();
+
+            // Actualizar la cantidad de publicaciones y la cantidad de álbumes
+            perfil.getElementsByTagName("cantPosts").item(0).setTextContent(String.valueOf(listaPublicacion.size()));
+            perfil.getElementsByTagName("cantAlbums").item(0).setTextContent(String.valueOf(listaAlbumes.size()));
+
+            // Escribir los cambios al archivo XML
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File("proyecto alg II/java/src/Swing/Perfil.xml"));
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
