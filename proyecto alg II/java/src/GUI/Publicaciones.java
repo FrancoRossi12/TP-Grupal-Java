@@ -11,12 +11,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
-
+import Perfil.Reportes;
 public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
     private JButton prev;
-
+    private Reportes reporte = new Reportes();
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
@@ -24,6 +24,7 @@ public class Publicaciones extends JDialog {
     private JPanel durable;
     private JButton PAUSARButton;
     private JButton AVANZARButton;
+    private JButton reportesButton;
 
     int filtroaplicado = 0;
     private static int indice = 0;
@@ -70,7 +71,11 @@ public class Publicaciones extends JDialog {
                 onNext();
             }
         });
-
+        reportesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onReportes();
+            }
+        });
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -86,6 +91,9 @@ public class Publicaciones extends JDialog {
 
     }
 
+    public void onReportes(){
+        reporte.prueba(listaPublicacion);
+    }
     private void onX() {
         dispose();
     }

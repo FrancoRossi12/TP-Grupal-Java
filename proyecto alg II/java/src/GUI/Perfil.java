@@ -17,7 +17,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class Perfil extends JDialog{
+import GUI.Publicaciones;
+public class Perfil extends JDialog {
     private JPanel contentPane;
     private JButton publicacionesButton;
     private JButton albunesButton;
@@ -27,6 +28,7 @@ public class Perfil extends JDialog{
     private JLabel Albunes;
     private JLabel Publicaciones;
     private JLabel usuario;
+    private JButton reportesButton;
     private String nombreUsuario;
     private String descripcionPerfil;
     private int cantidadSeguidores;
@@ -42,7 +44,6 @@ public class Perfil extends JDialog{
         setModal(true);
         getRootPane().setDefaultButton(publicacionesButton);
 
-        // Establecer tamaño mínimo
         publicacionesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onPublicaciones();
@@ -143,7 +144,6 @@ public class Perfil extends JDialog{
 
     private void onPublicaciones() {
 
-        // add your code here
         Publicaciones dialog = new Publicaciones(perfilInstagram.getListaPublicacion());
         dialog.pack();
         dialog.setVisible(true);
@@ -157,6 +157,7 @@ public class Perfil extends JDialog{
         dialog.pack();
         dialog.setVisible(true);
     }
+
 
     public static String getTextContent(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName);
@@ -174,14 +175,14 @@ public class Perfil extends JDialog{
             try {
                 return Integer.parseInt(value);
             } catch (NumberFormatException e) {
-                // El valor no es un número válido, se puede manejar el error aquí
+                // El valor no es un número valido, se puede manejar el error aca
                 e.printStackTrace();
             }
         }
-        return 0; // Valor predeterminado si el valor es vacío o no válido
+        return 0; // Valor predeterminado si el valor es vacio o no valido
     }
 
-    private static List<Publicacion> cargarPublicacionesDesdeXML(String NombreArch) {
+    public static List<Publicacion> cargarPublicacionesDesdeXML(String NombreArch) {
         List<Publicacion> listaPublicacion = new ArrayList<>();
 
         try {
