@@ -25,7 +25,7 @@ public class Video extends Publicacion implements Durable, Filtrable {
     public void reproducir() {
 
     }
-
+@Override
     public void avanzar(int segundos) {
 
     }

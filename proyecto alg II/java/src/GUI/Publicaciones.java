@@ -1,5 +1,6 @@
 package GUI;
 
+import Interfaz.Durable;
 import Interfaz.Filtrable;
 import TipoPublicacion.*;
 
@@ -32,6 +33,7 @@ public class Publicaciones extends JDialog {
     int filtroaplicado = 0;
     private static int indice = 0;
     private Thread Thread;
+    private boolean pausado;//para verificar si esta en pausa la repro
     private List<Publicacion> listaPublicacion;
 
     public Publicaciones(List<Publicacion> ListaPublicacion) {
@@ -278,10 +280,10 @@ public class Publicaciones extends JDialog {
     }
 
     private void OnPausar(){
-
+        pausado = true;
     }
     private void OnAvanzar(){
-
+        pausado = false;
     }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);
@@ -396,12 +398,13 @@ public class Publicaciones extends JDialog {
     }
     private void mostrarDuracionPublicacion(int duracion) {
         Thread = new Thread(() -> {
-            for (int j = 0; j <= duracion; j++) {
-                if (Thread.interrupted()) {
-                    return;
+            int j = 0;
+            while (j <= duracion && !Thread.interrupted()) {
+                if (!pausado) {
+                    String duraciontexto = j + " --------------------- " + duracion;
+                    SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
+                    j++;
                 }
-                String duraciontexto = j + " --------------------- " + duracion;
-                SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
