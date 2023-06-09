@@ -283,7 +283,7 @@ public class Publicaciones extends JDialog {
         pausado = true;
     }
     private void OnAvanzar(){
-        pausado = false;
+        pausado = false;//HAY QUE LLAMAR A AVANZAR DE AUDIO/VIDEO Y QUE SE HAGA FALSA O VERDADERA AHI
     }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);

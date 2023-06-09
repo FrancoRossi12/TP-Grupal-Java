@@ -6,6 +6,5 @@ public class main {
         Login dialog = new Login();
         dialog.pack();
         dialog.setVisible(true);
-
     }
 }
