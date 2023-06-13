@@ -182,14 +182,14 @@ public class Publicaciones extends JDialog {
         }
 
         // datos del texto
-        String fuenteImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+        String fuenteInput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
         int tamañoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
         ArrayList<String> comentariosInput = new ArrayList<>();
-        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteImput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteInput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -206,11 +206,11 @@ public class Publicaciones extends JDialog {
         // Solicitar la descripción de la nueva publicación de imagen
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+        String resolucionInput = JOptionPane.showInputDialog(this, "Ingrese la Resolucion de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int altoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la altura de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
-        int cantcuadrosInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int anchoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ancho de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
@@ -223,7 +223,7 @@ public class Publicaciones extends JDialog {
 
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionInput,altoInput,anchoInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -239,11 +239,11 @@ public class Publicaciones extends JDialog {
         // Solicitar la descripción de la nueva publicación de video
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+        String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la resolucion del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        int altoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int cantCuadrosInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de cuadros del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
-        int anchoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int duracionInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la duracion del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
@@ -255,7 +255,7 @@ public class Publicaciones extends JDialog {
         }
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionInput,cantCuadrosInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -271,9 +271,9 @@ public class Publicaciones extends JDialog {
         // Solicitar la descripción de la nueva publicación de audio
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la duracion del audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
-        int velocidad_bitsImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int velocidad_bitsImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la velocidad de bits del audio: ", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
