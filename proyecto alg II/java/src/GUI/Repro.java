@@ -6,10 +6,8 @@ import TipoPublicacion.Publicacion;
 import TipoPublicacion.Video;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -20,8 +18,9 @@ public class Repro extends JDialog {
     private JButton buttonSimulacion;
     private JList<String> listaPublicaciones;
     private JComboBox<String> filtroComboBox;
-    private final List<Publicacion> publicaciones;
-    private final List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
+    private List<Publicacion> publicaciones;
+    private List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
+    private int duracionTotal;
 
     public Repro(List<Publicacion> lista) {
         setTitle("Reproduccion de Publicaciones");
@@ -64,9 +63,11 @@ public class Repro extends JDialog {
 
         String[] filtros = {"DEFAULT", "B_N", "CLARENDON", "SEPIA"}; // Opciones de filtro disponibles
         filtroComboBox.setModel(new DefaultComboBoxModel<>(filtros));
-        filtroComboBox.addActionListener(e -> {
-            String filtroSeleccionado = (String) filtroComboBox.getSelectedItem();
-            filtrarPublicaciones(filtroSeleccionado);
+        filtroComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String filtroSeleccionado = (String) filtroComboBox.getSelectedItem();
+                filtrarPublicaciones(filtroSeleccionado);
+            }
         });
 
     }
@@ -82,7 +83,6 @@ public class Repro extends JDialog {
         List<Publicacion> publicacionesFiltradas = new ArrayList<>();
         for (Publicacion publicacion : publicaciones) {
             if (publicacion instanceof Video || publicacion instanceof Imagen) {
-<<<<<<< Updated upstream
                 if (filtro.equals("DEFAULT")) {
                     publicacionesFiltradas.add(publicacion);
                 } else if (filtro.equals("B_N")) {
@@ -114,27 +114,6 @@ public class Repro extends JDialog {
                         Video video = (Video) publicacion;
                         video.aplicarFiltro(3);
                         publicacionesFiltradas.add(video);
-=======
-                switch (filtro) {
-                    case "DEFAULT" -> publicacionesFiltradas.add(publicacion);
-                    case "B_N" -> {
-                        if (publicacion instanceof Imagen imagen) {
-                            imagen.aplicarFiltro(1);
-                            publicacionesFiltradas.add(imagen);
-                        }
-                    }
-                    case "CLARENDON" -> {
-                        if (publicacion instanceof Imagen imagen) {
-                            imagen.aplicarFiltro(2);
-                            publicacionesFiltradas.add(imagen);
-                        }
-                    }
-                    case "SEPIA" -> {
-                        if (publicacion instanceof Imagen imagen) {
-                            imagen.aplicarFiltro(3);
-                            publicacionesFiltradas.add(imagen);
-                        }
->>>>>>> Stashed changes
                     }
                 }if (filtro.equals("DEFAULT")) {
                     publicacionesFiltradas.add(publicacion);
@@ -176,7 +155,7 @@ public class Repro extends JDialog {
 
 
     private void reproducirPublicaciones() {
-        int duracionTotal = 0;
+        duracionTotal = 0;
         if (publicacionesSeleccionadas.isEmpty()) {
             System.out.println("No hay publicaciones seleccionadas para reproducir.");
             return;
@@ -185,7 +164,8 @@ public class Repro extends JDialog {
             final Publicacion pub = publicacion; // Variable final capturando el valor de publicacion
             System.out.println("Reproduciendo: " + pub.getNombre());
             int duracionPublicacion;
-            if (pub instanceof Video video) {
+            if (pub instanceof Video) {
+                Video video = (Video) pub;
                 duracionPublicacion = video.getDuracion();
                 System.out.println("Duración: " + duracionPublicacion + " segundos");
             } else if (pub instanceof Imagen) {
@@ -222,5 +202,8 @@ public class Repro extends JDialog {
     }
 
 
+    private void onOK() {
+        dispose();
+    }
 }
 

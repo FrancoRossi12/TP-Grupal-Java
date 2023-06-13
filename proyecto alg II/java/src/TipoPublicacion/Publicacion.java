@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Publicacion {
-    private final int cantMG;
-    private final String nombre;
-    private final String descPost;
-    private final ArrayList<String> listaComentario;
-    private final ArrayList<String> listaHashtag;
+    private int cantMG;
+    private String nombre, descPost;
+    private ArrayList<String> listaComentario;
+    private ArrayList<String> listaHashtag;
 
 
     public Publicacion(String nombre, String descripcion, int cantMG,ArrayList<String> listaHashtag,ArrayList<String> listaComentario){
@@ -18,6 +17,8 @@ public class Publicacion {
         this.listaComentario = listaComentario;
         this.listaHashtag = listaHashtag;
     }
+    //posible(realizar) set_nombrePost
+    public void modificaDescPost(String desc){descPost=desc;}
 
     public String getNombre() {
         return nombre;

@@ -1,26 +1,27 @@
 package GUI;
-
 import Perfil.Album;
 import Perfil.PerfilInstagram;
-import TipoPublicacion.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import TipoPublicacion.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import GUI.Publicaciones;
 public class Perfil extends JDialog {
     private JPanel contentPane;
     private JButton publicacionesButton;
@@ -31,18 +32,32 @@ public class Perfil extends JDialog {
     private JLabel Albunes;
     private JLabel Publicaciones;
     private JLabel usuario;
+    private String nombreUsuario;
+    private String descripcionPerfil;
+    private int cantidadSeguidores;
+    private int cantidadSeguidos;
+    private int cantidadAlbunes;
+    private int cantidadPublicaciones;
     private PerfilInstagram perfilInstagram;
-    private final List<Publicacion> listaPublicacion;
-    private final List<Album> listaAlbumes;
+    private List<Publicacion> listaPublicacion;
+    private List<Album> listaAlbumes = new ArrayList<>();
     public Perfil() {
         setTitle("Perfil");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(publicacionesButton);
 
-        publicacionesButton.addActionListener(e -> onPublicaciones());
+        publicacionesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onPublicaciones();
+            }
+        });
 
-        albunesButton.addActionListener(e -> onAlbunes());
+        albunesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onAlbunes();
+            }
+        });
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -52,7 +67,11 @@ public class Perfil extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onX();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         Dimension minimumSize;
         minimumSize = new Dimension(1080, 1920);
         contentPane.setMinimumSize(minimumSize);
@@ -84,7 +103,7 @@ public class Perfil extends JDialog {
     }
     private void onAlbunes() {
 
-        Albumvisual dialog = new Albumvisual(listaPublicacion);
+        Albumvisual dialog = new Albumvisual(listaAlbumes,listaPublicacion);
         dialog.pack();
         dialog.setVisible(true);
     }
@@ -92,7 +111,7 @@ public class Perfil extends JDialog {
 
     public static String getTextContent(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName);
-        if (nodeList.getLength() > 0) {
+        if (nodeList != null && nodeList.getLength() > 0) {
             Node node = nodeList.item(0);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 return node.getTextContent();
@@ -121,8 +140,8 @@ public class Perfil extends JDialog {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/" + NombreArch + ".xml");
 
-            NodeList publicacionNodes = document.getElementsByTagName("publicacion");
-            for (int i = 0; i < publicacionNodes.getLength(); i++) {
+            NodeList publicacionNodes = ((Document) document).getElementsByTagName("publicacion");
+            for (int i = 0; i < ((NodeList) publicacionNodes).getLength(); i++) {
                 Node publicacionNode = publicacionNodes.item(i);
                 if (publicacionNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element publicacionElement = (Element) publicacionNode;
@@ -149,33 +168,29 @@ public class Perfil extends JDialog {
                         }
                     }
 
-                    switch (tipo) {
-                        case "texto" -> {
-                            String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
-                            int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
-                            int tamanioFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
-                            listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamanioFuente, hashtags, comentarios));
-                        }
-                        case "imagen" -> {
-                            String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                            int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
-                            int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
+                    if (tipo.equals("texto")) {
+                        String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
+                        int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
+                        int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
 
-                            listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios));
-                        }
-                        case "audio" -> {
-                            int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
-                            int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+                        listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios));
+                    } else if (tipo.equals("imagen")) {
+                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                        int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
+                        int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
 
-                            listaPublicacion.add(new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios));
-                        }
-                        case "video" -> {
-                            String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                            int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
-                            int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
+                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios));
+                    } else if (tipo.equals("audio")) {
+                        int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
+                        int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
 
-                            listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios));
-                        }
+                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios));
+                    } else if (tipo.equals("video")) {
+                        String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                        int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+                        int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
+
+                        listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios));
                     }
                 }
             }
@@ -201,14 +216,14 @@ public class Perfil extends JDialog {
             Element perfil = doc.getDocumentElement();
 
             // Obtener los datos del perfil
-            String nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
-            String descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
-            int cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
-            int cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
-            int cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
-            int cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
+            nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
+            descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
+            cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
+            cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
+            cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
+            cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
 
-            perfilInstagram = new PerfilInstagram(nombreUsuario, descripcionPerfil, cantidadSeguidores, cantidadSeguidos, cantidadPublicaciones, cantidadAlbunes,listaPublicacion,listaAlbumes);
+            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion,listaAlbumes);
         } catch (Exception ex) {
             ex.printStackTrace();
             // Manejo de excepciones

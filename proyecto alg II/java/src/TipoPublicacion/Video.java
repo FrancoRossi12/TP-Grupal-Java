@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class Video extends Publicacion implements Durable, Filtrable {
 
-    private final int duracion;
-    private final int cantcuadros;
+    private int duracion, cantcuadros;
     private tipoFiltro filtroAplicado;
-    private final String resolucion;
+    private String resolucion;
 
     public Video(String nombre, String descripcion, int cantMG, String resolucion, int duracion, int cantcuadros, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
@@ -21,7 +20,13 @@ public class Video extends Publicacion implements Durable, Filtrable {
         this.filtroAplicado = tipoFiltro.DEFAULT;
     }
 
-    @Override
+    /**
+     * Permitir avanzar, detener, y aplicar filtros.
+     */
+    public void reproducir() {
+
+    }
+@Override
 public void avanzar(int segundos, Publicaciones publicacion) {
     publicacion.setPausado(false);
 }
@@ -33,10 +38,21 @@ public void avanzar(int segundos, Publicaciones publicacion) {
     @Override
     public void aplicarFiltro(int filtro) {
         switch (filtro) {
-            case 1 -> filtroAplicado = tipoFiltro.B_N;
-            case 2 -> filtroAplicado = tipoFiltro.CLARENDON;
-            case 3 -> filtroAplicado = tipoFiltro.SEPIA;
-            default -> filtroAplicado = tipoFiltro.DEFAULT;
+            case 0:
+                filtroAplicado = tipoFiltro.DEFAULT;
+                break;
+            case 1:
+                filtroAplicado = tipoFiltro.B_N;
+                break;
+            case 2:
+                filtroAplicado = tipoFiltro.CLARENDON;
+                break;
+            case 3:
+                filtroAplicado = tipoFiltro.SEPIA;
+                break;
+            default:
+                filtroAplicado = tipoFiltro.DEFAULT;
+                break;
         }
     }
 
@@ -55,5 +71,7 @@ public void avanzar(int segundos, Publicaciones publicacion) {
 
     public tipoFiltro getFiltro() {
         return filtroAplicado;
-    }
+    } // SIRVE PARA FILTRAR (FILTRAR DE AGRUPAR SEGUN CIERTAS CARACTERISTICAS)
+      // LAS IMAGENES DE ACUERDO A QUE FILTRO DE IMAGEN POSEEN EJ: B_N, SEPIA,
+      // ETC.
 }

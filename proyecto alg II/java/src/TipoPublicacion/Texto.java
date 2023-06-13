@@ -1,16 +1,17 @@
 package TipoPublicacion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Texto extends Publicacion{
     String fuente;
-    int cantCaracteres, tamanioFuente;
+    int cantCaracteres, tamañoFuente;
 
-    public Texto(String nombre, String descripcion, int cantMG, String fuente, int cantCaracteres, int tamanioFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
+    public Texto(String nombre, String descripcion, int cantMG, String fuente, int cantCaracteres, int tamañoFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
         this.fuente = fuente;
         this.cantCaracteres = cantCaracteres;
-        this.tamanioFuente = tamanioFuente;
+        this.tamañoFuente = tamañoFuente;
     }
 
 
@@ -24,7 +25,7 @@ public class Texto extends Publicacion{
         return this.cantCaracteres;
     }
 
-    public int getTamanioFuente() {
-        return this.tamanioFuente;
+    public int getTamañoFuente() {
+        return this.tamañoFuente;
     }
 }

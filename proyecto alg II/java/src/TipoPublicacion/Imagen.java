@@ -6,12 +6,11 @@ import java.util.ArrayList;
 
 public class Imagen extends Publicacion implements Filtrable {
 
-    private final int alto;
-    private final int ancho;
+    private int alto, ancho;
 
     private tipoFiltro filtroAplicado;
 
-    private final String resolucion;
+    private String resolucion;
 
     public Imagen(String nombre, String descripcion, int cantMG, String resolucion, int alto, int ancho, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
@@ -25,10 +24,21 @@ public class Imagen extends Publicacion implements Filtrable {
     @Override
     public void aplicarFiltro(int filtro) {
         switch (filtro) {
-            case 1 -> filtroAplicado = tipoFiltro.B_N;
-            case 2 -> filtroAplicado = tipoFiltro.CLARENDON;
-            case 3 -> filtroAplicado = tipoFiltro.SEPIA;
-            default -> filtroAplicado = tipoFiltro.DEFAULT;
+            case 0:
+                filtroAplicado = tipoFiltro.DEFAULT;
+                break;
+            case 1:
+                filtroAplicado = tipoFiltro.B_N;
+                break;
+            case 2:
+                filtroAplicado = tipoFiltro.CLARENDON;
+                break;
+            case 3:
+                filtroAplicado = tipoFiltro.SEPIA;
+                break;
+            default:
+                filtroAplicado = tipoFiltro.DEFAULT;
+                break;
         }
     }
 
