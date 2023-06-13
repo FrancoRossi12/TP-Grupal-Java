@@ -21,6 +21,7 @@ public class Publicaciones extends JDialog {
     private JButton next;
     private JButton prev;
     private Reportes reporte = new Reportes();
+    /*private Reproduccion repro = new Reproduccion(List<Publicacion>);*/
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
@@ -28,9 +29,13 @@ public class Publicaciones extends JDialog {
     private JButton PAUSARButton;
     private JButton AVANZARButton;
     private JButton reportesButton;
+
     private JButton eliminarButton;
     private JButton agregarButton;
     private JButton reproducirAPartirDeButton;
+
+    private JButton reproduccionButton;
+
 
     int filtroaplicado = 0;
     private static int indice = 0;
@@ -102,13 +107,24 @@ public class Publicaciones extends JDialog {
                 onReportes();
             }
         });
+        reproduccionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onRepro();
+            }
+        });
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 dispose();
             }
         });
-
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Lógica para cerrar el programa
+                System.exit(0); // Cierra la aplicación con el código de salida 0 (éxito)
+            }
+        });
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onX();
@@ -298,6 +314,12 @@ public class Publicaciones extends JDialog {
     }
     public void onReportes(){
         reporte.prueba(listaPublicacion);
+    }
+    public void onRepro(){
+        Repro dialog = new Repro(listaPublicacion);
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
     private void onX() {
         dispose();

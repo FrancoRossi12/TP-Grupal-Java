@@ -6,4 +6,22 @@ Cantidad de publicaciones: 1
 Nombre Publicacion: aaaa   Me gusta: 0
 Me gusta promedio: 0.0
 Videos:
+<<<<<<< Updated upstream
 Cantidad de publicaciones: 0
+=======
+Cantidad de publicaciones: 5
+Nombre Publicacion: Video 16   Me gusta: 55
+Nombre Publicacion: Video 12   Me gusta: 42
+Nombre Publicacion: Video 20   Me gusta: 38
+Nombre Publicacion: Video 8   Me gusta: 35
+Nombre Publicacion: Video 4   Me gusta: 30
+Me gusta promedio: 40.0
+Textos:
+Cantidad de publicaciones: 5
+Nombre Publicacion: Texto 19   Me gusta: 35
+Nombre Publicacion: Texto 15   Me gusta: 30
+Nombre Publicacion: Texto 7   Me gusta: 25
+Nombre Publicacion: Texto 3   Me gusta: 20
+Nombre Publicacion: Texto 11   Me gusta: 18
+Me gusta promedio: 25.6
+>>>>>>> Stashed changes
