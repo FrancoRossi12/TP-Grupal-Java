@@ -19,6 +19,7 @@ public class Repro extends JDialog {
     private JComboBox<String> filtroComboBox;
     private List<Publicacion> publicaciones;
     private List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
+    private int duracionTotal;
 
     public Repro(List<Publicacion> lista) {
         setTitle("Reproduccion de Publicaciones");
@@ -107,8 +108,7 @@ public class Repro extends JDialog {
     }
 
     private void reproducirPublicaciones() {
-        int duracionTotal = 0;
-        System.out.println("Hola");
+        duracionTotal = 0;
         if (publicacionesSeleccionadas.isEmpty()) {
             System.out.println("No hay publicaciones seleccionadas para reproducir.");
             return;
@@ -153,6 +153,7 @@ public class Repro extends JDialog {
         }
         System.out.println("Tiempo total de reproducción: " + duracionTotal + " segundos");
     }
+
 
     private void onOK() {
         dispose();
