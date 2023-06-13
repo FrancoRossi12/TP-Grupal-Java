@@ -3,6 +3,8 @@ package GUI;
 import Interfaz.Durable;
 import Interfaz.Filtrable;
 import TipoPublicacion.*;
+import TipoPublicacion.Audio;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +38,10 @@ public class Publicaciones extends JDialog {
     private boolean pausado;//para verificar si esta en pausa la repro
     private List<Publicacion> listaPublicacion;
 
+    public void setPausado(boolean pausa){
+        pausado = pausa;
+    }
+
     public Publicaciones(List<Publicacion> ListaPublicacion) {
 
         Thread= null; //Inicializo hilo
@@ -58,12 +64,12 @@ public class Publicaciones extends JDialog {
 
         PAUSARButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                OnPausar();
+                OnPausar(listaPublicacion.get(indice));
             }
         });
         AVANZARButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                OnAvanzar();
+                OnAvanzar(listaPublicacion.get(indice));
             }
         });
         filtro.addActionListener(new ActionListener() {
@@ -294,11 +300,11 @@ public class Publicaciones extends JDialog {
         dispose();
     }
 
-    private void OnPausar(){
-        pausado = true;
+    private void OnPausar(Publicacion publicacion){
+        ((Durable)publicacion).detener(this);
     }
-    private void OnAvanzar(){
-        pausado = false;//HAY QUE LLAMAR A AVANZAR DE AUDIO/VIDEO Y QUE SE HAGA FALSA O VERDADERA AHI
+    private void OnAvanzar(Publicacion publicacion){
+        ((Durable)publicacion).avanzar(0,this);//HAY QUE LLAMAR A AVANZAR DE AUDIO/VIDEO Y QUE SE HAGA FALSA O VERDADERA AHI
     }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);

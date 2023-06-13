@@ -1,7 +1,7 @@
 package TipoPublicacion;
 
 import Interfaz.Durable;
-
+import GUI.Publicaciones;
 import java.util.ArrayList;
 
 public class Audio extends Publicacion implements Durable {
@@ -16,11 +16,13 @@ public class Audio extends Publicacion implements Durable {
 
 
     // metodo avanzar y detener
-    public void avanzar(int segundos) {
-
+    @Override
+    public void avanzar(int segundos, Publicaciones publicacion) {
+        publicacion.setPausado(false);
     }
-    public void detener() {
-        
+    @Override
+    public void detener(Publicaciones publicacion) {
+        publicacion.setPausado(true);
     }
 
     public int getDuracion() {

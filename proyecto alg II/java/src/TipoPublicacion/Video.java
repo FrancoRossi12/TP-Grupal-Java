@@ -2,6 +2,7 @@ package TipoPublicacion;
 
 import Interfaz.Durable;
 import Interfaz.Filtrable;
+import GUI.Publicaciones;
 
 import java.util.ArrayList;
 
@@ -26,12 +27,12 @@ public class Video extends Publicacion implements Durable, Filtrable {
 
     }
 @Override
-    public void avanzar(int segundos) {
-
-    }
-
-    public void detener() {
-
+public void avanzar(int segundos, Publicaciones publicacion) {
+    publicacion.setPausado(false);
+}
+@Override
+    public void detener(Publicaciones publicacion) {
+        publicacion.setPausado(true);
     }
 
     @Override

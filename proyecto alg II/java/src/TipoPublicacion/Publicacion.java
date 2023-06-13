@@ -36,8 +36,8 @@ public class Publicacion {
         return listaComentario;
         
     }
-
     public List<String> getHashtags() {
         return listaHashtag;
     }
+
 }
