@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import Perfil.Album;
+import TipoPublicacion.Publicacion;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -25,13 +26,17 @@ public class Albumvisual extends JDialog {
     private JButton albumButton;
     private JButton subalbumButton;
     private List<Album> listaAlbumes;
+
+    private List<Publicacion> listaPublicacion;
     private Document documentoXML;
-    public Albumvisual(List<Album> listaAlbumes) {
+    public Albumvisual(List<Album> listaAlbumes,List<Publicacion> listaPublicacion) {
+
         setTitle("Album");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(agregar);
         this.listaAlbumes = listaAlbumes;
+        this.listaPublicacion = listaPublicacion;
         mostrarAlbumes();
 
         agregar.addActionListener(new ActionListener() {
@@ -148,6 +153,59 @@ public class Albumvisual extends JDialog {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    private void cargarDatosDesdeXML() {
+        try {
+            NodeList albumNodes = documentoXML.getElementsByTagName("album");
+            for (int i = 0; i < albumNodes.getLength(); i++) {
+                Node albumNode = albumNodes.item(i);
+                if (albumNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element albumElement = (Element) albumNode;
+
+                    // Obtener el nombre del álbum
+                    String nombreAlbum = getTextValue(albumElement, "nombre");
+                    Album album = new Album(nombreAlbum);
+
+                    // Cargar la lista principal
+                    Element listaElement = (Element) albumElement.getElementsByTagName("lista").item(0);
+                    NodeList publicacionNodes = listaElement.getElementsByTagName("publicacion");
+                    for (int j = 0; j < publicacionNodes.getLength(); j++) {
+                        Element publicacionElement = (Element) publicacionNodes.item(j);
+                        Publicacion publicacion = crearPublicacionDesdeElement(publicacionElement);
+                        album.agregarPublicacion(publicacion);
+                    }
+
+                    // Cargar la sublista
+                    Element sublistaElement = (Element) albumElement.getElementsByTagName("sublista").item(0);
+                    if (sublistaElement != null) {
+                        NodeList subpublicacionNodes = sublistaElement.getElementsByTagName("publicacion");
+                        for (int j = 0; j < subpublicacionNodes.getLength(); j++) {
+                            Element subpublicacionElement = (Element) subpublicacionNodes.item(j);
+                            Publicacion subpublicacion = crearPublicacionDesdeElement(subpublicacionElement);
+                            album.agregarSubpublicacion(subpublicacion);
+                        }
+                    }
+                    listaAlbumes.add(album);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private Publicacion crearPublicacionDesdeElement(Element publicacionElement) {
+
+    }
+
+    private String getTextValue(Element element, String tagName) {
+        NodeList nodeList = element.getElementsByTagName(tagName);
+        if (nodeList != null && nodeList.getLength() > 0) {
+            Element tagElement = (Element) nodeList.item(0);
+            if (tagElement != null && tagElement.getFirstChild() != null) {
+                return tagElement.getFirstChild().getNodeValue();
+            }
+        }
+        return "";
     }
     private void mostrarAlbumes(){
 

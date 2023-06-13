@@ -49,8 +49,13 @@ public class Publicaciones extends JDialog {
         Font font = textPane1.getFont();
         Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
         textPane1.setFont(newFont);
+        if(listaPublicacion.isEmpty()){
+            String texto = "Sin publicaciones";
+            textPane1.setText(texto);
+        }else{
+            mostrarPublicacion(indice);
+        }
 
-        mostrarPublicacion(indice);
         PAUSARButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 OnPausar();
@@ -105,6 +110,7 @@ public class Publicaciones extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+
     private void onEliminar(){
 
         if (!listaPublicacion.isEmpty()) {
@@ -112,36 +118,45 @@ public class Publicaciones extends JDialog {
             if (indice >= listaPublicacion.size()) {
                 indice = listaPublicacion.size() - 1;
             }
+
             mostrarPublicacion(indice);
+        }else{
+            String texto = "Sin publicaciones";
+            textPane1.setText(texto);
         }
     }
     private void onAgregar() {
         // Mostrar el cuadro de diálogo de opción
         String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-        List<Publicacion> listaPublicacion = Publicaciones.this.listaPublicacion;
+        listaPublicacion = new ArrayList<>();
         // Verificar la opción seleccionada
         switch (seleccion) {
             case 0:
                 // Agregar una publicación de texto
                 agregarPublicacionTexto();
+                mostrarPublicacion(listaPublicacion.size()-1);
                 break;
             case 1:
                 // Agregar una publicación de imagen
                 agregarPublicacionImagen();
+                mostrarPublicacion(listaPublicacion.size()-1);
                 break;
             case 2:
                 // Agregar una publicación de video
                 agregarPublicacionVideo();
+                mostrarPublicacion(listaPublicacion.size()-1);
                 break;
             case 3:
                 // Agregar una publicación de audio
                 agregarPublicacionAudio();
+                mostrarPublicacion(listaPublicacion.size()-1);
                 break;
             default:
                 // No se seleccionó una opción válida
                 break;
         }
+
     }
 
     private void agregarPublicacionTexto() {
