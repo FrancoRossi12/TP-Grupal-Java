@@ -271,10 +271,6 @@ public class Publicaciones extends JDialog {
         // Mostrar el cuadro de diálogo de opción
         String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-<<<<<<< Updated upstream
-=======
-        //listaPublicacion = new ArrayList<>();
->>>>>>> Stashed changes
         // Verificar la opción seleccionada
         switch (seleccion) {
             case 0:
