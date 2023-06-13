@@ -21,7 +21,6 @@ public class Publicaciones extends JDialog {
     private JButton next;
     private JButton prev;
     private Reportes reporte = new Reportes();
-    /*private Reproduccion repro = new Reproduccion(List<Publicacion>);*/
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
@@ -29,13 +28,11 @@ public class Publicaciones extends JDialog {
     private JButton PAUSARButton;
     private JButton AVANZARButton;
     private JButton reportesButton;
-
     private JButton eliminarButton;
     private JButton agregarButton;
     private JButton reproducirAPartirDeButton;
 
     private JButton reproduccionButton;
-
 
     int filtroaplicado = 0;
     private static int indice = 0;
@@ -74,7 +71,10 @@ public class Publicaciones extends JDialog {
         });
         AVANZARButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                OnAvanzar(listaPublicacion.get(indice));
+                if(listaPublicacion.get(indice) instanceof Audio)
+                    OnAvanzar(((Audio) listaPublicacion.get(indice)),0,((Audio) listaPublicacion.get(indice)).getDuracion());
+                else
+                    OnAvanzar(((Video) listaPublicacion.get(indice)),0,((Video) listaPublicacion.get(indice)).getDuracion());
             }
         });
         filtro.addActionListener(new ActionListener() {
@@ -107,17 +107,20 @@ public class Publicaciones extends JDialog {
                 onReportes();
             }
         });
+
         reproduccionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onRepro();
             }
         });
+
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 dispose();
             }
         });
+
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onX();
@@ -141,6 +144,12 @@ public class Publicaciones extends JDialog {
         }
     }
     void onreproducirAPartirDeButton(){
+        int desde = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese desde el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
+        int hasta = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese hasta el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
+        if(listaPublicacion.get(indice) instanceof Audio)
+            mostrarDuracionPublicacion(((Audio) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
+        else
+            mostrarDuracionPublicacion(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
 
     }
     private void onAgregar() {
@@ -308,7 +317,8 @@ public class Publicaciones extends JDialog {
     public void onReportes(){
         reporte.prueba(listaPublicacion);
     }
-    public void onRepro(){
+
+    public void onRepro(){///NO ESTA EN NINGUN LISTENER
         Repro dialog = new Repro(listaPublicacion);
         dialog.pack();
         dialog.setVisible(true);
@@ -321,8 +331,9 @@ public class Publicaciones extends JDialog {
     private void OnPausar(Publicacion publicacion){
         ((Durable)publicacion).detener(this);
     }
-    private void OnAvanzar(Publicacion publicacion){
-        ((Durable)publicacion).avanzar(0,this);//HAY QUE LLAMAR A AVANZAR DE AUDIO/VIDEO Y QUE SE HAGA FALSA O VERDADERA AHI
+    private void OnAvanzar(Publicacion publicacion, int desde, int hasta){
+        OnPausar(publicacion);///HAY Q SOLUCIONAR QUE REPRODUCE LOS 2 
+        ((Durable)publicacion).avanzar(0,this);
     }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);
@@ -420,6 +431,7 @@ public class Publicaciones extends JDialog {
             textPane1.setText(texto);
 
             if(publicacion instanceof Video || publicacion instanceof Audio){
+                reproducirAPartirDeButton.setVisible(true);
                 textdurable.setVisible(true);
                 AVANZARButton.setVisible(true);
                 PAUSARButton.setVisible(true);
@@ -434,6 +446,7 @@ public class Publicaciones extends JDialog {
                 mostrarDuracionPublicacion(duracion);
             }else{
                 duracion=0;
+                reproducirAPartirDeButton.setVisible(false);
                 textdurable.setVisible(false);
                 AVANZARButton.setVisible(false);
                 PAUSARButton.setVisible(false);
@@ -441,6 +454,30 @@ public class Publicaciones extends JDialog {
         }
 
     }
+    private void mostrarDuracionPublicacion(int duracion, int desde, int hasta) {
+        if(desde >= 0 && desde < hasta && hasta <= duracion) {
+            Thread = new Thread(() -> {
+                int j = desde;
+                while (j <= hasta && !Thread.interrupted()) {
+                    if (!pausado) {
+                        String duraciontexto = j + " --------------------- " + duracion;
+                        SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
+                        j++;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+            });
+            Thread.start();
+        }
+        else {
+            System.err.println("parametros erroneos");
+            onreproducirAPartirDeButton();
+        }
+        }
     private void mostrarDuracionPublicacion(int duracion) {
         Thread = new Thread(() -> {
             int j = 0;
