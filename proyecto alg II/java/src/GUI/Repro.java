@@ -1,5 +1,6 @@
 package GUI;
 
+import Interfaz.Filtrable;
 import TipoPublicacion.Imagen;
 import TipoPublicacion.Publicacion;
 import TipoPublicacion.Video;
@@ -78,8 +79,7 @@ public class Repro extends JDialog {
         }
         return nombres;
     }
-
-    private void filtrarPublicaciones(String filtro) {
+    /*private void filtrarPublicaciones(String filtro) {
         List<Publicacion> publicacionesFiltradas = new ArrayList<>();
         for (Publicacion publicacion : publicaciones) {
             if (publicacion instanceof Video || publicacion instanceof Imagen) {
@@ -90,25 +90,69 @@ public class Repro extends JDialog {
                         Imagen imagen = (Imagen) publicacion;
                         imagen.aplicarFiltro(1);
                         publicacionesFiltradas.add(imagen);
+                    }else {
+                        Video video = (Video) publicacion;
+                        video.aplicarFiltro(1);
+                        publicacionesFiltradas.add(video);
                     }
                 } else if (filtro.equals("CLARENDON")) {
                     if (publicacion instanceof Imagen) {
                         Imagen imagen = (Imagen) publicacion;
                         imagen.aplicarFiltro(2);
                         publicacionesFiltradas.add(imagen);
+                    }else{
+                        Video video = (Video) publicacion;
+                        video.aplicarFiltro(2);
+                        publicacionesFiltradas.add(video);
                     }
                 } else if (filtro.equals("SEPIA")) {
                     if (publicacion instanceof Imagen) {
                         Imagen imagen = (Imagen) publicacion;
                         imagen.aplicarFiltro(3);
                         publicacionesFiltradas.add(imagen);
+                    }else{
+                        Video video = (Video) publicacion;
+                        video.aplicarFiltro(3);
+                        publicacionesFiltradas.add(video);
                     }
+                }if (filtro.equals("DEFAULT")) {
+                    publicacionesFiltradas.add(publicacion);
                 }
             }
         }
         String[] nombresPublicacionesFiltradas = obtenerNombresPublicaciones(publicacionesFiltradas);
         listaPublicaciones.setListData(nombresPublicacionesFiltradas);
+    }*/
+    private void filtrarPublicaciones(String filtro) {
+        List<Publicacion> publicacionesFiltradas = new ArrayList<>();
+
+        if (filtro.equals("DEFAULT")) {
+            // Agregar todas las publicaciones por defecto
+            publicacionesFiltradas.addAll(publicaciones);
+        } else {
+            for (Publicacion publicacion : publicaciones) {
+                if (publicacion instanceof Video) {
+                    // Agregar los videos que coincidan con el filtro
+                    Video video = (Video) publicacion;
+                    Filtrable.tipoFiltro filtroAplicado = video.getFiltro();
+                    if (filtroAplicado != null && filtroAplicado.name().equalsIgnoreCase(filtro)) {
+                        publicacionesFiltradas.add(publicacion);
+                    }
+                } else if (publicacion instanceof Imagen) {
+                    // Agregar las imágenes que coincidan con el filtro
+                    Imagen imagen = (Imagen) publicacion;
+                    Filtrable.tipoFiltro filtroAplicado = imagen.getFiltro();
+                    if (filtroAplicado != null && filtroAplicado.name().equalsIgnoreCase(filtro)) {
+                        publicacionesFiltradas.add(publicacion);
+                    }
+                }
+            }
+        }
+
+        String[] nombresPublicacionesFiltradas = obtenerNombresPublicaciones(publicacionesFiltradas);
+        listaPublicaciones.setListData(nombresPublicacionesFiltradas);
     }
+
 
     private void reproducirPublicaciones() {
         duracionTotal = 0;

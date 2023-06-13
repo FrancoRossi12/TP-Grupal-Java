@@ -223,9 +223,9 @@ public class Publicaciones extends JDialog {
         int desde = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese desde el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
         int hasta = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese hasta el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
         if(listaPublicacion.get(indice) instanceof Audio)
-            mostrarDuracionPublicacion(((Audio) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
+            mostrarDuracionPublicacion2(((Audio) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
         else
-            mostrarDuracionPublicacion(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
+            mostrarDuracionPublicacion2(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
 
     }
     private void onAgregar(List<Publicacion> ListaPublicacion, List<Publicacion> listaPublicacion) {
@@ -271,6 +271,10 @@ public class Publicaciones extends JDialog {
         // Mostrar el cuadro de diálogo de opción
         String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+<<<<<<< Updated upstream
+=======
+        //listaPublicacion = new ArrayList<>();
+>>>>>>> Stashed changes
         // Verificar la opción seleccionada
         switch (seleccion) {
             case 0:
@@ -429,7 +433,7 @@ public class Publicaciones extends JDialog {
         mostrarPublicacion(indice);
     }
     public void onReportes(){
-        reporte.prueba(listaPublicacion);
+        reporte.Reporte1(listaPublicacion);
     }
 
     public void onRepro(){///NO ESTA EN NINGUN LISTENER
@@ -568,7 +572,7 @@ public class Publicaciones extends JDialog {
         }
 
     }
-    private void mostrarDuracionPublicacion(int duracion, int desde, int hasta) {
+    private void mostrarDuracionPublicacion2(int duracion, int desde, int hasta) {
         if(desde >= 0 && desde < hasta && hasta <= duracion) {
             Thread = new Thread(() -> {
                 int j = desde;
