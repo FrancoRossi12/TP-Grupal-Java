@@ -48,6 +48,11 @@ public class Repro extends JDialog {
 
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
 
         publicaciones = lista;
         //publicacionesSeleccionadas = new ArrayList<>();
@@ -64,8 +69,6 @@ public class Repro extends JDialog {
             }
         });
 
-        pack();
-        setVisible(true);
     }
 
     private String[] obtenerNombresPublicaciones(List<Publicacion> publicaciones) {

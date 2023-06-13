@@ -118,13 +118,6 @@ public class Publicaciones extends JDialog {
                 dispose();
             }
         });
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Lógica para cerrar el programa
-                System.exit(0); // Cierra la aplicación con el código de salida 0 (éxito)
-            }
-        });
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onX();
@@ -319,7 +312,7 @@ public class Publicaciones extends JDialog {
         Repro dialog = new Repro(listaPublicacion);
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+
     }
     private void onX() {
         dispose();
