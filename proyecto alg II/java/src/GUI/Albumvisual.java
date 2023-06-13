@@ -33,7 +33,8 @@ public class Albumvisual extends JDialog {
     private JButton subalbumButton;
     private List<Album> listaAlbumes;
 
-    private List<Publicacion> listaPublicacion;
+    private List<Publicacion> ListaPublicacion;
+    private List<Publicacion> listaPublicacioncompleta;
     private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
     public Albumvisual(List<Album> ListaAlbumes,List<Publicacion> listaPublicacion) {
@@ -43,7 +44,7 @@ public class Albumvisual extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(agregar);
         cargarDatosDesdeXML();
-
+        listaPublicacioncompleta = listaPublicacion;
         mostrarAlbumes();
 
         albumButton.addActionListener(new ActionListener() {
@@ -102,8 +103,8 @@ public class Albumvisual extends JDialog {
                 .findFirst();
 
         optionalAlbum.ifPresent(album -> {
-            listaPublicacion = album.getListaPublicacion();
-            Publicaciones dialog = new Publicaciones(listaPublicacion);
+            ListaPublicacion = album.getListaPublicacion();
+            Publicaciones dialog = new Publicaciones(ListaPublicacion,listaPublicacioncompleta);
             dialog.pack();
             dialog.setVisible(true);
         });
@@ -117,7 +118,7 @@ public class Albumvisual extends JDialog {
 
         optionalAlbum.ifPresent(album -> {
             sublistaPublicacion = album.getSubpublicaciones();
-            Publicaciones dialog = new Publicaciones(sublistaPublicacion);
+            Publicaciones dialog = new Publicaciones(sublistaPublicacion,listaPublicacioncompleta);
             dialog.pack();
             dialog.setVisible(true);
         });

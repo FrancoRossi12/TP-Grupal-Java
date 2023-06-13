@@ -128,7 +128,90 @@ public class Publicaciones extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+    public Publicaciones(List<Publicacion> ListaPublicacion,List<Publicacion> ListaPublicacion2) {
 
+        Thread= null; //Inicializo hilo
+        this.listaPublicacion = ListaPublicacion;
+        setTitle("Publicaciones");
+        setContentPane(contentPane);
+        setModal(true);
+        getRootPane().setDefaultButton(prev);
+        setSize(1080, 720);
+
+        Font font = textPane1.getFont();
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
+        textPane1.setFont(newFont);
+        mostrarPublicacion(indice);
+
+        reproducirAPartirDeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onreproducirAPartirDeButton();
+            }
+        });
+        PAUSARButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                OnPausar(listaPublicacion.get(indice));
+            }
+        });
+        AVANZARButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(listaPublicacion.get(indice) instanceof Audio)
+                    OnAvanzar(((Audio) listaPublicacion.get(indice)),0,((Audio) listaPublicacion.get(indice)).getDuracion());
+                else
+                    OnAvanzar(((Video) listaPublicacion.get(indice)),0,((Video) listaPublicacion.get(indice)).getDuracion());
+            }
+        });
+        filtro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Onfiltro();
+            }
+        });
+        prev.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onPrev();
+            }
+        });
+        next.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onNext();
+            }
+        });
+        eliminarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onEliminar();
+            }
+        });
+        agregarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onAgregar(ListaPublicacion2);
+            }
+        });
+        reportesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onReportes();
+            }
+        });
+
+        reproduccionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onRepro();
+            }
+        });
+
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        contentPane.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onX();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+    }
     private void onEliminar(){
 
         if (!listaPublicacion.isEmpty()) {
@@ -151,6 +234,38 @@ public class Publicaciones extends JDialog {
         else
             mostrarDuracionPublicacion(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
 
+    }
+    private void onAgregar(List<Publicacion> listaPublicacion) {
+        // Obtener los nombres de las publicaciones como opciones
+        String[] opciones = new String[listaPublicacion.size()];
+        for (int i = 0; i < listaPublicacion.size(); i++) {
+            opciones[i] = listaPublicacion.get(i).getNombre();
+        }
+
+        // Mostrar cuadro de diálogo con el selector de publicaciones
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "Selecciona una publicación para agregar:",
+                "Agregar Publicación",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                null
+        );
+
+        // Verificar si se seleccionó una publicación y realizar la acción correspondiente
+        if (seleccion != null) {
+            // Obtener la publicación seleccionada
+            Publicacion publicacionSeleccionada = null;
+            for (Publicacion publicacion : listaPublicacion) {
+                if (publicacion.getNombre().equals(seleccion)) {
+                    publicacionSeleccionada = publicacion;
+                    break;
+                }
+            }
+            // Realizar la acción de agregar la publicación seleccionada
+            // ...
+        }
     }
     private void onAgregar() {
         // Mostrar el cuadro de diálogo de opción

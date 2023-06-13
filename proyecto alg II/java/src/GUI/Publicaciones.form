@@ -70,7 +70,7 @@
       </grid>
       <component id="8ce80" class="javax.swing.JButton" binding="filtro">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Aplicar Filtro"/>
@@ -79,21 +79,11 @@
       <grid id="da92d" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="ac201" class="javax.swing.JTextPane" binding="textdurable">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="4" fill="2" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-            </constraints>
-            <properties>
-              <editable value="false"/>
-            </properties>
-          </component>
           <component id="2139c" class="javax.swing.JButton" binding="PAUSARButton" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -110,46 +100,63 @@
               <text value="AVANZAR"/>
             </properties>
           </component>
+          <component id="ac201" class="javax.swing.JTextPane" binding="textdurable">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="4" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+            </properties>
+          </component>
         </children>
       </grid>
-      <component id="d3ee2" class="javax.swing.JButton" binding="reportesButton" default-binding="true">
-        <constraints>
-          <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Reportes"/>
-        </properties>
-      </component>
-      <component id="e6e3b" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Eliminar"/>
-        </properties>
-      </component>
-      <component id="3c752" class="javax.swing.JButton" binding="agregarButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Agregar"/>
-        </properties>
-      </component>
       <component id="f0f2b" class="javax.swing.JButton" binding="reproducirAPartirDeButton" default-binding="true">
         <constraints>
-          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Reproducir a partir de"/>
         </properties>
       </component>
+      <hspacer id="ada3f">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="290" height="11"/>
+          </grid>
+        </constraints>
+      </hspacer>
+      <component id="d3ee2" class="javax.swing.JButton" binding="reportesButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Reportes"/>
+        </properties>
+      </component>
       <component id="abd56" class="javax.swing.JButton" binding="reproduccionButton">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Reproducir"/>
+        </properties>
+      </component>
+      <component id="3c752" class="javax.swing.JButton" binding="agregarButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Agregar"/>
+        </properties>
+      </component>
+      <component id="e6e3b" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Eliminar"/>
         </properties>
       </component>
     </children>
