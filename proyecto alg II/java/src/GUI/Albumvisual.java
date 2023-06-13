@@ -98,7 +98,7 @@ public class Albumvisual extends JDialog {
         String nombreAlbum = (String) comboBoxAlbumes.getSelectedItem();
         for (Album album : listaAlbumes) {
             if (album.getNombreAlbum().equals(nombreAlbum)) {
-                sublistaPublicacion = album.getPublicaciones();
+                sublistaPublicacion = album.getListaPublicacion();
                 break;
             }
         }
@@ -230,7 +230,7 @@ public class Albumvisual extends JDialog {
                         for (int j = 0; j < subpublicacionNodes.getLength(); j++) {
                             Element subpublicacionElement = (Element) subpublicacionNodes.item(j);
                             Publicacion subpublicacion = crearPublicacionDesdeElement(subpublicacionElement);
-                            album.agregarSubpublicacion(subpublicacion);
+                            album.agregarSubpublicacion(subpublicacion);System.out.println(subpublicacionElement);
                         }
                     }
                     listaAlbumes = new ArrayList<>();
@@ -244,7 +244,9 @@ public class Albumvisual extends JDialog {
 
     private Publicacion crearPublicacionDesdeElement(Element publicacionElement) {
         Publicacion pub = null;
+
         if (publicacionElement.getNodeType() == Node.ELEMENT_NODE) {
+
             String tipo = publicacionElement.getAttribute("tipo");
             String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
             String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
@@ -272,7 +274,7 @@ public class Albumvisual extends JDialog {
                 String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
                 int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
                 int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
-
+                System.out.println("aca");
                 pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
             } else if (tipo.equals("imagen")) {
                 String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
@@ -292,6 +294,7 @@ public class Albumvisual extends JDialog {
 
                 pub = new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
             }
+
         }
         return pub;
 

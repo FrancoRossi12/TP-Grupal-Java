@@ -2,6 +2,8 @@ Listado completo de publicaciones agrupadas por tipo:
 Audios:
 Cantidad de publicaciones: 0
 Fotos:
-Cantidad de publicaciones: 0
+Cantidad de publicaciones: 1
+Nombre Publicacion: aaaa   Me gusta: 0
+Me gusta promedio: 0.0
 Videos:
 Cantidad de publicaciones: 0
