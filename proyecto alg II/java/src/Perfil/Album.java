@@ -15,13 +15,9 @@ public class Album {
         this.nombreAlbum = nombreAlbum;
         cantPostsAlbum=0;
         listaPublicacion = new ArrayList<Publicacion>();
+        subListaAlbums = new ArrayList<Publicacion>();
     }
-    public Album(String nombreAlbum,List<Publicacion> listaPublicacion,List<Publicacion> subListaAlbums){
-        this.nombreAlbum = nombreAlbum;
-        cantPostsAlbum=0;
-        this.listaPublicacion = listaPublicacion;
-        this.subListaAlbums = subListaAlbums;
-    }
+
     public void setNombreAlbum(String al){nombreAlbum=al;}
     public void setNuevoSubAlbum(){subListaAlbums= new ArrayList<Publicacion>();}
 
@@ -59,5 +55,13 @@ public class Album {
 
     public void agregarSubpublicacion(Publicacion subpublicacion) {
         this.subListaAlbums.add(subpublicacion);
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return listaPublicacion;
+    }
+
+    public List<Publicacion> getSubpublicaciones() {
+        return this.subListaAlbums;
     }
 }

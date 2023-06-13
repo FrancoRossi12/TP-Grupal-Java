@@ -40,10 +40,21 @@ public class Albumvisual extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(agregar);
+        cargarDatosDesdeXML();
         this.listaAlbumes = listaAlbumes;
-        this.listaPublicacion = listaPublicacion;
+
         mostrarAlbumes();
 
+        albumButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onalbumButton();
+            }
+        });
+        subalbumButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onsubalbumButton();
+            }
+        });
         agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onAgregar();
@@ -83,6 +94,31 @@ public class Albumvisual extends JDialog {
     private void onX(){
         dispose();
     }
+    private void onalbumButton() {
+        String nombreAlbum = (String) comboBoxAlbumes.getSelectedItem();
+        for (Album album : listaAlbumes) {
+            if (album.getNombreAlbum().equals(nombreAlbum)) {
+                sublistaPublicacion = album.getPublicaciones();
+                break;
+            }
+        }
+        Publicaciones dialog = new Publicaciones(sublistaPublicacion);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    private void onsubalbumButton() {
+        String nombreAlbum = (String) comboBoxAlbumes.getSelectedItem();
+        for (Album album : listaAlbumes) {
+            if (album.getNombreAlbum().equals(nombreAlbum)) {
+                sublistaPublicacion = album.getSubpublicaciones();
+                break;
+            }
+        }
+        Publicaciones dialog = new Publicaciones(sublistaPublicacion);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
     private void onAgregar() {
         String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo álbum:", "Agregar Álbum", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
@@ -161,7 +197,10 @@ public class Albumvisual extends JDialog {
     }
     private void cargarDatosDesdeXML() {
         try {
-            NodeList albumNodes = documentoXML.getElementsByTagName("album");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse("proyecto alg II/java/src/Swing/Album.xml");
+            NodeList albumNodes = ((Document) document).getElementsByTagName("album");
             for (int i = 0; i < albumNodes.getLength(); i++) {
                 Node albumNode = albumNodes.item(i);
                 if (albumNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -172,12 +211,16 @@ public class Albumvisual extends JDialog {
                     Album album = new Album(nombreAlbum);
 
                     // Cargar la lista principal
-                    Element listaElement = (Element) albumElement.getElementsByTagName("lista").item(0);
-                    NodeList publicacionNodes = listaElement.getElementsByTagName("publicacion");
-                    for (int j = 0; j < publicacionNodes.getLength(); j++) {
-                        Element publicacionElement = (Element) publicacionNodes.item(j);
-                        Publicacion publicacion = crearPublicacionDesdeElement(publicacionElement);
-                        album.agregarPublicacion(publicacion);
+
+                    NodeList listaNodes = ((Document) document).getElementsByTagName("lista");
+                    if (listaNodes.getLength() > 0) {
+                        Element listaElement = (Element) listaNodes.item(0);
+                        NodeList publicacionNodes = listaElement.getElementsByTagName("publicacion");
+                        for (int j = 0; j < publicacionNodes.getLength(); j++) {
+                            Element publicacionElement = (Element) publicacionNodes.item(j);
+                            Publicacion publicacion = crearPublicacionDesdeElement(publicacionElement);
+                            album.agregarPublicacion(publicacion);
+                        }
                     }
 
                     // Cargar la sublista
@@ -190,6 +233,7 @@ public class Albumvisual extends JDialog {
                             album.agregarSubpublicacion(subpublicacion);
                         }
                     }
+                    listaAlbumes = new ArrayList<>();
                     listaAlbumes.add(album);
                 }
             }
@@ -250,6 +294,7 @@ public class Albumvisual extends JDialog {
             }
         }
         return pub;
+
     }
 
     private String getTextValue(Element element, String tagName) {
