@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import Perfil.Reportes;
 public class Publicaciones extends JDialog {
@@ -33,6 +32,7 @@ public class Publicaciones extends JDialog {
 
     private JButton eliminarButton;
     private JButton agregarButton;
+    private JButton reproducirAPartirDeButton;
 
     private JButton reproduccionButton;
 
@@ -60,13 +60,13 @@ public class Publicaciones extends JDialog {
         Font font = textPane1.getFont();
         Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
         textPane1.setFont(newFont);
-        if(listaPublicacion.isEmpty()){
-            String texto = "Sin publicaciones";
-            textPane1.setText(texto);
-        }else{
-            mostrarPublicacion(indice);
-        }
+        mostrarPublicacion(indice);
 
+        reproducirAPartirDeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onreproducirAPartirDeButton();
+            }
+        });
         PAUSARButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 OnPausar(listaPublicacion.get(indice));
@@ -146,6 +146,9 @@ public class Publicaciones extends JDialog {
             String texto = "Sin publicaciones";
             textPane1.setText(texto);
         }
+    }
+    void onreproducirAPartirDeButton(){
+
     }
     private void onAgregar() {
         // Mostrar el cuadro de diálogo de opción
@@ -361,83 +364,89 @@ public class Publicaciones extends JDialog {
     }
 
     private void mostrarPublicacion(int i) {
-        int duracion=0;
-        filtro.setVisible(false);
-        String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
-        Publicacion publicacion = listaPublicacion.get(i);
-        String tipo = publicacion.getClass().getSimpleName();
-        String texto = "Tipo: " + tipo + "\n";
-        texto += "Nombre: " + publicacion.getNombre() + "\n";
-        texto += "Descripción: " + publicacion.getDescripcionPost() + "\n";
-        texto += "Me gusta: " + publicacion.getCantMG() + "\n";
-
-        // Mostrar los datos específicos según el tipo de publicación
-        if (publicacion instanceof Texto) {
-            Texto textoPublicacion = (Texto) publicacion;
-            texto += "Fuente: " + textoPublicacion.getFuente() + "\n";
-            texto += "Cantidad de caracteres: " + textoPublicacion.getCantCaracteres() + "\n";
-            texto += "Tamaño de fuente: " + textoPublicacion.getTamañoFuente() + "\n";
-        } else if (publicacion instanceof Imagen) {
-            Imagen imagenPublicacion = (Imagen) publicacion;
-            texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";
-            texto += "Alto: " + imagenPublicacion.getAlto() + "\n";
-            texto += "Ancho: " + imagenPublicacion.getAncho() + "\n";
-            texto += "Filtro:" + ((Imagen) publicacion).getFiltro() + "\n";
-        } else if (publicacion instanceof Audio) {
-            Audio audioPublicacion = (Audio) publicacion;
-            texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
-            texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
-
-        } else if (publicacion instanceof Video) {
-            Video videoPublicacion = (Video) publicacion;
-            texto += "Resolucion: " + videoPublicacion.getResolucion() + "\n";
-            texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
-            texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
-            texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
-
-        }
-
-        if(publicacion instanceof Video || publicacion instanceof Imagen){
-            filtro.setVisible(true);
-        }
-        List<String> hashtags = publicacion.getHashtags();
-        if (!hashtags.isEmpty()) {
-            texto += "\nHashtags:\n";
-            for (String hashtag : hashtags) {
-                texto += "#" + hashtag ;
-            }
-        }else{texto += "\nSin hashtags";}
-
-        List<String> comentarios = publicacion.getComentarios();
-        if (!comentarios.isEmpty()) {
-            texto += "\nComentarios:\n";
-            for (String comentario : comentarios) {
-                texto += comentario + "\n";
-            }
-        }else{texto += "\nSin comentario";}
-
-        cantPub.setText(contador);
-        textPane1.setText(texto);
-
-        if(publicacion instanceof Video || publicacion instanceof Audio){
-        textdurable.setVisible(true);
-        AVANZARButton.setVisible(true);
-        PAUSARButton.setVisible(true);
-        if (Thread != null) {
-            Thread.interrupt();
-        }
-        if(publicacion instanceof Video){
-            duracion = ((Video) publicacion).getDuracion();
+        if(listaPublicacion.isEmpty()){
+            String texto = "Sin publicaciones";
+            textPane1.setText(texto);
         }else{
-            duracion = ((Audio) publicacion).getDuracion();
+            int duracion=0;
+            filtro.setVisible(false);
+            String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
+            Publicacion publicacion = listaPublicacion.get(i);
+            String tipo = publicacion.getClass().getSimpleName();
+            String texto = "Tipo: " + tipo + "\n";
+            texto += "Nombre: " + publicacion.getNombre() + "\n";
+            texto += "Descripción: " + publicacion.getDescripcionPost() + "\n";
+            texto += "Me gusta: " + publicacion.getCantMG() + "\n";
+
+            // Mostrar los datos específicos según el tipo de publicación
+            if (publicacion instanceof Texto) {
+                Texto textoPublicacion = (Texto) publicacion;
+                texto += "Fuente: " + textoPublicacion.getFuente() + "\n";
+                texto += "Cantidad de caracteres: " + textoPublicacion.getCantCaracteres() + "\n";
+                texto += "Tamaño de fuente: " + textoPublicacion.getTamañoFuente() + "\n";
+            } else if (publicacion instanceof Imagen) {
+                Imagen imagenPublicacion = (Imagen) publicacion;
+                texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";
+                texto += "Alto: " + imagenPublicacion.getAlto() + "\n";
+                texto += "Ancho: " + imagenPublicacion.getAncho() + "\n";
+                texto += "Filtro:" + ((Imagen) publicacion).getFiltro() + "\n";
+            } else if (publicacion instanceof Audio) {
+                Audio audioPublicacion = (Audio) publicacion;
+                texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
+                texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
+
+            } else if (publicacion instanceof Video) {
+                Video videoPublicacion = (Video) publicacion;
+                texto += "Resolucion: " + videoPublicacion.getResolucion() + "\n";
+                texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
+                texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
+                texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
+
+            }
+
+            if(publicacion instanceof Video || publicacion instanceof Imagen){
+                filtro.setVisible(true);
+            }
+            List<String> hashtags = publicacion.getHashtags();
+            if (!hashtags.isEmpty()) {
+                texto += "\nHashtags:\n";
+                for (String hashtag : hashtags) {
+                    texto += "#" + hashtag ;
+                }
+            }else{texto += "\nSin hashtags";}
+
+            List<String> comentarios = publicacion.getComentarios();
+            if (!comentarios.isEmpty()) {
+                texto += "\nComentarios:\n";
+                for (String comentario : comentarios) {
+                    texto += comentario + "\n";
+                }
+            }else{texto += "\nSin comentario";}
+
+            cantPub.setText(contador);
+            textPane1.setText(texto);
+
+            if(publicacion instanceof Video || publicacion instanceof Audio){
+                textdurable.setVisible(true);
+                AVANZARButton.setVisible(true);
+                PAUSARButton.setVisible(true);
+                if (Thread != null) {
+                    Thread.interrupt();
+                }
+                if(publicacion instanceof Video){
+                    duracion = ((Video) publicacion).getDuracion();
+                }else{
+                    duracion = ((Audio) publicacion).getDuracion();
+                }
+                mostrarDuracionPublicacion(duracion);
+            }else{
+                duracion=0;
+                textdurable.setVisible(false);
+                AVANZARButton.setVisible(false);
+                PAUSARButton.setVisible(false);
+            }
         }
-            mostrarDuracionPublicacion(duracion);
-        }else{
-            duracion=0;
-            textdurable.setVisible(false);
-            AVANZARButton.setVisible(false);
-            PAUSARButton.setVisible(false);
-        }
+
     }
     private void mostrarDuracionPublicacion(int duracion) {
         Thread = new Thread(() -> {
