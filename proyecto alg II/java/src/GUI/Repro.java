@@ -142,7 +142,7 @@ public class Repro extends JDialog {
                         LocalTime currentTime = LocalTime.now();
                         Duration duration = Duration.between(startTime, currentTime);
                         long secondsElapsed = duration.getSeconds();
-                        System.out.println("Segundo actual: " + secondsElapsed);
+                        System.out.println("Publicacion actual: "+ pub.getNombre() +"  Segundo actual: " + secondsElapsed);
                     } catch (InterruptedException e) {
                         return;
                     }
