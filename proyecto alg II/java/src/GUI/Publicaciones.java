@@ -2,25 +2,22 @@ package GUI;
 
 import Interfaz.Durable;
 import Interfaz.Filtrable;
+import Perfil.Reportes;
 import TipoPublicacion.*;
-import TipoPublicacion.Audio;
-
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import Perfil.Reportes;
+// extends JDialog
 public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
     private JButton prev;
-    private Reportes reporte = new Reportes();
+    private final Reportes reporte = new Reportes();
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
@@ -38,7 +35,7 @@ public class Publicaciones extends JDialog {
     private static int indice = 0;
     private Thread Thread;
     private boolean pausado;//para verificar si esta en pausa la repro
-    private List<Publicacion> listaPublicacion;
+    private final List<Publicacion> listaPublicacion;
 
     public void setPausado(boolean pausa){
         pausado = pausa;
@@ -58,60 +55,22 @@ public class Publicaciones extends JDialog {
         textPane1.setFont(newFont);
         mostrarPublicacion(indice);
 
-        reproducirAPartirDeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onreproducirAPartirDeButton();
-            }
+        reproducirAPartirDeButton.addActionListener(e -> onreproducirAPartirDeButton());
+        PAUSARButton.addActionListener(e -> OnPausar(listaPublicacion.get(indice)));
+        AVANZARButton.addActionListener(e -> {
+            if(listaPublicacion.get(indice) instanceof Audio)
+                OnAvanzar(listaPublicacion.get(indice));
+            else
+                OnAvanzar(listaPublicacion.get(indice));
         });
-        PAUSARButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                OnPausar(listaPublicacion.get(indice));
-            }
-        });
-        AVANZARButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(listaPublicacion.get(indice) instanceof Audio)
-                    OnAvanzar(((Audio) listaPublicacion.get(indice)),0,((Audio) listaPublicacion.get(indice)).getDuracion());
-                else
-                    OnAvanzar(((Video) listaPublicacion.get(indice)),0,((Video) listaPublicacion.get(indice)).getDuracion());
-            }
-        });
-        filtro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Onfiltro();
-            }
-        });
-        prev.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onPrev();
-            }
-        });
-        next.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onNext();
-            }
-        });
-        eliminarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onEliminar();
-            }
-        });
-        agregarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAgregar();
-            }
-        });
-        reportesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onReportes();
-            }
-        });
+        filtro.addActionListener(e -> Onfiltro());
+        prev.addActionListener(e -> onPrev());
+        next.addActionListener(e -> onNext());
+        eliminarButton.addActionListener(e -> onEliminar());
+        agregarButton.addActionListener(e -> onAgregar());
+        reportesButton.addActionListener(e -> onReportes());
 
-        reproduccionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onRepro();
-            }
-        });
+        reproduccionButton.addActionListener(e -> onRepro());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -120,11 +79,7 @@ public class Publicaciones extends JDialog {
             }
         });
 
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
     public Publicaciones(List<Publicacion> ListaPublicaciones,List<Publicacion> ListaPublicacionescompleta) {
@@ -142,54 +97,20 @@ public class Publicaciones extends JDialog {
         textPane1.setFont(newFont);
         mostrarPublicacion(indice);
 
-        reproducirAPartirDeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onreproducirAPartirDeButton();
-            }
+        reproducirAPartirDeButton.addActionListener(e -> onreproducirAPartirDeButton());
+        PAUSARButton.addActionListener(e -> OnPausar(listaPublicacion.get(indice)));
+        AVANZARButton.addActionListener(e -> {
+            if(listaPublicacion.get(indice) instanceof Audio)
+                OnAvanzar(listaPublicacion.get(indice));
+            else
+                OnAvanzar(listaPublicacion.get(indice));
         });
-        PAUSARButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                OnPausar(listaPublicacion.get(indice));
-            }
-        });
-        AVANZARButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(listaPublicacion.get(indice) instanceof Audio)
-                    OnAvanzar(((Audio) listaPublicacion.get(indice)),0,((Audio) listaPublicacion.get(indice)).getDuracion());
-                else
-                    OnAvanzar(((Video) listaPublicacion.get(indice)),0,((Video) listaPublicacion.get(indice)).getDuracion());
-            }
-        });
-        filtro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Onfiltro();
-            }
-        });
-        prev.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onPrev();
-            }
-        });
-        next.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onNext();
-            }
-        });
-        eliminarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onEliminar();
-            }
-        });
-        agregarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAgregar(listaPublicacion,ListaPublicacionescompleta);
-            }
-        });
-        reproduccionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onRepro();
-            }
-        });
+        filtro.addActionListener(e -> Onfiltro());
+        prev.addActionListener(e -> onPrev());
+        next.addActionListener(e -> onNext());
+        eliminarButton.addActionListener(e -> onEliminar());
+        agregarButton.addActionListener(e -> onAgregar(listaPublicacion,ListaPublicacionescompleta));
+        reproduccionButton.addActionListener(e -> onRepro());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -198,11 +119,7 @@ public class Publicaciones extends JDialog {
             }
         });
 
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
     private void onEliminar(){
@@ -245,7 +162,6 @@ public class Publicaciones extends JDialog {
                 opciones,
                 null
         );
-
         // Verificar si se seleccionó una publicación y realizar la acción correspondiente
         if (seleccion != null) {
             // Obtener la publicación seleccionada
@@ -256,7 +172,6 @@ public class Publicaciones extends JDialog {
                     break;
                 }
             }
-
             if (publicacionSeleccionada != null) {
                 // Realizar la acción de agregar la publicación seleccionada
                 ListaPublicacion.add(publicacionSeleccionada);
@@ -273,29 +188,29 @@ public class Publicaciones extends JDialog {
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         // Verificar la opción seleccionada
         switch (seleccion) {
-            case 0:
+            case 0 -> {
                 // Agregar una publicación de texto
                 agregarPublicacionTexto();
-                mostrarPublicacion(listaPublicacion.size()-1);
-                break;
-            case 1:
+                mostrarPublicacion(listaPublicacion.size() - 1);
+            }
+            case 1 -> {
                 // Agregar una publicación de imagen
                 agregarPublicacionImagen();
-                mostrarPublicacion(listaPublicacion.size()-1);
-                break;
-            case 2:
+                mostrarPublicacion(listaPublicacion.size() - 1);
+            }
+            case 2 -> {
                 // Agregar una publicación de video
                 agregarPublicacionVideo();
-                mostrarPublicacion(listaPublicacion.size()-1);
-                break;
-            case 3:
+                mostrarPublicacion(listaPublicacion.size() - 1);
+            }
+            case 3 -> {
                 // Agregar una publicación de audio
                 agregarPublicacionAudio();
-                mostrarPublicacion(listaPublicacion.size()-1);
-                break;
-            default:
-                // No se seleccionó una opción válida
-                break;
+                mostrarPublicacion(listaPublicacion.size() - 1);
+            }
+            default -> {
+            }
+            // No se seleccionó una opción válida
         }
 
     }
@@ -319,12 +234,12 @@ public class Publicaciones extends JDialog {
         // datos del texto
         String fuenteInput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
-        int tamañoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int tamanioImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
         ArrayList<String> comentariosInput = new ArrayList<>();
-        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteInput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteInput,cantCararcInput,tamanioImput,hashtags,comentariosInput);
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -445,13 +360,12 @@ public class Publicaciones extends JDialog {
     private void OnPausar(Publicacion publicacion){
         ((Durable)publicacion).detener(this);
     }
-    private void OnAvanzar(Publicacion publicacion, int desde, int hasta){
-        OnPausar(publicacion);///HAY Q SOLUCIONAR QUE REPRODUCE LOS 2 
+    private void OnAvanzar(Publicacion publicacion){
+        OnPausar(publicacion);///HAY Q ILLUSIONARY QUE REPRODUCE LOS 2
         ((Durable)publicacion).avanzar(0,this);
     }
     private void Onfiltro(){
         Publicacion publicacion = listaPublicacion.get(indice);
-        String tipo = publicacion.getClass().getSimpleName();
 
         if(publicacion instanceof Imagen || publicacion instanceof Video){
             filtropublicaciones dialog = new filtropublicaciones();
@@ -486,39 +400,35 @@ public class Publicaciones extends JDialog {
             String texto = "Sin publicaciones";
             textPane1.setText(texto);
         }else{
-            int duracion=0;
+            int duracion;
             filtro.setVisible(false);
             String contador = (indice+1) + "/" + listaPublicacion.toArray().length;
             Publicacion publicacion = listaPublicacion.get(i);
             String tipo = publicacion.getClass().getSimpleName();
-            String texto = "Tipo: " + tipo + "\n";
-            texto += "Nombre: " + publicacion.getNombre() + "\n";
-            texto += "Descripción: " + publicacion.getDescripcionPost() + "\n";
-            texto += "Me gusta: " + publicacion.getCantMG() + "\n";
+            StringBuilder texto = new StringBuilder("Tipo: " + tipo + "\n");
+            texto.append("Nombre: ").append(publicacion.getNombre()).append("\n");
+            texto.append("Descripción: ").append(publicacion.getDescripcionPost()).append("\n");
+            texto.append("Me gusta: ").append(publicacion.getCantMG()).append("\n");
 
             // Mostrar los datos específicos según el tipo de publicación
-            if (publicacion instanceof Texto) {
-                Texto textoPublicacion = (Texto) publicacion;
-                texto += "Fuente: " + textoPublicacion.getFuente() + "\n";
-                texto += "Cantidad de caracteres: " + textoPublicacion.getCantCaracteres() + "\n";
-                texto += "Tamaño de fuente: " + textoPublicacion.getTamañoFuente() + "\n";
-            } else if (publicacion instanceof Imagen) {
-                Imagen imagenPublicacion = (Imagen) publicacion;
-                texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";
-                texto += "Alto: " + imagenPublicacion.getAlto() + "\n";
-                texto += "Ancho: " + imagenPublicacion.getAncho() + "\n";
-                texto += "Filtro:" + ((Imagen) publicacion).getFiltro() + "\n";
-            } else if (publicacion instanceof Audio) {
-                Audio audioPublicacion = (Audio) publicacion;
-                texto += "Velocidad Bits: " + audioPublicacion.getVelocidad_bits() + "\n";
-                texto += "Duracion: " + audioPublicacion.getDuracion() + "\n";
+            if (publicacion instanceof Texto textoPublicacion) {
+                texto.append("Fuente: ").append(textoPublicacion.getFuente()).append("\n");
+                texto.append("Cantidad de caracteres: ").append(textoPublicacion.getCantCaracteres()).append("\n");
+                texto.append("Tamaño de fuente: ").append(textoPublicacion.getTamanioFuente()).append("\n");
+            } else if (publicacion instanceof Imagen imagenPublicacion) {
+                texto.append("Resolucion: ").append(imagenPublicacion.getResolucion()).append("\n");
+                texto.append("Alto: ").append(imagenPublicacion.getAlto()).append("\n");
+                texto.append("Ancho: ").append(imagenPublicacion.getAncho()).append("\n");
+                texto.append("Filtro:").append(((Imagen) publicacion).getFiltro()).append("\n");
+            } else if (publicacion instanceof Audio audioPublicacion) {
+                texto.append("Velocidad Bits: ").append(audioPublicacion.getVelocidad_bits()).append("\n");
+                texto.append("Duracion: ").append(audioPublicacion.getDuracion()).append("\n");
 
-            } else if (publicacion instanceof Video) {
-                Video videoPublicacion = (Video) publicacion;
-                texto += "Resolucion: " + videoPublicacion.getResolucion() + "\n";
-                texto += "Cantidad de cuadros: " + videoPublicacion.getCantcuadros() + "\n";
-                texto += "Duracion: " + videoPublicacion.getDuracion() + "\n";
-                texto += "Filtro:" + ((Video) publicacion).getFiltro() + "\n";
+            } else if (publicacion instanceof Video videoPublicacion) {
+                texto.append("Resolucion: ").append(videoPublicacion.getResolucion()).append("\n");
+                texto.append("Cantidad de cuadros: ").append(videoPublicacion.getCantcuadros()).append("\n");
+                texto.append("Duracion: ").append(videoPublicacion.getDuracion()).append("\n");
+                texto.append("Filtro:").append(((Video) publicacion).getFiltro()).append("\n");
 
             }
 
@@ -527,22 +437,24 @@ public class Publicaciones extends JDialog {
             }
             List<String> hashtags = publicacion.getHashtags();
             if (!hashtags.isEmpty()) {
-                texto += "\nHashtags:\n";
+                texto.append("\nHashtags:\n");
                 for (String hashtag : hashtags) {
-                    texto += "#" + hashtag ;
+                    texto.append("#").append(hashtag);
                 }
-            }else{texto += "\nSin hashtags";}
+            }else{
+                texto.append("\nSin hashtags");}
 
             List<String> comentarios = publicacion.getComentarios();
             if (!comentarios.isEmpty()) {
-                texto += "\nComentarios:\n";
+                texto.append("\nComentarios:\n");
                 for (String comentario : comentarios) {
-                    texto += comentario + "\n";
+                    texto.append(comentario).append("\n");
                 }
-            }else{texto += "\nSin comentario";}
+            }else{
+                texto.append("\nSin comentario");}
 
             cantPub.setText(contador);
-            textPane1.setText(texto);
+            textPane1.setText(texto.toString());
 
             if(publicacion instanceof Video || publicacion instanceof Audio){
                 reproducirAPartirDeButton.setVisible(true);
@@ -559,7 +471,6 @@ public class Publicaciones extends JDialog {
                 }
                 mostrarDuracionPublicacion(duracion);
             }else{
-                duracion=0;
                 reproducirAPartirDeButton.setVisible(false);
                 textdurable.setVisible(false);
                 AVANZARButton.setVisible(false);
@@ -572,14 +483,14 @@ public class Publicaciones extends JDialog {
         if(desde >= 0 && desde < hasta && hasta <= duracion) {
             Thread = new Thread(() -> {
                 int j = desde;
-                while (j <= hasta && !Thread.interrupted()) {
+                while (j <= hasta && !java.lang.Thread.interrupted()) {
                     if (!pausado) {
                         String duraciontexto = j + " --------------------- " + duracion;
                         SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
                         j++;
                     }
                     try {
-                        Thread.sleep(1000);
+                        java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         return;
                     }
@@ -595,14 +506,14 @@ public class Publicaciones extends JDialog {
     private void mostrarDuracionPublicacion(int duracion) {
         Thread = new Thread(() -> {
             int j = 0;
-            while (j <= duracion && !Thread.interrupted()) {
+            while (j <= duracion && !java.lang.Thread.interrupted()) {
                 if (!pausado) {
                     String duraciontexto = j + " --------------------- " + duracion;
                     SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
                     j++;
                 }
                 try {
-                    Thread.sleep(1000);
+                    java.lang.Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     return;
                 }

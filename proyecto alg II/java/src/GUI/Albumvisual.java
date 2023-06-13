@@ -34,10 +34,10 @@ public class Albumvisual extends JDialog {
     private List<Album> listaAlbumes;
 
     private List<Publicacion> ListaPublicacion;
-    private List<Publicacion> listaPublicacioncompleta;
+    private final List<Publicacion> listaPublicacioncompleta;
     private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
-    public Albumvisual(List<Album> ListaAlbumes,List<Publicacion> listaPublicacion) {
+    public Albumvisual(List<Publicacion> listaPublicacion) {
 
         setTitle("Album");
         setContentPane(contentPane);
@@ -47,27 +47,11 @@ public class Albumvisual extends JDialog {
         listaPublicacioncompleta = listaPublicacion;
         mostrarAlbumes();
 
-        albumButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onalbumButton();
-            }
-        });
-        subalbumButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onsubalbumButton();
-            }
-        });
-        agregar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAgregar();
-            }
-        });
+        albumButton.addActionListener(e -> onalbumButton());
+        subalbumButton.addActionListener(e -> onsubalbumButton());
+        agregar.addActionListener(e -> onAgregar());
 
-        eliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onEliminar();
-            }
-        });
+        eliminar.addActionListener(e -> onEliminar());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -77,11 +61,7 @@ public class Albumvisual extends JDialog {
         });
 
         // call on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         try {
             // Cargar el archivo XML
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -125,7 +105,7 @@ public class Albumvisual extends JDialog {
     }
 
     private void onAgregar() {
-        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo álbum:", "Agregar Álbum", JOptionPane.PLAIN_MESSAGE);
+        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo album:", "Agregar Album", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
             Album nuevoAlbum = new Album(nombreAlbum);
             listaAlbumes.add(nuevoAlbum);
@@ -135,7 +115,7 @@ public class Albumvisual extends JDialog {
     }
 
     private void onEliminar() {
-        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del álbum a eliminar:", "Eliminar Álbum", JOptionPane.PLAIN_MESSAGE);
+        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del album a eliminar:", "Eliminar Album", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
             Album albumEliminado = null;
             for (Album album : listaAlbumes) {
@@ -146,11 +126,11 @@ public class Albumvisual extends JDialog {
             }
             if (albumEliminado != null) {
                 listaAlbumes.remove(albumEliminado);
-                JOptionPane.showMessageDialog(this, "Álbum eliminado correctamente.", "Eliminar Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Album eliminado correctamente.", "Eliminar Album", JOptionPane.INFORMATION_MESSAGE);
                 eliminarAlbumXML(nombreAlbum);
                 mostrarAlbumes();
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró el álbum especificado.", "Eliminar Álbum", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se encontró el album especificado.", "Eliminar Album", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -214,7 +194,7 @@ public class Albumvisual extends JDialog {
                     Element albumElement = (Element) albumNode;
 
                     // Obtener el nombre del álbum
-                    String nombreAlbum = getTextValue(albumElement, "nombre");
+                    String nombreAlbum = getTextValue(albumElement);
                     Album album = new Album(nombreAlbum);
 
                     // Cargar la lista principal
@@ -277,29 +257,33 @@ public class Albumvisual extends JDialog {
                 }
             }
 
-            if (tipo.equals("texto")) {
-                String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
-                int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
-                int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
+            switch (tipo) {
+                case "texto" -> {
+                    String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
+                    int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
+                    int tamanioFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
+                    pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamanioFuente, hashtags, comentarios);
+                }
+                case "imagen" -> {
+                    String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                    int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
+                    int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
 
-                pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
-            } else if (tipo.equals("imagen")) {
-                String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
-                int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
+                    pub = new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios);
+                }
+                case "audio" -> {
+                    int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
+                    int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
 
-                pub = new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios);
-            } else if (tipo.equals("audio")) {
-                int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
-                int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+                    pub = new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios);
+                }
+                case "video" -> {
+                    String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                    int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+                    int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
 
-                pub = new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios);
-            } else if (tipo.equals("video")) {
-                String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
-                int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
-                int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
-
-                pub = new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
+                    pub = new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
+                }
             }
 
         }
@@ -308,9 +292,9 @@ public class Albumvisual extends JDialog {
 
     }
 
-    private String getTextValue(Element element, String tagName) {
-        NodeList nodeList = element.getElementsByTagName(tagName);
-        if (nodeList != null && nodeList.getLength() > 0) {
+    private String getTextValue(Element element) {
+        NodeList nodeList = element.getElementsByTagName("nombre");
+        if (nodeList.getLength() > 0) {
             Element tagElement = (Element) nodeList.item(0);
             if (tagElement != null && tagElement.getFirstChild() != null) {
                 return tagElement.getFirstChild().getNodeValue();
