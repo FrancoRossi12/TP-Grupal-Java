@@ -53,7 +53,6 @@ public class Publicaciones extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
-
         Font font = textPane1.getFont();
         Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
         textPane1.setFont(newFont);
@@ -128,16 +127,16 @@ public class Publicaciones extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
-    public Publicaciones(List<Publicacion> ListaPublicacion,List<Publicacion> ListaPublicacion2) {
+    public Publicaciones(List<Publicacion> ListaPublicaciones,List<Publicacion> ListaPublicacionescompleta) {
 
         Thread= null; //Inicializo hilo
-        this.listaPublicacion = ListaPublicacion;
+        this.listaPublicacion = ListaPublicaciones;
         setTitle("Publicaciones");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
-
+        reportesButton.setVisible(false);
         Font font = textPane1.getFont();
         Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
         textPane1.setFont(newFont);
@@ -183,15 +182,9 @@ public class Publicaciones extends JDialog {
         });
         agregarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onAgregar(ListaPublicacion2);
+                onAgregar(listaPublicacion,ListaPublicacionescompleta);
             }
         });
-        reportesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onReportes();
-            }
-        });
-
         reproduccionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onRepro();
@@ -235,7 +228,7 @@ public class Publicaciones extends JDialog {
             mostrarDuracionPublicacion(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
 
     }
-    private void onAgregar(List<Publicacion> listaPublicacion) {
+    private void onAgregar(List<Publicacion> ListaPublicacion, List<Publicacion> listaPublicacion) {
         // Obtener los nombres de las publicaciones como opciones
         String[] opciones = new String[listaPublicacion.size()];
         for (int i = 0; i < listaPublicacion.size(); i++) {
@@ -263,15 +256,21 @@ public class Publicaciones extends JDialog {
                     break;
                 }
             }
-            // Realizar la acción de agregar la publicación seleccionada
-            // ...
+
+            if (publicacionSeleccionada != null) {
+                // Realizar la acción de agregar la publicación seleccionada
+                ListaPublicacion.add(publicacionSeleccionada);
+
+                // Aquí puedes realizar cualquier otra operación adicional que necesites
+                // ...
+            }
         }
+        mostrarPublicacion(indice);
     }
     private void onAgregar() {
         // Mostrar el cuadro de diálogo de opción
         String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-        listaPublicacion = new ArrayList<>();
         // Verificar la opción seleccionada
         switch (seleccion) {
             case 0:
