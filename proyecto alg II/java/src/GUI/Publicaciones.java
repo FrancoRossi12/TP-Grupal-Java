@@ -223,7 +223,7 @@ public class Publicaciones extends JDialog {
 
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,duracionImput,cantcuadrosInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -255,7 +255,7 @@ public class Publicaciones extends JDialog {
         }
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,altoImput,anchoInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
