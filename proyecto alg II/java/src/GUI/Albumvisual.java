@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import Perfil.Album;
 import TipoPublicacion.*;
 import org.w3c.dom.Document;
@@ -34,14 +36,13 @@ public class Albumvisual extends JDialog {
     private List<Publicacion> listaPublicacion;
     private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
-    public Albumvisual(List<Album> listaAlbumes,List<Publicacion> listaPublicacion) {
+    public Albumvisual(List<Album> ListaAlbumes,List<Publicacion> listaPublicacion) {
 
         setTitle("Album");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(agregar);
         cargarDatosDesdeXML();
-        this.listaAlbumes = listaAlbumes;
 
         mostrarAlbumes();
 
@@ -96,27 +97,30 @@ public class Albumvisual extends JDialog {
     }
     private void onalbumButton() {
         String nombreAlbum = (String) comboBoxAlbumes.getSelectedItem();
-        for (Album album : listaAlbumes) {
-            if (album.getNombreAlbum().equals(nombreAlbum)) {
-                sublistaPublicacion = album.getListaPublicacion();
-                break;
-            }
-        }
-        Publicaciones dialog = new Publicaciones(sublistaPublicacion);
-        dialog.pack();
-        dialog.setVisible(true);
+        Optional<Album> optionalAlbum = listaAlbumes.stream()
+                .filter(album -> album.getNombreAlbum().equals(nombreAlbum))
+                .findFirst();
+
+        optionalAlbum.ifPresent(album -> {
+            listaPublicacion = album.getListaPublicacion();
+            Publicaciones dialog = new Publicaciones(listaPublicacion);
+            dialog.pack();
+            dialog.setVisible(true);
+        });
     }
+
     private void onsubalbumButton() {
         String nombreAlbum = (String) comboBoxAlbumes.getSelectedItem();
-        for (Album album : listaAlbumes) {
-            if (album.getNombreAlbum().equals(nombreAlbum)) {
-                sublistaPublicacion = album.getSubpublicaciones();
-                break;
-            }
-        }
-        Publicaciones dialog = new Publicaciones(sublistaPublicacion);
-        dialog.pack();
-        dialog.setVisible(true);
+        Optional<Album> optionalAlbum = listaAlbumes.stream()
+                .filter(album -> album.getNombreAlbum().equals(nombreAlbum))
+                .findFirst();
+
+        optionalAlbum.ifPresent(album -> {
+            sublistaPublicacion = album.getSubpublicaciones();
+            Publicaciones dialog = new Publicaciones(sublistaPublicacion);
+            dialog.pack();
+            dialog.setVisible(true);
+        });
     }
 
     private void onAgregar() {
@@ -200,7 +204,9 @@ public class Albumvisual extends JDialog {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/Album.xml");
-            NodeList albumNodes = ((Document) document).getElementsByTagName("album");
+            NodeList albumNodes = document.getElementsByTagName("album");
+            listaAlbumes = new ArrayList<>(); // Crear la lista de álbumes fuera del bucle
+
             for (int i = 0; i < albumNodes.getLength(); i++) {
                 Node albumNode = albumNodes.item(i);
                 if (albumNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -211,8 +217,7 @@ public class Albumvisual extends JDialog {
                     Album album = new Album(nombreAlbum);
 
                     // Cargar la lista principal
-
-                    NodeList listaNodes = ((Document) document).getElementsByTagName("lista");
+                    NodeList listaNodes = albumElement.getElementsByTagName("lista");
                     if (listaNodes.getLength() > 0) {
                         Element listaElement = (Element) listaNodes.item(0);
                         NodeList publicacionNodes = listaElement.getElementsByTagName("publicacion");
@@ -230,11 +235,12 @@ public class Albumvisual extends JDialog {
                         for (int j = 0; j < subpublicacionNodes.getLength(); j++) {
                             Element subpublicacionElement = (Element) subpublicacionNodes.item(j);
                             Publicacion subpublicacion = crearPublicacionDesdeElement(subpublicacionElement);
-                            album.agregarSubpublicacion(subpublicacion);System.out.println(subpublicacionElement);
+                            album.agregarSubpublicacion(subpublicacion);
                         }
                     }
-                    listaAlbumes = new ArrayList<>();
-                    listaAlbumes.add(album);
+
+                    listaAlbumes.add(album); // Agregar el álbum a la lista
+
                 }
             }
         } catch (Exception ex) {
@@ -242,9 +248,9 @@ public class Albumvisual extends JDialog {
         }
     }
 
+
     private Publicacion crearPublicacionDesdeElement(Element publicacionElement) {
         Publicacion pub = null;
-
         if (publicacionElement.getNodeType() == Node.ELEMENT_NODE) {
 
             String tipo = publicacionElement.getAttribute("tipo");
@@ -274,7 +280,7 @@ public class Albumvisual extends JDialog {
                 String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
                 int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
                 int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
-                System.out.println("aca");
+
                 pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
             } else if (tipo.equals("imagen")) {
                 String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
@@ -296,6 +302,7 @@ public class Albumvisual extends JDialog {
             }
 
         }
+
         return pub;
 
     }
