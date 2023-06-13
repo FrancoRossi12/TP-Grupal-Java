@@ -52,4 +52,12 @@ public class Album {
     public void setSubListaAlbums(List<Publicacion> subListaAlbums) {
         this.subListaAlbums = subListaAlbums;
     }
+
+    public void agregarPublicacion(Publicacion publicacion) {
+        this.listaPublicacion.add(publicacion);
+    }
+
+    public void agregarSubpublicacion(Publicacion subpublicacion) {
+        this.subListaAlbums.add(subpublicacion);
+    }
 }

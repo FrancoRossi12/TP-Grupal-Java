@@ -9,13 +9,17 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import Perfil.Album;
-import TipoPublicacion.Publicacion;
+import TipoPublicacion.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import static GUI.Perfil.getTextContent;
+import static GUI.Perfil.parseOptionalInt;
 
 public class Albumvisual extends JDialog {
     private JPanel contentPane;
@@ -28,6 +32,7 @@ public class Albumvisual extends JDialog {
     private List<Album> listaAlbumes;
 
     private List<Publicacion> listaPublicacion;
+    private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
     public Albumvisual(List<Album> listaAlbumes,List<Publicacion> listaPublicacion) {
 
@@ -194,7 +199,57 @@ public class Albumvisual extends JDialog {
     }
 
     private Publicacion crearPublicacionDesdeElement(Element publicacionElement) {
+        Publicacion pub = null;
+        if (publicacionElement.getNodeType() == Node.ELEMENT_NODE) {
+            String tipo = publicacionElement.getAttribute("tipo");
+            String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
+            String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
+            int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
 
+            ArrayList<String> hashtags = new ArrayList<>();
+            NodeList hashtagNodes = publicacionElement.getElementsByTagName("hashtag");
+            for (int j = 0; j < hashtagNodes.getLength(); j++) {
+                Node hashtagNode = hashtagNodes.item(j);
+                if (hashtagNode.getNodeType() == Node.ELEMENT_NODE) {
+                    hashtags.add(hashtagNode.getTextContent());
+                }
+            }
+
+            ArrayList<String> comentarios = new ArrayList<>();
+            NodeList comentarioNodes = publicacionElement.getElementsByTagName("comentario");
+            for (int j = 0; j < comentarioNodes.getLength(); j++) {
+                Node comentarioNode = comentarioNodes.item(j);
+                if (comentarioNode.getNodeType() == Node.ELEMENT_NODE) {
+                    comentarios.add(comentarioNode.getTextContent());
+                }
+            }
+
+            if (tipo.equals("texto")) {
+                String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
+                int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
+                int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
+
+                pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
+            } else if (tipo.equals("imagen")) {
+                String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
+                int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
+
+                pub = new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios);
+            } else if (tipo.equals("audio")) {
+                int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
+                int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+
+                pub = new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios);
+            } else if (tipo.equals("video")) {
+                String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
+                int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
+                int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
+
+                pub = new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
+            }
+        }
+        return pub;
     }
 
     private String getTextValue(Element element, String tagName) {
