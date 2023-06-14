@@ -1,27 +1,26 @@
 package GUI;
+
 import Perfil.Album;
 import Perfil.PerfilInstagram;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import TipoPublicacion.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import GUI.Publicaciones;
+import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 public class Perfil extends JDialog {
     private JPanel contentPane;
     private JButton publicacionesButton;
@@ -32,12 +31,6 @@ public class Perfil extends JDialog {
     private JLabel Albunes;
     private JLabel Publicaciones;
     private JLabel usuario;
-    private String nombreUsuario;
-    private String descripcionPerfil;
-    private int cantidadSeguidores;
-    private int cantidadSeguidos;
-    private int cantidadAlbunes;
-    private int cantidadPublicaciones;
     private PerfilInstagram perfilInstagram;
     private List<Publicacion> listaPublicacion;
     private List<Album> listaAlbumes = new ArrayList<>();
@@ -47,17 +40,9 @@ public class Perfil extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(publicacionesButton);
 
-        publicacionesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onPublicaciones();
-            }
-        });
+        publicacionesButton.addActionListener(e -> onPublicaciones());
 
-        albunesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAlbunes();
-            }
-        });
+        albunesButton.addActionListener(e -> onAlbunes());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -67,11 +52,7 @@ public class Perfil extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         Dimension minimumSize;
         minimumSize = new Dimension(1080, 1920);
         contentPane.setMinimumSize(minimumSize);
@@ -216,14 +197,14 @@ public class Perfil extends JDialog {
             Element perfil = doc.getDocumentElement();
 
             // Obtener los datos del perfil
-            nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
-            descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
-            cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
-            cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
-            cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
-            cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
+            String nombreUsuario = perfil.getElementsByTagName("nombreUsuario").item(0).getTextContent();
+            String descripcionPerfil = perfil.getElementsByTagName("descripcion").item(0).getTextContent();
+            int cantidadSeguidores = Integer.parseInt(perfil.getElementsByTagName("seguidores").item(0).getTextContent());
+            int cantidadSeguidos = Integer.parseInt(perfil.getElementsByTagName("seguidos").item(0).getTextContent());
+            int cantidadAlbunes = Integer.parseInt(perfil.getElementsByTagName("cantAlbums").item(0).getTextContent());
+            int cantidadPublicaciones = Integer.parseInt(perfil.getElementsByTagName("cantPosts").item(0).getTextContent());
 
-            perfilInstagram = new PerfilInstagram(nombreUsuario,descripcionPerfil,cantidadSeguidores,cantidadSeguidos,cantidadPublicaciones,cantidadAlbunes,listaPublicacion,listaAlbumes);
+            perfilInstagram = new PerfilInstagram(nombreUsuario, descripcionPerfil, cantidadSeguidores, cantidadSeguidos, cantidadPublicaciones, cantidadAlbunes,listaPublicacion,listaAlbumes);
         } catch (Exception ex) {
             ex.printStackTrace();
             // Manejo de excepciones

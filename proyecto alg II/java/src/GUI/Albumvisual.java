@@ -47,27 +47,11 @@ public class Albumvisual extends JDialog {
         listaPublicacioncompleta = listaPublicacion;
         mostrarAlbumes();
 
-        albumButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onalbumButton();
-            }
-        });
-        subalbumButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onsubalbumButton();
-            }
-        });
-        agregar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAgregar();
-            }
-        });
+        albumButton.addActionListener(e -> onalbumButton());
+        subalbumButton.addActionListener(e -> onsubalbumButton());
+        agregar.addActionListener(e -> onAgregar());
 
-        eliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onEliminar();
-            }
-        });
+        eliminar.addActionListener(e -> onEliminar());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -77,11 +61,7 @@ public class Albumvisual extends JDialog {
         });
 
         // call on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         try {
             // Cargar el archivo XML
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -310,7 +290,7 @@ public class Albumvisual extends JDialog {
 
     private String getTextValue(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName);
-        if (nodeList != null && nodeList.getLength() > 0) {
+        if (nodeList.getLength() > 0) {
             Element tagElement = (Element) nodeList.item(0);
             if (tagElement != null && tagElement.getFirstChild() != null) {
                 return tagElement.getFirstChild().getNodeValue();

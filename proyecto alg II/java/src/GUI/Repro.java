@@ -6,8 +6,10 @@ import TipoPublicacion.Publicacion;
 import TipoPublicacion.Video;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -18,9 +20,8 @@ public class Repro extends JDialog {
     private JButton buttonSimulacion;
     private JList<String> listaPublicaciones;
     private JComboBox<String> filtroComboBox;
-    private List<Publicacion> publicaciones;
-    private List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
-    private int duracionTotal;
+    private final List<Publicacion> publicaciones;
+    private final List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
 
     public Repro(List<Publicacion> lista) {
         setTitle("Reproduccion de Publicaciones");
@@ -63,11 +64,9 @@ public class Repro extends JDialog {
 
         String[] filtros = {"DEFAULT", "B_N", "CLARENDON", "SEPIA"}; // Opciones de filtro disponibles
         filtroComboBox.setModel(new DefaultComboBoxModel<>(filtros));
-        filtroComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String filtroSeleccionado = (String) filtroComboBox.getSelectedItem();
-                filtrarPublicaciones(filtroSeleccionado);
-            }
+        filtroComboBox.addActionListener(e -> {
+            String filtroSeleccionado = (String) filtroComboBox.getSelectedItem();
+            filtrarPublicaciones(filtroSeleccionado);
         });
 
     }
@@ -79,50 +78,7 @@ public class Repro extends JDialog {
         }
         return nombres;
     }
-    /*private void filtrarPublicaciones(String filtro) {
-        List<Publicacion> publicacionesFiltradas = new ArrayList<>();
-        for (Publicacion publicacion : publicaciones) {
-            if (publicacion instanceof Video || publicacion instanceof Imagen) {
-                if (filtro.equals("DEFAULT")) {
-                    publicacionesFiltradas.add(publicacion);
-                } else if (filtro.equals("B_N")) {
-                    if (publicacion instanceof Imagen) {
-                        Imagen imagen = (Imagen) publicacion;
-                        imagen.aplicarFiltro(1);
-                        publicacionesFiltradas.add(imagen);
-                    }else {
-                        Video video = (Video) publicacion;
-                        video.aplicarFiltro(1);
-                        publicacionesFiltradas.add(video);
-                    }
-                } else if (filtro.equals("CLARENDON")) {
-                    if (publicacion instanceof Imagen) {
-                        Imagen imagen = (Imagen) publicacion;
-                        imagen.aplicarFiltro(2);
-                        publicacionesFiltradas.add(imagen);
-                    }else{
-                        Video video = (Video) publicacion;
-                        video.aplicarFiltro(2);
-                        publicacionesFiltradas.add(video);
-                    }
-                } else if (filtro.equals("SEPIA")) {
-                    if (publicacion instanceof Imagen) {
-                        Imagen imagen = (Imagen) publicacion;
-                        imagen.aplicarFiltro(3);
-                        publicacionesFiltradas.add(imagen);
-                    }else{
-                        Video video = (Video) publicacion;
-                        video.aplicarFiltro(3);
-                        publicacionesFiltradas.add(video);
-                    }
-                }if (filtro.equals("DEFAULT")) {
-                    publicacionesFiltradas.add(publicacion);
-                }
-            }
-        }
-        String[] nombresPublicacionesFiltradas = obtenerNombresPublicaciones(publicacionesFiltradas);
-        listaPublicaciones.setListData(nombresPublicacionesFiltradas);
-    }*/
+
     private void filtrarPublicaciones(String filtro) {
         List<Publicacion> publicacionesFiltradas = new ArrayList<>();
 
@@ -155,7 +111,7 @@ public class Repro extends JDialog {
 
 
     private void reproducirPublicaciones() {
-        duracionTotal = 0;
+        int duracionTotal = 0;
         if (publicacionesSeleccionadas.isEmpty()) {
             System.out.println("No hay publicaciones seleccionadas para reproducir.");
             return;
@@ -202,8 +158,5 @@ public class Repro extends JDialog {
     }
 
 
-    private void onOK() {
-        dispose();
-    }
 }
 

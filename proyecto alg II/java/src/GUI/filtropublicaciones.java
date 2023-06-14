@@ -16,26 +16,10 @@ public class filtropublicaciones extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(sinFiltroButton);
 
-        sinFiltroButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onSinFiltroButton();
-            }
-        });
-        sepiaButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onSepiaButton();
-            }
-        });
-        blancoYNegroButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onBlancoYNegroButton();
-            }
-        });
-        clarendonButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onClarendonButton();
-            }
-        });
+        sinFiltroButton.addActionListener(e -> onSinFiltroButton());
+        sepiaButton.addActionListener(e -> onSepiaButton());
+        blancoYNegroButton.addActionListener(e -> onBlancoYNegroButton());
+        clarendonButton.addActionListener(e -> onClarendonButton());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -46,11 +30,7 @@ public class filtropublicaciones extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onX();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
     public int getFiltroaplicado(){
