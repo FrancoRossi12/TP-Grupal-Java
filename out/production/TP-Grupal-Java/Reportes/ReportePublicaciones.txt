@@ -7,7 +7,7 @@ Nombre Publicacion: Audio 5   Me gusta: 15
 Nombre Publicacion: Audio 9   Me gusta: 12
 Nombre Publicacion: Audio 1   Me gusta: 10
 Me gusta promedio: 16.4
-Fotos:
+Imagenes:
 Cantidad de publicaciones: 5
 Nombre Publicacion: Imagen 14   Me gusta: 70
 Nombre Publicacion: Imagen 10   Me gusta: 60
@@ -23,7 +23,7 @@ Nombre Publicacion: Video 20   Me gusta: 38
 Nombre Publicacion: Video 8   Me gusta: 35
 Nombre Publicacion: Video 4   Me gusta: 30
 Me gusta promedio: 40.0
-Textos:
+Textos
 Cantidad de publicaciones: 5
 Nombre Publicacion: Texto 19   Me gusta: 35
 Nombre Publicacion: Texto 15   Me gusta: 30

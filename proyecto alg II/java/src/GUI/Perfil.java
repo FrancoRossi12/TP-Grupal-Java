@@ -58,7 +58,8 @@ public class Perfil extends JDialog {
         contentPane.setMinimumSize(minimumSize);
 
         // Cargar datos del perfil
-        String arch= "proyecto alg II/java/src/Swing/Album.xml";listaAlbumes = cargarAlbumesDesdeXML(arch);
+        String arch= "proyecto alg II/java/src/Swing/Album.xml";
+        listaAlbumes = cargarAlbumesDesdeXML(arch);
         listaPublicacion = cargarPublicacionesDesdeXML("Publicaciones");
         actualizarXML();
         cargarDatosPerfil();
@@ -81,6 +82,7 @@ public class Perfil extends JDialog {
     }
     private void onX(){
         dispose();
+        System.exit(0);
     }
     private void onAlbunes() {
 

@@ -1,0 +1,16 @@
+Álbum: Audio
+Cantidad de publicaciones: 0
+Cantidad de comentarios: 0
+
+Álbum: Texto
+Cantidad de publicaciones: 2
+Cantidad de comentarios: 4
+
+Álbum: Imagen
+Cantidad de publicaciones: 2
+Cantidad de comentarios: 4
+
+Álbum: Video
+Cantidad de publicaciones: 0
+Cantidad de comentarios: 0
+

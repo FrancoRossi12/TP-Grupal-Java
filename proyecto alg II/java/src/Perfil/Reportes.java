@@ -5,14 +5,16 @@ import TipoPublicacion.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Reportes {
     public void Reporte1(List<Publicacion> lista) {
-        String rutaReportesPublicaciones="proyecto alg II/java/src/Reportes/ReportePublicaciones.txt";
+        String rutaReportePublicaciones="proyecto alg II/java/src/Reportes/ReportePublicaciones.txt";
         List<Audio> audios = new ArrayList<>();
         List<Imagen> imagenes = new ArrayList<>();
         List<Video> videos = new ArrayList<>();
@@ -34,69 +36,85 @@ public class Reportes {
         videos.sort(Comparator.comparingInt(Publicacion::getCantMG).reversed());
         textos.sort(Comparator.comparingInt(Publicacion::getCantMG).reversed());
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaReportesPublicaciones))) {
-            writer.write("Listado completo de publicaciones agrupadas por tipo:\n");
-
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaReportePublicaciones))) {
+            writer.write("Listado completo de publicaciones agrupadas por tipo:");
+            writer.newLine();
             // Escribe los audios
-            writer.write("Audios:\n");
-            writer.write("Cantidad de publicaciones: " + audios.size() + "\n");
+            writer.write("Audios:");
+            writer.newLine();
+            writer.write("Cantidad de publicaciones: " + audios.size());
+            writer.newLine();
             if (!audios.isEmpty()) {
                 int totalLikes = 0;
                 for (Audio audio : audios) {
                     totalLikes += audio.getCantMG();
-                    writer.write("Nombre Publicacion: " + audio.getNombre() + "   Me gusta: " + audio.getCantMG() + "\n");
+                    writer.write("Nombre Publicacion: " + audio.getNombre() + "   Me gusta: " + audio.getCantMG());
+                    writer.newLine();
                 }
                 double likesPromedio = (double) totalLikes / audios.size();
-                writer.write("Me gusta promedio: " + likesPromedio + "\n");
+                writer.write("Me gusta promedio: " + likesPromedio);
+                writer.newLine();
             }
 
-            // Resultados para las fotos
-            writer.write("Fotos:\n");
-            writer.write("Cantidad de publicaciones: " + imagenes.size() + "\n");
+            // Escribe las imagenes
+            writer.write("Imagenes:");
+            writer.newLine();
+            writer.write("Cantidad de publicaciones: " + imagenes.size());
+            writer.newLine();
             if (!imagenes.isEmpty()) {
                 int totalLikes = 0;
                 for (Imagen imagen : imagenes) {
                     totalLikes += imagen.getCantMG();
-                    writer.write("Nombre Publicacion: " + imagen.getNombre() + "   Me gusta: " + imagen.getCantMG() + "\n");
-                    // Escribir información adicional de la foto si es necesario
+                    writer.write("Nombre Publicacion: " + imagen.getNombre() + "   Me gusta: " + imagen.getCantMG());
+                    writer.newLine();
+
                 }
                 double likesPromedio = (double) totalLikes / imagenes.size();
-                writer.write("Me gusta promedio: " + likesPromedio + "\n");
+                writer.write("Me gusta promedio: " + likesPromedio);
+                writer.newLine();
             }
 
-            // Resultados para los videos
-            writer.write("Videos:\n");
-            writer.write("Cantidad de publicaciones: " + videos.size() + "\n");
+
+            writer.write("Videos:");
+            writer.newLine();
+            writer.write("Cantidad de publicaciones: " + videos.size());
+            writer.newLine();
             if (!videos.isEmpty()) {
                 int totalLikes = 0;
                 for (Video video : videos) {
                     totalLikes += video.getCantMG();
-                    writer.write("Nombre Publicacion: " + video.getNombre() + "   Me gusta: " + video.getCantMG() + "\n");
-                    // Escribir información adicional del video si es necesario
+                    writer.write("Nombre Publicacion: " + video.getNombre() + "   Me gusta: " + video.getCantMG());
+                    writer.newLine();
+
                 }
                 double likesPromedio = (double) totalLikes / videos.size();
-                writer.write("Me gusta promedio: " + likesPromedio + "\n");
+                writer.write("Me gusta promedio: " + likesPromedio);
+                writer.newLine();
             }
 
             // Resultados para los textos
-            writer.write("Textos:\n");
-            writer.write("Cantidad de publicaciones: " + textos.size() + "\n");
+            writer.write("Textos");
+            writer.newLine();
+            writer.write("Cantidad de publicaciones: " + textos.size());
+            writer.newLine();
             if (!textos.isEmpty()) {
                 int totalLikes = 0;
                 for (Texto texto : textos) {
                     totalLikes += texto.getCantMG();
-                    writer.write("Nombre Publicacion: " + texto.getNombre() + "   Me gusta: " + texto.getCantMG() + "\n");
-                    // Escribir información adicional de la foto si es necesario
+                    writer.write("Nombre Publicacion: " + texto.getNombre() + "   Me gusta: " + texto.getCantMG());
+                    writer.newLine();
                 }
                 double likesPromedio = (double) totalLikes / textos.size();
-                writer.write("Me gusta promedio: " + likesPromedio + "\n");
+                writer.write("Me gusta promedio: " + likesPromedio);
+                writer.newLine();
             }
+            writer.flush();
             writer.close();
+            System.out.println("El reporte de Publicaciones se generó correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Listado completo de publicaciones agrupadas por tipo:");
 
         // Mostrar resultados para los audios
         System.out.println("Audios:");
@@ -106,21 +124,21 @@ public class Reportes {
             for (Audio audio : audios) {
                 totalLikes += audio.getCantMG();
                 System.out.println("Nombre Publicacion: " + audio.getNombre() + "   Me gusta: " + audio.getCantMG());
-                // Mostrar información adicional del audio si es necesario
+
             }
             double likesPromedio = (double) totalLikes / audios.size();
             System.out.println("Me gusta promedio: " + likesPromedio);
         }
 
-        // Mostrar resultados para las fotos
-        System.out.println("Fotos:");
+        // Mostrar resultados para las imagenes
+        System.out.println("Imagenes:");
         System.out.println("Cantidad de publicaciones: " + imagenes.size());
         if (!imagenes.isEmpty()) {
             int totalLikes = 0;
             for (Imagen imagen : imagenes) {
                 totalLikes += imagen.getCantMG();
                 System.out.println("Nombre Publicacion: " + imagen.getNombre() + "   Me gusta: " + imagen.getCantMG());
-                // Mostrar información adicional de la foto si es necesario
+
             }
             double likesPromedio = (double) totalLikes / imagenes.size();
             System.out.println("Me gusta promedio: " + likesPromedio);
@@ -148,15 +166,63 @@ public class Reportes {
             for (Texto texto : textos) {
                 totalLikes += texto.getCantMG();
                 System.out.println("Nombre Publicacion: " + texto.getNombre() + "   Me gusta: " + texto.getCantMG());
-                // Escribir información adicional de la foto si es necesario
+
             }
             double likesPromedio = (double) totalLikes / textos.size();
             System.out.println("Me gusta promedio: " + likesPromedio);
         }
+
+        System.out.println("Listado completo de publicaciones agrupadas por tipo:");
+        System.out.println("-------------------------------------------------------------");
     }
 
     public void Reporte2(List<Album> lista2){
+        String rutaReporteAlbumes="proyecto alg II/java/src/Reportes/ReporteAlbumes.txt";
 
+        // Leo fechas desde la terminal
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la fecha de inicio (YYYY-MM-DD): ");
+        LocalDate fechaInicio = LocalDate.parse(scanner.nextLine());
+        System.out.print("Ingrese la fecha de fin (YYYY-MM-DD): ");
+        LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
+
+        // Filtro los álbumes dentro del rango de fechas
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaReporteAlbumes))) {
+            for (Album album : lista2) {
+
+                int cantidadPublicaciones = 0;
+                int cantidadComentarios = 0;
+
+                for (Publicacion publicacion : album.getPublicaciones()) {
+                    LocalDate fechaPublicacion = LocalDate.parse(publicacion.getFechaSubida());
+                    if (fechaPublicacion.isAfter(fechaInicio) && fechaPublicacion.isBefore(fechaFin)) {
+                        cantidadPublicaciones++;
+                        List<String> listaComentarios = publicacion.getComentarios();
+                        for(String comentario : listaComentarios){
+                            cantidadComentarios++;
+                        }
+                    }
+                }
+
+                writer.write("Álbum: " + album.getNombreAlbum());
+                System.out.println("Álbum: " + album.getNombreAlbum());
+                writer.newLine();
+                writer.write("Cantidad de publicaciones: " + cantidadPublicaciones);
+                System.out.println("Cantidad de publicaciones: " + cantidadPublicaciones);
+                writer.newLine();
+                writer.write("Cantidad de comentarios: " + cantidadComentarios);
+                System.out.println("Cantidad de comentarios: " + cantidadComentarios);
+                writer.newLine();
+                writer.newLine();
+            }
+            writer.flush();
+            writer.close();
+            System.out.println("El reporte de Albumes se generó correctamente.");
+            System.out.println("-------------------------------------------------------------");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
 

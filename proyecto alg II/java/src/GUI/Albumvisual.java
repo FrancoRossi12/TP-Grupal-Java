@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import Perfil.Reportes;
 import Perfil.Album;
 import TipoPublicacion.*;
 import org.w3c.dom.Document;
@@ -32,6 +32,9 @@ public class Albumvisual extends JDialog {
     private JPanel box;
     private JButton albumButton;
     private JButton subalbumButton;
+    private JButton reportesButton;
+
+    private Reportes reporte = new Reportes();
     private List<Album> listaAlbumes;
 
     private List<Publicacion> ListaPublicacion;
@@ -39,7 +42,7 @@ public class Albumvisual extends JDialog {
     private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
     public Albumvisual(List<Album> ListaAlbumes,List<Publicacion> listaPublicacion) {
-
+        this.listaAlbumes=ListaAlbumes;
         setTitle("Album");
         setContentPane(contentPane);
         setModal(true);
@@ -51,6 +54,7 @@ public class Albumvisual extends JDialog {
         albumButton.addActionListener(e -> onalbumButton());
         subalbumButton.addActionListener(e -> onsubalbumButton());
         agregar.addActionListener(e -> onAgregar());
+        reportesButton.addActionListener(e -> onReportes());
 
         eliminar.addActionListener(e -> onEliminar());
 
@@ -72,6 +76,9 @@ public class Albumvisual extends JDialog {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    public void onReportes(){
+        reporte.Reporte2(listaAlbumes);
     }
 
     private void onX(){
@@ -238,7 +245,7 @@ public class Albumvisual extends JDialog {
             String tipo = publicacionElement.getAttribute("tipo");
             String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
             String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
-            String fechaSubida = String.valueOf(LocalDate.now());
+            String fechaSubida = publicacionElement.getElementsByTagName("fechaSubida").item(0).getTextContent();
             int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
 
             ArrayList<String> hashtags = new ArrayList<>();

@@ -21,7 +21,7 @@ public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
     private JButton prev;
-    private final Reportes reporte = new Reportes();
+    private Reportes reporte = new Reportes();
     private JLabel cantPub;
     private JTextPane textPane1;
     private JButton filtro;
