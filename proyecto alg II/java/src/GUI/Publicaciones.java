@@ -36,7 +36,7 @@ public class Publicaciones extends JDialog {
     private JButton reproduccionButton;
 
     int filtroaplicado = 0;
-    private static int indice = 0;
+    private int indice = 0;
     private Thread Thread;
     private boolean pausado;//para verificar si esta en pausa la repro
     private final List<Publicacion> listaPublicacion;
