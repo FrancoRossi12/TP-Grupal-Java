@@ -1,9 +1,4 @@
 !! Trabajo Practico Grupal - Java POO 
-Integrantes: Bruno M. y Franco R.
+Integrantes: Bruno M., Federico., Catalina.V y Franco R.
 
-- Usar librerias Date, localtime, etc para las fechas.
-- Verificar set_nombrePost en Publicaciones.
-- Clase texto: Cata
-- Clase Imagen: Fede
-- Clase Audio: Bruno
-- Clase Video: Fran
+El Proyecto consistio en el desarrollo de un sistema en Java para generar estadisticas, reportes, realizar consultas y reproducciones de las publicaciones de un Perfil de "Instagram". El sistema permite administrar y organizar diferentes tipos de publicaciones, como videos, imagenes, audios y textos, con sus respectivos atributos y operaciones especificas. Tambien se puede crear y gestionar albumes para organizar las publicaciones, realizar consultas y reproducciones con filtros configurables, generar reportes y estadisticas resumidas. Se utilizan estructuras de datos como arboles y clases especificas para el manejo de los datos, y se aplican validaciones para asegurar la consistencia de la informacion. La interfaz de usuario que utilizamos fue Swing y mostramos algunos datos tambien por la terminal.
