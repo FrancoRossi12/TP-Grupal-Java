@@ -34,6 +34,7 @@ public class Publicaciones extends JDialog {
     private JButton reproducirAPartirDeButton;
 
     private JButton reproduccionButton;
+    private JButton estadisticasButton;
 
     /**
      * The Filtroaplicado.
@@ -88,7 +89,7 @@ public class Publicaciones extends JDialog {
         reportesButton.addActionListener(e -> onReportes());
 
         reproduccionButton.addActionListener(e -> onRepro());
-
+        estadisticasButton.addActionListener(e -> onEstadisticas());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -135,6 +136,7 @@ public class Publicaciones extends JDialog {
         eliminarButton.addActionListener(e -> onEliminar());
         agregarButton.addActionListener(e -> onAgregar(listaPublicacion,ListaPublicacionescompleta));
         reproduccionButton.addActionListener(e -> onRepro());
+        estadisticasButton.addActionListener(e -> onEstadisticas());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -361,6 +363,13 @@ public class Publicaciones extends JDialog {
         dialog.setVisible(true);
 
     }
+
+    public void onEstadisticas(){
+        Estadisticas dialog = new Estadisticas(listaPublicacion);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
     private void onX() {
         dispose();
     }
