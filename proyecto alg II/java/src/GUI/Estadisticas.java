@@ -71,9 +71,9 @@ public class Estadisticas extends JDialog {
     }
 
     private void mostrarEstadisticas(List<Publicacion> listaPublicacion) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Estadísticas de las publicaciones:\n\n");
-        sb.append("Total de publicaciones: ").append(listaPublicacion.size()).append("\n");
+        StringBuilder texto = new StringBuilder();
+        texto.append("Estadísticas de las publicaciones:\n\n");
+        texto.append("Total de publicaciones: ").append(listaPublicacion.size()).append("\n");
 
         int textCount = contarPublicacionesTexto(listaPublicacion);
         textProgressBar.setMaximum(listaPublicacion.size());
@@ -103,7 +103,7 @@ public class Estadisticas extends JDialog {
         audioProgressBar.setStringPainted(true);
         audioProgressBar.setForeground(Color.ORANGE);
 
-        statisticsPane.setText(sb.toString());
+        statisticsPane.setText(texto.toString());
     }
 
     private int contarPublicacionesTexto(List<Publicacion> listaPublicacion) {
