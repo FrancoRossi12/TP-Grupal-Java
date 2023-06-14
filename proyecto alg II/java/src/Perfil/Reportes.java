@@ -12,7 +12,15 @@ import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * The type Reportes.
+ */
 public class Reportes {
+    /**
+     * Reporte 1.
+     *
+     * @param lista the lista
+     */
     public void Reporte1(List<Publicacion> lista) {
         String rutaReportePublicaciones="proyecto alg II/java/src/Reportes/ReportePublicaciones.txt";
         List<Audio> audios = new ArrayList<>();
@@ -176,6 +184,11 @@ public class Reportes {
         System.out.println("-------------------------------------------------------------");
     }
 
+    /**
+     * Reporte 2.
+     *
+     * @param lista2 the lista 2
+     */
     public void Reporte2(List<Album> lista2){
         String rutaReporteAlbumes="proyecto alg II/java/src/Reportes/ReporteAlbumes.txt";
 

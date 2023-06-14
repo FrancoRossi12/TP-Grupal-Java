@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * The type Login.
+ */
 public class Login extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -18,16 +21,16 @@ public class Login extends JDialog {
     private JPasswordField password;
     private JTextField Usuario;
 
+    /**
+     * Instantiates a new Login.
+     */
     public Login() {
         setTitle("Login");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        // Establecer tamaño mínimo
-
         buttonOK.addActionListener(e -> onOK());
-
         buttonCancel.addActionListener(e -> onCancel());
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -36,11 +39,8 @@ public class Login extends JDialog {
                 onCancel();
             }
         });
-
-        // call on ESCAPE
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
-
     private void onOK() {
         // Obtener los valores ingresados por el usuario
         String usuarioIngresado = Usuario.getText();
@@ -48,14 +48,12 @@ public class Login extends JDialog {
 
         // Cargar y analizar el archivo XML
         try {
-            // Ruta al archivo XML (reemplaza con tu propia ruta)
+            // Ruta al archivo XML
             String rutaArchivo = "proyecto alg II/java/src/Swing/Usuarios.xml";
 
             // Crear el analizador de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-
-            // Parsear el archivo XML
             Document doc = dBuilder.parse(rutaArchivo);
 
             // Obtener la lista de nodos de usuario
@@ -64,16 +62,12 @@ public class Login extends JDialog {
             // Iterar sobre los nodos de usuario
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element elementoUsuario = (Element) nodeList.item(i);
-
                 // Obtener el nombre de usuario y contraseña del nodo actual
                 String usuario = elementoUsuario.getElementsByTagName("nombre").item(0).getTextContent();
                 String contrasena = elementoUsuario.getElementsByTagName("contrasena").item(0).getTextContent();
-
                 // Comparar los datos ingresados con los datos del archivo XML
                 if (usuarioIngresado.equals(usuario) && contrasenaIngresada.equals(contrasena)) {
-                    // Autenticación exitosa
                     dispose();
-                    // Agrega aquí el código para continuar con la lógica de tu aplicación
 
                     Perfil dialog = new Perfil();
                     dialog.pack();
@@ -81,18 +75,13 @@ public class Login extends JDialog {
 
                 }
             }
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Manejo de excepciones
-            // Si se llega a este punto, la autenticación ha fallado
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void onCancel() { // cerrar programa
-        // add your code here if necessary
         dispose();
     }
 

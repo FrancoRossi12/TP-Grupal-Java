@@ -4,6 +4,9 @@ import Interfaz.Filtrable;
 
 import java.util.ArrayList;
 
+/**
+ * The type Imagen.
+ */
 public class Imagen extends Publicacion implements Filtrable {
 
     private int alto, ancho;
@@ -12,6 +15,19 @@ public class Imagen extends Publicacion implements Filtrable {
 
     private String resolucion;
 
+    /**
+     * Instantiates a new Imagen.
+     *
+     * @param nombre          the nombre
+     * @param descripcion     the descripcion
+     * @param fechaSubida     the fecha subida
+     * @param cantMG          the cant mg
+     * @param resolucion      the resolucion
+     * @param alto            the alto
+     * @param ancho           the ancho
+     * @param listaHashtag    the lista hashtag
+     * @param listaComentario the lista comentario
+     */
     public Imagen(String nombre, String descripcion, String fechaSubida, int cantMG, String resolucion, int alto, int ancho, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, fechaSubida, cantMG,listaHashtag,listaComentario);
         this.resolucion = resolucion;
@@ -42,18 +58,38 @@ public class Imagen extends Publicacion implements Filtrable {
         }
     }
 
+    /**
+     * Gets resolucion.
+     *
+     * @return the resolucion
+     */
     public String getResolucion() {
         return resolucion;
     }
 
+    /**
+     * Gets alto.
+     *
+     * @return the alto
+     */
     public int getAlto() {
         return alto;
     }
 
+    /**
+     * Gets ancho.
+     *
+     * @return the ancho
+     */
     public int getAncho() {
         return ancho;
     }
 
+    /**
+     * Gets filtro.
+     *
+     * @return the filtro
+     */
     public tipoFiltro getFiltro() {
         return filtroAplicado;
     }

@@ -24,6 +24,9 @@ import org.w3c.dom.NodeList;
 import static GUI.Perfil.getTextContent;
 import static GUI.Perfil.parseOptionalInt;
 
+/**
+ * The type Albumvisual.
+ */
 public class Albumvisual extends JDialog {
     private JPanel contentPane;
     private JButton agregar;
@@ -41,6 +44,13 @@ public class Albumvisual extends JDialog {
     private List<Publicacion> listaPublicacioncompleta;
     private List<Publicacion> sublistaPublicacion;
     private Document documentoXML;
+
+    /**
+     * Instantiates a new Albumvisual.
+     *
+     * @param ListaAlbumes     the lista albumes
+     * @param listaPublicacion the lista publicacion
+     */
     public Albumvisual(List<Album> ListaAlbumes,List<Publicacion> listaPublicacion) {
         this.listaAlbumes=ListaAlbumes;
         setTitle("Album");
@@ -65,7 +75,6 @@ public class Albumvisual extends JDialog {
             }
         });
 
-        // call on ESCAPE
         contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         try {
             // Cargar el archivo XML
@@ -77,6 +86,10 @@ public class Albumvisual extends JDialog {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * On reportes.
+     */
     public void onReportes(){
         reporte.Reporte2(listaAlbumes);
     }

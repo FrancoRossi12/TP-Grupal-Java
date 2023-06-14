@@ -3,6 +3,9 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Filtropublicaciones.
+ */
 public class filtropublicaciones extends JDialog {
     private int filtro = 0;
     private JPanel contentPane;
@@ -11,6 +14,9 @@ public class filtropublicaciones extends JDialog {
     private JButton clarendonButton;
     private JButton sinFiltroButton;
 
+    /**
+     * Instantiates a new Filtropublicaciones.
+     */
     public filtropublicaciones () {
         setContentPane(contentPane);
         setModal(true);
@@ -21,7 +27,6 @@ public class filtropublicaciones extends JDialog {
         blancoYNegroButton.addActionListener(e -> onBlancoYNegroButton());
         clarendonButton.addActionListener(e -> onClarendonButton());
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -29,10 +34,15 @@ public class filtropublicaciones extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+
+    /**
+     * Get filtroaplicado int.
+     *
+     * @return the int
+     */
     public int getFiltroaplicado(){
         return filtro;
     }
@@ -54,7 +64,6 @@ public class filtropublicaciones extends JDialog {
         dispose();
     }
     private void onX() {
-        // add your code here
         dispose();
     }
 }

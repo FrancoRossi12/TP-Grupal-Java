@@ -6,12 +6,28 @@ import GUI.Publicaciones;
 
 import java.util.ArrayList;
 
+/**
+ * The type Video.
+ */
 public class Video extends Publicacion implements Durable, Filtrable {
 
     private int duracion, cantcuadros;
     private tipoFiltro filtroAplicado;
     private String resolucion;
 
+    /**
+     * Instantiates a new Video.
+     *
+     * @param nombre          the nombre
+     * @param descripcion     the descripcion
+     * @param fechaSubida     the fecha subida
+     * @param cantMG          the cant mg
+     * @param resolucion      the resolucion
+     * @param duracion        the duracion
+     * @param cantcuadros     the cantcuadros
+     * @param listaHashtag    the lista hashtag
+     * @param listaComentario the lista comentario
+     */
     public Video(String nombre, String descripcion, String fechaSubida, int cantMG, String resolucion, int duracion, int cantcuadros, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, fechaSubida, cantMG,listaHashtag,listaComentario);
         this.resolucion = resolucion;
@@ -56,19 +72,39 @@ public void avanzar(int segundos, Publicaciones publicacion) {
         }
     }
 
+    /**
+     * Gets resolucion.
+     *
+     * @return the resolucion
+     */
     public String getResolucion() {
         return resolucion;
     }
 
+    /**
+     * Gets duracion.
+     *
+     * @return the duracion
+     */
     public int getDuracion() {
         return duracion;
     }
 
+    /**
+     * Gets cantcuadros.
+     *
+     * @return the cantcuadros
+     */
     public int getCantcuadros() {
         return cantcuadros;
     }
 
 
+    /**
+     * Gets filtro.
+     *
+     * @return the filtro
+     */
     public tipoFiltro getFiltro() {
         return filtroAplicado;
     } // SIRVE PARA FILTRAR (FILTRAR DE AGRUPAR SEGUN CIERTAS CARACTERISTICAS)

@@ -15,6 +15,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Repro.
+ */
 public class Repro extends JDialog {
     private JPanel contentPane;
     private JButton buttonSimulacion;
@@ -23,6 +26,11 @@ public class Repro extends JDialog {
     private final List<Publicacion> publicaciones;
     private final List<Publicacion> publicacionesSeleccionadas= new ArrayList<>();
 
+    /**
+     * Instantiates a new Repro.
+     *
+     * @param lista the lista
+     */
     public Repro(List<Publicacion> lista) {
         setTitle("Reproduccion de Publicaciones");
         setSize(1080, 720);
@@ -57,11 +65,8 @@ public class Repro extends JDialog {
         });
 
         publicaciones = lista;
-        //publicacionesSeleccionadas = new ArrayList<>();
-
         String[] nombresPublicaciones = obtenerNombresPublicaciones(publicaciones);
         listaPublicaciones.setListData(nombresPublicaciones);
-
         String[] filtros = {"DEFAULT", "B_N", "CLARENDON", "SEPIA"}; // Opciones de filtro disponibles
         filtroComboBox.setModel(new DefaultComboBoxModel<>(filtros));
         filtroComboBox.addActionListener(e -> {
@@ -117,7 +122,7 @@ public class Repro extends JDialog {
             return;
         }
         for (Publicacion publicacion : publicacionesSeleccionadas) {
-            final Publicacion pub = publicacion; // Variable final capturando el valor de publicacion
+            final Publicacion pub = publicacion;
             System.out.println("Reproduciendo: " + pub.getNombre());
             int duracionPublicacion;
             if (pub instanceof Video) {
@@ -131,7 +136,6 @@ public class Repro extends JDialog {
                 duracionPublicacion = 0;
             }
             duracionTotal += duracionPublicacion;
-
             // Simulación de reproducción utilizando un hilo
             Thread thread = new Thread(() -> {
                 System.out.println("Inicio: " + pub.getNombre());

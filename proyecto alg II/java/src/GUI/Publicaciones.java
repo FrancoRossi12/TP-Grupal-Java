@@ -2,21 +2,21 @@ package GUI;
 
 import Interfaz.Durable;
 import Interfaz.Filtrable;
+import Perfil.Reportes;
 import TipoPublicacion.*;
-import TipoPublicacion.Audio;
-
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import Perfil.Reportes;
+
+/**
+ * The type Publicaciones.
+ */
 public class Publicaciones extends JDialog {
     private JPanel contentPane;
     private JButton next;
@@ -35,16 +35,29 @@ public class Publicaciones extends JDialog {
 
     private JButton reproduccionButton;
 
+    /**
+     * The Filtroaplicado.
+     */
     int filtroaplicado = 0;
     private int indice = 0;
     private Thread Thread;
     private boolean pausado;//para verificar si esta en pausa la repro
     private final List<Publicacion> listaPublicacion;
 
+    /**
+     * Set pausado.
+     *
+     * @param pausa the pausa
+     */
     public void setPausado(boolean pausa){
         pausado = pausa;
     }
 
+    /**
+     * Instantiates a new Publicaciones.
+     *
+     * @param ListaPublicacion the lista publicacion
+     */
     public Publicaciones(List<Publicacion> ListaPublicacion) {
 
         Thread= null; //Inicializo hilo
@@ -55,7 +68,7 @@ public class Publicaciones extends JDialog {
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
         Font font = textPane1.getFont();
-        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 10 puntos
         textPane1.setFont(newFont);
         mostrarPublicacion(indice);
 
@@ -86,6 +99,13 @@ public class Publicaciones extends JDialog {
         contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
+
+    /**
+     * Instantiates a new Publicaciones.
+     *
+     * @param ListaPublicaciones         the lista publicaciones
+     * @param ListaPublicacionescompleta the lista publicacionescompleta
+     */
     public Publicaciones(List<Publicacion> ListaPublicaciones,List<Publicacion> ListaPublicacionescompleta) {
 
         Thread= null; //Inicializo hilo
@@ -140,6 +160,10 @@ public class Publicaciones extends JDialog {
             textPane1.setText(texto);
         }
     }
+
+    /**
+     * Onreproducir a partir de button.
+     */
     void onreproducirAPartirDeButton(){
         Thread.interrupt();
         int desde = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese desde el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
@@ -156,7 +180,6 @@ public class Publicaciones extends JDialog {
         for (int i = 0; i < listaPublicacion.size(); i++) {
             opciones[i] = listaPublicacion.get(i).getNombre();
         }
-
         // Mostrar cuadro de diálogo con el selector de publicaciones
         String seleccion = (String) JOptionPane.showInputDialog(
                 null,
@@ -167,7 +190,6 @@ public class Publicaciones extends JDialog {
                 opciones,
                 null
         );
-
         // Verificar si se seleccionó una publicación y realizar la acción correspondiente
         if (seleccion != null) {
             // Obtener la publicación seleccionada
@@ -178,13 +200,8 @@ public class Publicaciones extends JDialog {
                     break;
                 }
             }
-
             if (publicacionSeleccionada != null) {
-                // Realizar la acción de agregar la publicación seleccionada
                 ListaPublicacion.add(publicacionSeleccionada);
-
-                // Aquí puedes realizar cualquier otra operación adicional que necesites
-                // ...
             }
         }
         mostrarPublicacion(indice);
@@ -225,26 +242,17 @@ public class Publicaciones extends JDialog {
     private void agregarPublicacionTexto() {
         // Solicitar el nombre de la nueva publicación de texto
         String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
-        // Solicitar la descripción de la nueva publicación de texto
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         String fechaSubida = String.valueOf(LocalDate.now());
-
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         // Separar los hashtags ingresados por comas y agregarlos a una lista
         ArrayList<String> hashtags = new ArrayList<>();
         String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
         for (String hashtag : hashtagsArray) {
             hashtags.add(hashtag.trim());
         }
-
-        // datos del texto
         String fuenteInput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         int tamañoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
         ArrayList<String> comentariosInput = new ArrayList<>();
@@ -259,22 +267,15 @@ public class Publicaciones extends JDialog {
     }
 
     private void agregarPublicacionImagen() {
+
         // Solicitar el nombre de la nueva publicación de imagen
         String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
-        // Solicitar la descripción de la nueva publicación de imagen
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         String fechaSubida = String.valueOf(LocalDate.now());
-
         String resolucionInput = JOptionPane.showInputDialog(this, "Ingrese la Resolucion de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         int altoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la altura de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         int anchoInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ancho de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         // Separar los hashtags ingresados por comas y agregarlos a una lista
         ArrayList<String> hashtags = new ArrayList<>();
         String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
@@ -296,20 +297,12 @@ public class Publicaciones extends JDialog {
     private void agregarPublicacionVideo() {
         // Solicitar el nombre de la nueva publicación de video
         String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
-        // Solicitar la descripción de la nueva publicación de video
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         String fechaSubida = String.valueOf(LocalDate.now());
-
         String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la resolucion del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         int cantCuadrosInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de cuadros del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         int duracionInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la duracion del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         // Separar los hashtags ingresados por comas y agregarlos a una lista
         ArrayList<String> hashtags = new ArrayList<>();
         String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
@@ -330,18 +323,11 @@ public class Publicaciones extends JDialog {
     private void agregarPublicacionAudio() {
         // Solicitar el nombre de la nueva publicación de audio
         String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
-        // Solicitar la descripción de la nueva publicación de audio
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         String fechaSubida = String.valueOf(LocalDate.now());
-
         int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la duracion del audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         int velocidad_bitsImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la velocidad de bits del audio: ", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
-
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-
         // Separar los hashtags ingresados por comas y agregarlos a una lista
         ArrayList<String> hashtags = new ArrayList<>();
         String[] hashtagsArray = hashtagsInput.split("\\s*,\\s*");
@@ -358,11 +344,18 @@ public class Publicaciones extends JDialog {
         indice = listaPublicacion.size() - 1;
         mostrarPublicacion(indice);
     }
+
+    /**
+     * On reportes.
+     */
     public void onReportes(){
         reporte.Reporte1(listaPublicacion);
     }
 
-    public void onRepro(){///NO ESTA EN NINGUN LISTENER
+    /**
+     * On repro.
+     */
+    public void onRepro(){
         Repro dialog = new Repro(listaPublicacion);
         dialog.pack();
         dialog.setVisible(true);
@@ -376,7 +369,7 @@ public class Publicaciones extends JDialog {
         ((Durable)publicacion).detener(this);
     }
     private void OnAvanzar(Publicacion publicacion, int desde, int hasta){
-        OnPausar(publicacion);///HAY Q SOLUCIONAR QUE REPRODUCE LOS 2 
+        OnPausar(publicacion);
         ((Durable)publicacion).avanzar(0,this);
     }
     private void Onfiltro(){

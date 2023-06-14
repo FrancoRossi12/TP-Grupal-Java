@@ -21,6 +21,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+/**
+ * The type Perfil.
+ */
 public class Perfil extends JDialog {
     private JPanel contentPane;
     private JButton publicacionesButton;
@@ -34,6 +38,10 @@ public class Perfil extends JDialog {
     private PerfilInstagram perfilInstagram;
     private List<Publicacion> listaPublicacion;
     private List<Album> listaAlbumes = new ArrayList<>();
+
+    /**
+     * Instantiates a new Perfil.
+     */
     public Perfil() {
         setTitle("Perfil");
         setContentPane(contentPane);
@@ -51,19 +59,21 @@ public class Perfil extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onX(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         Dimension minimumSize;
         minimumSize = new Dimension(1080, 1920);
         contentPane.setMinimumSize(minimumSize);
 
-        // Cargar datos del perfil
         String arch= "proyecto alg II/java/src/Swing/Album.xml";
         listaAlbumes = cargarAlbumesDesdeXML(arch);
         listaPublicacion = cargarPublicacionesDesdeXML("Publicaciones");
         actualizarXML();
         cargarDatosPerfil();
     }
+
+    /**
+     * Muestradatos perfil.
+     */
     void muestradatosPerfil(){
         usuario.setText(perfilInstagram.getNombreUsuario());
         descripcion.setText(perfilInstagram.getDescripcion());
@@ -92,6 +102,13 @@ public class Perfil extends JDialog {
     }
 
 
+    /**
+     * Gets text content.
+     *
+     * @param element the element
+     * @param tagName the tag name
+     * @return the text content
+     */
     public static String getTextContent(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName);
         if (nodeList != null && nodeList.getLength() > 0) {
@@ -103,6 +120,12 @@ public class Perfil extends JDialog {
         return ""; // Valor predeterminado si el contenido no está presente
     }
 
+    /**
+     * Parse optional int int.
+     *
+     * @param value the value
+     * @return the int
+     */
     public static int parseOptionalInt(String value) {
         if (value != null && !value.isEmpty()) {
             try {
@@ -115,6 +138,12 @@ public class Perfil extends JDialog {
         return 0; // Valor predeterminado si el valor es vacio o no valido
     }
 
+    /**
+     * Cargar publicaciones desde xml list.
+     *
+     * @param NombreArch the nombre arch
+     * @return the list
+     */
     public static List<Publicacion> cargarPublicacionesDesdeXML(String NombreArch) {
         List<Publicacion> listaPublicacion = new ArrayList<>();
 
@@ -142,7 +171,6 @@ public class Perfil extends JDialog {
                             hashtags.add(hashtagNode.getTextContent());
                         }
                     }
-
                     ArrayList<String> comentarios = new ArrayList<>();
                     NodeList comentarioNodes = publicacionElement.getElementsByTagName("comentario");
                     for (int j = 0; j < comentarioNodes.getLength(); j++) {
