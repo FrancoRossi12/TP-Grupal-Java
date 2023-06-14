@@ -16,13 +16,14 @@ Nombre Publicacion: Imagen 18   Me gusta: 45
 Nombre Publicacion: Imagen 6   Me gusta: 40
 Me gusta promedio: 53.0
 Videos:
-Cantidad de publicaciones: 5
+Cantidad de publicaciones: 6
 Nombre Publicacion: Video 16   Me gusta: 55
 Nombre Publicacion: Video 12   Me gusta: 42
 Nombre Publicacion: Video 20   Me gusta: 38
 Nombre Publicacion: Video 8   Me gusta: 35
 Nombre Publicacion: Video 4   Me gusta: 30
-Me gusta promedio: 40.0
+Nombre Publicacion: 2   Me gusta: 0
+Me gusta promedio: 33.333333333333336
 Textos:
 Cantidad de publicaciones: 5
 Nombre Publicacion: Texto 19   Me gusta: 35

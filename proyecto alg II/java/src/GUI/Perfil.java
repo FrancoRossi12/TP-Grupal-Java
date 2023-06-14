@@ -129,6 +129,7 @@ public class Perfil extends JDialog {
                     String tipo = publicacionElement.getAttribute("tipo");
                     String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
                     String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
+                    String fechaSubida = publicacionElement.getElementsByTagName("fechaSubida").item(0).getTextContent();
                     int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
 
                     ArrayList<String> hashtags = new ArrayList<>();
@@ -154,24 +155,24 @@ public class Perfil extends JDialog {
                         int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
                         int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
 
-                        listaPublicacion.add(new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios));
+                        listaPublicacion.add(new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios));
                     } else if (tipo.equals("imagen")) {
                         String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                         int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
                         int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
 
-                        listaPublicacion.add(new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios));
+                        listaPublicacion.add(new Imagen(nombre, descripcion, fechaSubida, cantMG, resolucion, alto, ancho, hashtags, comentarios));
                     } else if (tipo.equals("audio")) {
                         int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
                         int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
 
-                        listaPublicacion.add(new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios));
+                        listaPublicacion.add(new Audio(nombre, descripcion, fechaSubida, cantMG, duracion, velocidad_bits, hashtags, comentarios));
                     } else if (tipo.equals("video")) {
                         String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                         int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
                         int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
 
-                        listaPublicacion.add(new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios));
+                        listaPublicacion.add(new Video(nombre, descripcion, fechaSubida, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios));
                     }
                 }
             }

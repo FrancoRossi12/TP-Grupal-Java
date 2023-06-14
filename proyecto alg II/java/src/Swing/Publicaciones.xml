@@ -3,6 +3,7 @@
         <nombre>Audio 1</nombre>
         <descripcionPost>Descripción del audio 1</descripcionPost>
         <cantMG>10</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 1</comentario>
             <comentario>Comentario 2</comentario>
@@ -18,6 +19,7 @@
         <nombre>Imagen 2</nombre>
         <descripcionPost>Descripción de la imagen 2</descripcionPost>
         <cantMG>50</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 3</comentario>
             <comentario>Comentario 4</comentario>
@@ -34,6 +36,7 @@
         <nombre>Texto 3</nombre>
         <descripcionPost>Descripción del texto 3</descripcionPost>
         <cantMG>20</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 5</comentario>
             <comentario>Comentario 6</comentario>
@@ -50,6 +53,7 @@
         <nombre>Video 4</nombre>
         <descripcionPost>Descripción del video 4</descripcionPost>
         <cantMG>30</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 7</comentario>
             <comentario>Comentario 8</comentario>
@@ -66,6 +70,7 @@
         <nombre>Audio 5</nombre>
         <descripcionPost>Descripción del audio 5</descripcionPost>
         <cantMG>15</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 9</comentario>
             <comentario>Comentario 10</comentario>
@@ -81,6 +86,7 @@
         <nombre>Imagen 6</nombre>
         <descripcionPost>Descripción de la imagen 6</descripcionPost>
         <cantMG>40</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 11</comentario>
             <comentario>Comentario 12</comentario>
@@ -97,6 +103,7 @@
         <nombre>Texto 7</nombre>
         <descripcionPost>Descripción del texto 7</descripcionPost>
         <cantMG>25</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 13</comentario>
             <comentario>Comentario 14</comentario>
@@ -113,6 +120,7 @@
         <nombre>Video 8</nombre>
         <descripcionPost>Descripción del video 8</descripcionPost>
         <cantMG>35</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 15</comentario>
             <comentario>Comentario 16</comentario>
@@ -129,6 +137,7 @@
         <nombre>Audio 9</nombre>
         <descripcionPost>Descripción del audio 9</descripcionPost>
         <cantMG>12</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 17</comentario>
             <comentario>Comentario 18</comentario>
@@ -144,6 +153,7 @@
         <nombre>Imagen 10</nombre>
         <descripcionPost>Descripción de la imagen 10</descripcionPost>
         <cantMG>60</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 19</comentario>
             <comentario>Comentario 20</comentario>
@@ -160,6 +170,7 @@
         <nombre>Texto 11</nombre>
         <descripcionPost>Descripción del texto 11</descripcionPost>
         <cantMG>18</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 21</comentario>
             <comentario>Comentario 22</comentario>
@@ -176,6 +187,7 @@
         <nombre>Video 12</nombre>
         <descripcionPost>Descripción del video 12</descripcionPost>
         <cantMG>42</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 23</comentario>
             <comentario>Comentario 24</comentario>
@@ -192,6 +204,7 @@
         <nombre>Audio 13</nombre>
         <descripcionPost>Descripción del audio 13</descripcionPost>
         <cantMG>20</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 25</comentario>
             <comentario>Comentario 26</comentario>
@@ -207,6 +220,7 @@
         <nombre>Imagen 14</nombre>
         <descripcionPost>Descripción de la imagen 14</descripcionPost>
         <cantMG>70</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 27</comentario>
             <comentario>Comentario 28</comentario>
@@ -223,6 +237,7 @@
         <nombre>Texto 15</nombre>
         <descripcionPost>Descripción del texto 15</descripcionPost>
         <cantMG>30</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 29</comentario>
             <comentario>Comentario 30</comentario>
@@ -239,6 +254,7 @@
         <nombre>Video 16</nombre>
         <descripcionPost>Descripción del video 16</descripcionPost>
         <cantMG>55</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 31</comentario>
             <comentario>Comentario 32</comentario>
@@ -255,6 +271,7 @@
         <nombre>Audio 17</nombre>
         <descripcionPost>Descripción del audio 17</descripcionPost>
         <cantMG>25</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 33</comentario>
             <comentario>Comentario 34</comentario>
@@ -270,6 +287,7 @@
         <nombre>Imagen 18</nombre>
         <descripcionPost>Descripción de la imagen 18</descripcionPost>
         <cantMG>45</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 35</comentario>
             <comentario>Comentario 36</comentario>
@@ -286,6 +304,7 @@
         <nombre>Texto 19</nombre>
         <descripcionPost>Descripción del texto 19</descripcionPost>
         <cantMG>35</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 37</comentario>
             <comentario>Comentario 38</comentario>
@@ -302,6 +321,7 @@
         <nombre>Video 20</nombre>
         <descripcionPost>Descripción del video 20</descripcionPost>
         <cantMG>38</cantMG>
+        <fechaSubida>2023-06-01</fechaSubida>
         <listaComentario>
             <comentario>Comentario 39</comentario>
             <comentario>Comentario 40</comentario>

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import Perfil.Reportes;
@@ -227,6 +228,8 @@ public class Publicaciones extends JDialog {
         // Solicitar la descripción de la nueva publicación de texto
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
+        String fechaSubida = String.valueOf(LocalDate.now());
+
         String hashtagsInput = JOptionPane.showInputDialog(this, "Ingrese los hashtags de la nueva publicación (separados por comas):", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
         // Separar los hashtags ingresados por comas y agregarlos a una lista
@@ -244,7 +247,7 @@ public class Publicaciones extends JDialog {
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
         ArrayList<String> comentariosInput = new ArrayList<>();
-        Publicacion nuevaPublicacion = new Texto(nombre, descripcion,0, fuenteInput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion, fechaSubida,0, fuenteInput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -260,6 +263,8 @@ public class Publicaciones extends JDialog {
 
         // Solicitar la descripción de la nueva publicación de imagen
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        String fechaSubida = String.valueOf(LocalDate.now());
 
         String resolucionInput = JOptionPane.showInputDialog(this, "Ingrese la Resolucion de la imagen:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
@@ -278,7 +283,7 @@ public class Publicaciones extends JDialog {
 
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion,0,resolucionInput,altoInput,anchoInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Imagen(nombre, descripcion, fechaSubida,0,resolucionInput,altoInput,anchoInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -293,6 +298,8 @@ public class Publicaciones extends JDialog {
 
         // Solicitar la descripción de la nueva publicación de video
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
+
+        String fechaSubida = String.valueOf(LocalDate.now());
 
         String resolucionImput = JOptionPane.showInputDialog(this, "Ingrese la resolucion del video:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
@@ -310,7 +317,7 @@ public class Publicaciones extends JDialog {
         }
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Video(nombre, descripcion,0,resolucionImput,duracionInput,cantCuadrosInput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Video(nombre, descripcion, fechaSubida,0,resolucionImput,duracionInput,cantCuadrosInput,hashtags,comentariosInput );
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -326,6 +333,8 @@ public class Publicaciones extends JDialog {
         // Solicitar la descripción de la nueva publicación de audio
         String descripcion = JOptionPane.showInputDialog(this, "Ingrese la descripción de la nueva publicación de audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
 
+        String fechaSubida = String.valueOf(LocalDate.now());
+
         int duracionImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la duracion del audio:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
 
         int velocidad_bitsImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la velocidad de bits del audio: ", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
@@ -340,7 +349,7 @@ public class Publicaciones extends JDialog {
         }
         ArrayList<String> comentariosInput = new ArrayList<>();
         // Crear una nueva instancia de Publicacion de imagen
-        Publicacion nuevaPublicacion = new Audio(nombre, descripcion,0,duracionImput,velocidad_bitsImput,hashtags,comentariosInput );
+        Publicacion nuevaPublicacion = new Audio(nombre, descripcion, fechaSubida,0,duracionImput,velocidad_bitsImput,hashtags,comentariosInput );
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
 
@@ -413,6 +422,7 @@ public class Publicaciones extends JDialog {
             String texto = "Tipo: " + tipo + "\n";
             texto += "Nombre: " + publicacion.getNombre() + "\n";
             texto += "Descripción: " + publicacion.getDescripcionPost() + "\n";
+            texto += "Fecha de Subida: " + publicacion.getFechaSubida() + "\n";
             texto += "Me gusta: " + publicacion.getCantMG() + "\n";
 
             // Mostrar los datos específicos según el tipo de publicación

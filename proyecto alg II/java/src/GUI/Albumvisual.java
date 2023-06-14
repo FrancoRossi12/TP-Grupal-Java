@@ -9,6 +9,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -237,6 +238,7 @@ public class Albumvisual extends JDialog {
             String tipo = publicacionElement.getAttribute("tipo");
             String nombre = publicacionElement.getElementsByTagName("nombre").item(0).getTextContent();
             String descripcion = publicacionElement.getElementsByTagName("descripcionPost").item(0).getTextContent();
+            String fechaSubida = String.valueOf(LocalDate.now());
             int cantMG = parseOptionalInt(getTextContent(publicacionElement, "cantMG"));
 
             ArrayList<String> hashtags = new ArrayList<>();
@@ -262,24 +264,24 @@ public class Albumvisual extends JDialog {
                 int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
                 int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
 
-                pub = new Texto(nombre, descripcion, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
+                pub = new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
             } else if (tipo.equals("imagen")) {
                 String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                 int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
                 int ancho = parseOptionalInt(getTextContent(publicacionElement, "ancho"));
 
-                pub = new Imagen(nombre, descripcion, cantMG, resolucion, alto, ancho, hashtags, comentarios);
+                pub = new Imagen(nombre, descripcion, fechaSubida, cantMG, resolucion, alto, ancho, hashtags, comentarios);
             } else if (tipo.equals("audio")) {
                 int velocidad_bits = parseOptionalInt(getTextContent(publicacionElement, "velocidad_bits"));
                 int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
 
-                pub = new Audio(nombre, descripcion, cantMG, duracion, velocidad_bits, hashtags, comentarios);
+                pub = new Audio(nombre, descripcion, fechaSubida, cantMG, duracion, velocidad_bits, hashtags, comentarios);
             } else if (tipo.equals("video")) {
                 String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                 int duracion = parseOptionalInt(getTextContent(publicacionElement, "duracion"));
                 int cantcuadros = parseOptionalInt(getTextContent(publicacionElement, "cantCuadros"));
 
-                pub = new Video(nombre, descripcion, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
+                pub = new Video(nombre, descripcion, fechaSubida, cantMG, resolucion, duracion, cantcuadros, hashtags, comentarios);
             }
 
         }

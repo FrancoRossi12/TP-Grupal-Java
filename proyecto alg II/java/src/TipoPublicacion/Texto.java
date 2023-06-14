@@ -7,8 +7,8 @@ public class Texto extends Publicacion{
     String fuente;
     int cantCaracteres, tamañoFuente;
 
-    public Texto(String nombre, String descripcion, int cantMG, String fuente, int cantCaracteres, int tamañoFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
-        super(nombre, descripcion, cantMG,listaHashtag,listaComentario);
+    public Texto(String nombre, String descripcion, String fechaSubida, int cantMG, String fuente, int cantCaracteres, int tamañoFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
+        super(nombre, descripcion, fechaSubida, cantMG,listaHashtag,listaComentario);
         this.fuente = fuente;
         this.cantCaracteres = cantCaracteres;
         this.tamañoFuente = tamañoFuente;
