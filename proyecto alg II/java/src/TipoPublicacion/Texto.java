@@ -15,9 +15,9 @@ public class Texto extends Publicacion{
      * The Cant caracteres.
      */
     int cantCaracteres, /**
-     * The Tamaño fuente.
+     * The Tamanio fuente.
      */
-    tamañoFuente;
+    tamanioFuente;
 
     /**
      * Instantiates a new Texto.
@@ -28,15 +28,15 @@ public class Texto extends Publicacion{
      * @param cantMG          the cant mg
      * @param fuente          the fuente
      * @param cantCaracteres  the cant caracteres
-     * @param tamañoFuente    the tamaño fuente
+     * @param tamanioFuente    the tamanio fuente
      * @param listaHashtag    the lista hashtag
      * @param listaComentario the lista comentario
      */
-    public Texto(String nombre, String descripcion, String fechaSubida, int cantMG, String fuente, int cantCaracteres, int tamañoFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
+    public Texto(String nombre, String descripcion, String fechaSubida, int cantMG, String fuente, int cantCaracteres, int tamanioFuente, ArrayList<String> listaHashtag, ArrayList<String> listaComentario) {
         super(nombre, descripcion, fechaSubida, cantMG,listaHashtag,listaComentario);
         this.fuente = fuente;
         this.cantCaracteres = cantCaracteres;
-        this.tamañoFuente = tamañoFuente;
+        this.tamanioFuente = tamanioFuente;
     }
 
 
@@ -59,11 +59,11 @@ public class Texto extends Publicacion{
     }
 
     /**
-     * Get tamaño fuente int.
+     * Get tamanio fuente int.
      *
      * @return the int
      */
-    public int getTamañoFuente() {
-        return this.tamañoFuente;
+    public int getTamanioFuente() {
+        return this.tamanioFuente;
     }
 }

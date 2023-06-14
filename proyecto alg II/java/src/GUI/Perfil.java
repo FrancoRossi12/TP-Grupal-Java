@@ -117,7 +117,7 @@ public class Perfil extends JDialog {
                 return node.getTextContent();
             }
         }
-        return ""; // Valor predeterminado si el contenido no está presente
+        return ""; // Valor predeterminado si el contenido no esta presente
     }
 
     /**
@@ -183,9 +183,9 @@ public class Perfil extends JDialog {
                     if (tipo.equals("texto")) {
                         String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
                         int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
-                        int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
+                        int tamanioFuente = parseOptionalInt(getTextContent(publicacionElement, "tamanioFuente"));
 
-                        listaPublicacion.add(new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios));
+                        listaPublicacion.add(new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamanioFuente, hashtags, comentarios));
                     } else if (tipo.equals("imagen")) {
                         String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                         int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
@@ -272,7 +272,7 @@ public class Perfil extends JDialog {
 
             Element perfil = document.getDocumentElement();
 
-            // Actualizar la cantidad de publicaciones y la cantidad de álbumes
+            // Actualizar la cantidad de publicaciones y la cantidad de albumes
             perfil.getElementsByTagName("cantPosts").item(0).setTextContent(String.valueOf(listaPublicacion.size()));
             perfil.getElementsByTagName("cantAlbums").item(0).setTextContent(String.valueOf(listaAlbumes.size()));
 

@@ -68,7 +68,7 @@ public class Publicaciones extends JDialog {
         getRootPane().setDefaultButton(prev);
         setSize(1080, 720);
         Font font = textPane1.getFont();
-        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 10 puntos
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamanio en 10 puntos
         textPane1.setFont(newFont);
         mostrarPublicacion(indice);
 
@@ -117,7 +117,7 @@ public class Publicaciones extends JDialog {
         setSize(1080, 720);
         reportesButton.setVisible(false);
         Font font = textPane1.getFont();
-        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamaño en 2 puntos
+        Font newFont = font.deriveFont(font.getSize() + 10f); // Aumentar el tamanio en 2 puntos
         textPane1.setFont(newFont);
         mostrarPublicacion(indice);
 
@@ -180,7 +180,7 @@ public class Publicaciones extends JDialog {
         for (int i = 0; i < listaPublicacion.size(); i++) {
             opciones[i] = listaPublicacion.get(i).getNombre();
         }
-        // Mostrar cuadro de diálogo con el selector de publicaciones
+        // Mostrar cuadro de dialogo con el selector de publicaciones
         String seleccion = (String) JOptionPane.showInputDialog(
                 null,
                 "Selecciona una publicación para agregar:",
@@ -207,7 +207,7 @@ public class Publicaciones extends JDialog {
         mostrarPublicacion(indice);
     }
     private void onAgregar() {
-        // Mostrar el cuadro de diálogo de opción
+        // Mostrar el cuadro de dialogo de opción
         String[] opciones = {"Texto", "Imagen", "Video", "Audio"};
         int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de publicación a agregar:", "Agregar Publicación", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
         // Verificar la opción seleccionada
@@ -233,7 +233,7 @@ public class Publicaciones extends JDialog {
                 mostrarPublicacion(listaPublicacion.size()-1);
                 break;
             default:
-                // No se seleccionó una opción válida
+                // No se seleccionó una opción valida
                 break;
         }
 
@@ -252,11 +252,11 @@ public class Publicaciones extends JDialog {
             hashtags.add(hashtag.trim());
         }
         String fuenteInput = JOptionPane.showInputDialog(this, "Ingrese la fuente de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE);
-        int tamañoImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamaño de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
+        int tamanioImput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el tamanio de texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         int cantCararcInput = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad de caracteres del texto:", "Agregar Publicación", JOptionPane.PLAIN_MESSAGE));
         // Crear una nueva instancia de Publicacion de texto
         ArrayList<String> comentariosInput = new ArrayList<>();
-        Publicacion nuevaPublicacion = new Texto(nombre, descripcion, fechaSubida,0, fuenteInput,cantCararcInput,tamañoImput,hashtags,comentariosInput);
+        Publicacion nuevaPublicacion = new Texto(nombre, descripcion, fechaSubida,0, fuenteInput,cantCararcInput,tamanioImput,hashtags,comentariosInput);
 
         // Agregar la nueva publicación a la lista
         listaPublicacion.add(nuevaPublicacion);
@@ -424,7 +424,7 @@ public class Publicaciones extends JDialog {
                 Texto textoPublicacion = (Texto) publicacion;
                 texto += "Fuente: " + textoPublicacion.getFuente() + "\n";
                 texto += "Cantidad de caracteres: " + textoPublicacion.getCantCaracteres() + "\n";
-                texto += "Tamaño de fuente: " + textoPublicacion.getTamañoFuente() + "\n";
+                texto += "Tamanio de fuente: " + textoPublicacion.getTamanioFuente() + "\n";
             } else if (publicacion instanceof Imagen) {
                 Imagen imagenPublicacion = (Imagen) publicacion;
                 texto += "Resolucion: " + imagenPublicacion.getResolucion() + "\n";

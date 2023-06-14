@@ -100,7 +100,7 @@ public class Repro extends JDialog {
                         publicacionesFiltradas.add(publicacion);
                     }
                 } else if (publicacion instanceof Imagen) {
-                    // Agregar las imágenes que coincidan con el filtro
+                    // Agregar las imagenes que coincidan con el filtro
                     Imagen imagen = (Imagen) publicacion;
                     Filtrable.tipoFiltro filtroAplicado = imagen.getFiltro();
                     if (filtroAplicado != null && filtroAplicado.name().equalsIgnoreCase(filtro)) {
@@ -130,7 +130,7 @@ public class Repro extends JDialog {
                 duracionPublicacion = video.getDuracion();
                 System.out.println("Duración: " + duracionPublicacion + " segundos");
             } else if (pub instanceof Imagen) {
-                duracionPublicacion = 1; // Duración simulada de 1 segundo para las imágenes
+                duracionPublicacion = 1; // Duración simulada de 1 segundo para las imagenes
                 System.out.println("Duración: 1 segundo");
             } else {
                 duracionPublicacion = 0;

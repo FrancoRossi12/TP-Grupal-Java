@@ -47,7 +47,7 @@
         </listaHashtag>
         <fuente>Arial</fuente>
         <cantCaracteres>500</cantCaracteres>
-        <tamañoFuente>12</tamañoFuente>
+        <tamanioFuente>12</tamanioFuente>
     </publicacion>
     <publicacion tipo="video">
         <nombre>Video 4</nombre>
@@ -114,7 +114,7 @@
         </listaHashtag>
         <fuente>Times New Roman</fuente>
         <cantCaracteres>750</cantCaracteres>
-        <tamañoFuente>14</tamañoFuente>
+        <tamanioFuente>14</tamanioFuente>
     </publicacion>
     <publicacion tipo="video">
         <nombre>Video 8</nombre>
@@ -181,7 +181,7 @@
         </listaHashtag>
         <fuente>Verdana</fuente>
         <cantCaracteres>900</cantCaracteres>
-        <tamañoFuente>16</tamañoFuente>
+        <tamanioFuente>16</tamanioFuente>
     </publicacion>
     <publicacion tipo="video">
         <nombre>Video 12</nombre>
@@ -248,7 +248,7 @@
         </listaHashtag>
         <fuente>Courier New</fuente>
         <cantCaracteres>700</cantCaracteres>
-        <tamañoFuente>14</tamañoFuente>
+        <tamanioFuente>14</tamanioFuente>
     </publicacion>
     <publicacion tipo="video">
         <nombre>Video 16</nombre>
@@ -315,7 +315,7 @@
         </listaHashtag>
         <fuente>Arial</fuente>
         <cantCaracteres>800</cantCaracteres>
-        <tamañoFuente>16</tamañoFuente>
+        <tamanioFuente>16</tamanioFuente>
     </publicacion>
     <publicacion tipo="video">
         <nombre>Video 20</nombre>

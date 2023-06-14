@@ -72,7 +72,7 @@
                 </listaHashtag>
                 <fuente>Arial</fuente>
                 <cantCaracteres>500</cantCaracteres>
-                <tamañoFuente>12</tamañoFuente>
+                <tamanioFuente>12</tamanioFuente>
             </publicacion>
             <publicacion tipo="texto">
                 <nombre>Texto 7</nombre>
@@ -89,7 +89,7 @@
                 </listaHashtag>
                 <fuente>Times New Roman</fuente>
                 <cantCaracteres>750</cantCaracteres>
-                <tamañoFuente>14</tamañoFuente>
+                <tamanioFuente>14</tamanioFuente>
             </publicacion>
         </lista>
         <sublista>
@@ -108,7 +108,7 @@
                 </listaHashtag>
                 <fuente>Verdana</fuente>
                 <cantCaracteres>900</cantCaracteres>
-                <tamañoFuente>16</tamañoFuente>
+                <tamanioFuente>16</tamanioFuente>
             </publicacion>
         </sublista>
     </album>

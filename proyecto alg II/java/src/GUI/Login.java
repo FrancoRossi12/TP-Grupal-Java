@@ -62,7 +62,7 @@ public class Login extends JDialog {
             // Iterar sobre los nodos de usuario
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element elementoUsuario = (Element) nodeList.item(i);
-                // Obtener el nombre de usuario y contraseña del nodo actual
+                // Obtener el nombre de usuario y contrasenia del nodo actual
                 String usuario = elementoUsuario.getElementsByTagName("nombre").item(0).getTextContent();
                 String contrasena = elementoUsuario.getElementsByTagName("contrasena").item(0).getTextContent();
                 // Comparar los datos ingresados con los datos del archivo XML

@@ -199,7 +199,7 @@ public class Reportes {
         System.out.print("Ingrese la fecha de fin (YYYY-MM-DD): ");
         LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
 
-        // Filtro los álbumes dentro del rango de fechas
+        // Filtro los albumes dentro del rango de fechas
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaReporteAlbumes))) {
             for (Album album : lista2) {
 
@@ -217,8 +217,8 @@ public class Reportes {
                     }
                 }
 
-                writer.write("Álbum: " + album.getNombreAlbum());
-                System.out.println("Álbum: " + album.getNombreAlbum());
+                writer.write("Album: " + album.getNombreAlbum());
+                System.out.println("Album: " + album.getNombreAlbum());
                 writer.newLine();
                 writer.write("Cantidad de publicaciones: " + cantidadPublicaciones);
                 System.out.println("Cantidad de publicaciones: " + cantidadPublicaciones);

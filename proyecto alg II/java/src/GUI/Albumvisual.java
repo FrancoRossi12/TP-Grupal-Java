@@ -126,7 +126,7 @@ public class Albumvisual extends JDialog {
     }
 
     private void onAgregar() {
-        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo álbum:", "Agregar Álbum", JOptionPane.PLAIN_MESSAGE);
+        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo album:", "Agregar Album", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
             Album nuevoAlbum = new Album(nombreAlbum);
             listaAlbumes.add(nuevoAlbum);
@@ -136,7 +136,7 @@ public class Albumvisual extends JDialog {
     }
 
     private void onEliminar() {
-        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del álbum a eliminar:", "Eliminar Álbum", JOptionPane.PLAIN_MESSAGE);
+        String nombreAlbum = JOptionPane.showInputDialog(this, "Ingrese el nombre del album a eliminar:", "Eliminar Album", JOptionPane.PLAIN_MESSAGE);
         if (nombreAlbum != null && !nombreAlbum.isEmpty()) {
             Album albumEliminado = null;
             for (Album album : listaAlbumes) {
@@ -147,11 +147,11 @@ public class Albumvisual extends JDialog {
             }
             if (albumEliminado != null) {
                 listaAlbumes.remove(albumEliminado);
-                JOptionPane.showMessageDialog(this, "Álbum eliminado correctamente.", "Eliminar Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Album eliminado correctamente.", "Eliminar Album", JOptionPane.INFORMATION_MESSAGE);
                 eliminarAlbumXML(nombreAlbum);
                 mostrarAlbumes();
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró el álbum especificado.", "Eliminar Álbum", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se encontró el album especificado.", "Eliminar Album", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -207,14 +207,14 @@ public class Albumvisual extends JDialog {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("proyecto alg II/java/src/Swing/Album.xml");
             NodeList albumNodes = document.getElementsByTagName("album");
-            listaAlbumes = new ArrayList<>(); // Crear la lista de álbumes fuera del bucle
+            listaAlbumes = new ArrayList<>(); // Crear la lista de albumes fuera del bucle
 
             for (int i = 0; i < albumNodes.getLength(); i++) {
                 Node albumNode = albumNodes.item(i);
                 if (albumNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element albumElement = (Element) albumNode;
 
-                    // Obtener el nombre del álbum
+                    // Obtener el nombre del album
                     String nombreAlbum = getTextValue(albumElement, "nombre");
                     Album album = new Album(nombreAlbum);
 
@@ -241,7 +241,7 @@ public class Albumvisual extends JDialog {
                         }
                     }
 
-                    listaAlbumes.add(album); // Agregar el álbum a la lista
+                    listaAlbumes.add(album); // Agregar el album a la lista
 
                 }
             }
@@ -282,9 +282,9 @@ public class Albumvisual extends JDialog {
             if (tipo.equals("texto")) {
                 String fuente = publicacionElement.getElementsByTagName("fuente").item(0).getTextContent();
                 int cantCaracteres = parseOptionalInt(getTextContent(publicacionElement, "cantCaracteres"));
-                int tamañoFuente = parseOptionalInt(getTextContent(publicacionElement, "tamañoFuente"));
+                int tamanioFuente = parseOptionalInt(getTextContent(publicacionElement, "tamanioFuente"));
 
-                pub = new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamañoFuente, hashtags, comentarios);
+                pub = new Texto(nombre, descripcion, fechaSubida, cantMG, fuente, cantCaracteres, tamanioFuente, hashtags, comentarios);
             } else if (tipo.equals("imagen")) {
                 String resolucion = publicacionElement.getElementsByTagName("resolucion").item(0).getTextContent();
                 int alto = parseOptionalInt(getTextContent(publicacionElement, "alto"));
