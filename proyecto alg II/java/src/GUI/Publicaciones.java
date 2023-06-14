@@ -141,12 +141,13 @@ public class Publicaciones extends JDialog {
         }
     }
     void onreproducirAPartirDeButton(){
+        Thread.interrupt();
         int desde = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese desde el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
         int hasta = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese hasta el segundo a reproducir:", "Reproduccion", JOptionPane.PLAIN_MESSAGE));
         if(listaPublicacion.get(indice) instanceof Audio)
-            mostrarDuracionPublicacion2(((Audio) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
+            mostrarDuracionPublicacion(((Audio) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
         else
-            mostrarDuracionPublicacion2(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
+            mostrarDuracionPublicacion(((Video) listaPublicacion.get(indice)).getDuracion(),desde,hasta);
 
     }
     private void onAgregar(List<Publicacion> ListaPublicacion, List<Publicacion> listaPublicacion) {
@@ -521,6 +522,31 @@ public class Publicaciones extends JDialog {
             onreproducirAPartirDeButton();
         }
         }
+    private void mostrarDuracionPublicacion(int duracion, int desde, int hasta) {
+
+        if(desde >= 0 && desde < hasta && hasta <= duracion) {
+            Thread = new Thread(() -> {
+                int j = desde;
+                while (j <= hasta && !Thread.interrupted()) {
+                    if (!pausado) {
+                        String duraciontexto = j + " --------------------- " + duracion;
+                        SwingUtilities.invokeLater(() -> textdurable.setText(duraciontexto));
+                        j++;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+            });
+            Thread.start();
+        }
+        else {
+            System.err.println("parametros erroneos");
+            onreproducirAPartirDeButton();
+        }
+    }
     private void mostrarDuracionPublicacion(int duracion) {
         Thread = new Thread(() -> {
             int j = 0;
